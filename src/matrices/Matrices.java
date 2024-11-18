@@ -1,13 +1,15 @@
 package matrices;
 
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.math.BigDecimal;
 
 public class Matrices {
     //Declaring Variables
     protected static byte noOfRowsMatrixOne;
-    protected static byte noOfColomsMatrixOne;
+    protected static byte noOfColumnsMatrixOne;
 
     public static void main(String[] args) {
 
@@ -66,15 +68,18 @@ public class Matrices {
             }while (checker == 'N' || checker == 'n');
 
             // Create final Matrix
-            double[][]matrixFinal = new double[noOfRowsMatrixOne][noOfColomsMatrixOne];
+            double[][]matrixFinal = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
 
             //Adder for each row
             for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
 
                 //Adder for each colum
-                for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColomsMatrixOne; matrixColoumAdder++){
+                for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixOne; matrixColoumAdder++){
+                    //Adds A to B
+                    BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] - matrixB[matrixRowAdder][matrixColoumAdder]));
+                    BigDecimal finalMatrixNumberRounded = finalMatrixNumberBigDecimal.setScale(8, RoundingMode.HALF_UP); // Rounds to 8 decimal places
 
-                    matrixFinal[matrixRowAdder][matrixColoumAdder] = (matrixA[matrixRowAdder][matrixColoumAdder] + matrixB[matrixRowAdder][matrixColoumAdder]);
+                    matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
                 }
             }
             //Print the out the matrix
@@ -83,6 +88,64 @@ public class Matrices {
             }
 
         }
+
+        if(function == 2){
+            double[][]matrixA = matrixCreator();
+
+            //Used for ensuring correct matrix
+            char checker;
+            do {
+
+                //Print the out the matrix
+                for (double[] row : matrixA) {
+                    System.out.println(Arrays.toString(row));
+                }
+                System.out.print("Is matrix A correct Y/N: ");
+                checker = YorN();
+
+                if(checker == 'N' || checker == 'n') {
+                    matrixA = matrixCreator();
+                }
+            }while (checker == 'N' || checker == 'n');
+
+            double[][]matrixB = matrixCreatorB();
+            //Used for ensuring correct matrix
+            do {
+
+                //Print the out the matrix
+                for (double[] row : matrixB) {
+                    System.out.println(Arrays.toString(row));
+                }
+                System.out.print("Is matrix B correct Y/N: ");
+                checker = YorN();
+
+                if(checker == 'N' || checker == 'n') {
+                    matrixB = matrixCreator();
+                }
+            }while (checker == 'N' || checker == 'n');
+
+            // Create final Matrix
+            double[][]matrixFinal = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
+
+            //Adder for each row
+            for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
+
+                //Adder for each colum
+                for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixOne; matrixColoumAdder++){
+                    //Subtracts A from B
+                    BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] - matrixB[matrixRowAdder][matrixColoumAdder]));
+                    BigDecimal finalMatrixNumberRounded = finalMatrixNumberBigDecimal.setScale(8, RoundingMode.HALF_UP); // Rounds to 8 decimal places
+
+                    matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
+                }
+            }
+            //Print the out the matrix
+            for (double[] row : matrixFinal) {
+                System.out.println(Arrays.toString(row));
+            }
+
+        }
+
     }
 
     public static char YorN(){
@@ -115,12 +178,12 @@ public class Matrices {
         //input no of columns
         System.out.print("Enter Number of Columns: ");
         // checks if the number of coloms is valid
-        while ((noOfColomsMatrixOne = byteSizeInt()) == 0){
+        while ((noOfColumnsMatrixOne = byteSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-127: ");
         }
 
         //Create a 2D array or Matrix
-        double[][]matrixOneSize = new double[noOfRowsMatrixOne][noOfColomsMatrixOne];
+        double[][]matrixOneSize = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
 
         // using scanner to find the numbers
         Scanner input = new Scanner(System.in);
@@ -135,14 +198,14 @@ public class Matrices {
             String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
 
             // itterate through the coloums in each row and adding them to the matrix
-            for(positionCounter = 0; positionCounter<noOfColomsMatrixOne; positionCounter++){
+            for(positionCounter = 0; positionCounter< noOfColumnsMatrixOne; positionCounter++){
 
                 double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
                 matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
 
             // for printing out next row before you enter each row
-            if(noOfColomsMatrixOne != (rowCounter+1)){
+            if(noOfRowsMatrixOne != (rowCounter+1)){
                 System.out.print("Enter next row:\t\t");
             }
         }
@@ -154,7 +217,7 @@ public class Matrices {
     // used to create a matrix
     public static double[][] matrixCreatorB() {
         //Create a 2D array or Matrix
-        double[][]matrixOneSize = new double[noOfRowsMatrixOne][noOfColomsMatrixOne];
+        double[][]matrixOneSize = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
 
         // using scanner to find the numbers
         Scanner input = new Scanner(System.in);
@@ -169,14 +232,14 @@ public class Matrices {
             String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
 
             // itterate through the coloums in each row and adding them to the matrix
-            for(positionCounter = 0; positionCounter<noOfColomsMatrixOne; positionCounter++){
+            for(positionCounter = 0; positionCounter< noOfColumnsMatrixOne; positionCounter++){
 
                 double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
                 matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
 
             // for printing out next row before you enter each row
-            if(noOfColomsMatrixOne != (rowCounter+1)){
+            if(noOfRowsMatrixOne > (rowCounter+1)){
                 System.out.print("Enter next row:\t\t");
             }
         }
