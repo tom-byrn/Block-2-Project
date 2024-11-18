@@ -76,7 +76,7 @@ public class Matrices {
                 //Adder for each colum
                 for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixOne; matrixColoumAdder++){
                     //Adds A to B
-                    BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] - matrixB[matrixRowAdder][matrixColoumAdder]));
+                    BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] + matrixB[matrixRowAdder][matrixColoumAdder]));
                     BigDecimal finalMatrixNumberRounded = finalMatrixNumberBigDecimal.setScale(8, RoundingMode.HALF_UP); // Rounds to 8 decimal places
 
                     matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
@@ -143,6 +143,9 @@ public class Matrices {
             for (double[] row : matrixFinal) {
                 System.out.println(Arrays.toString(row));
             }
+
+        }
+        if(function == 4){
 
         }
 
