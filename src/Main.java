@@ -1,3 +1,8 @@
+import algebra.AlgebraManager;
+import calculations.CalculationsManager;
+import functions.FunctionsManager;
+import matrices.MatricesManager;
+
 import java.util.Scanner;
 
 public class Main {
@@ -32,15 +37,23 @@ public class Main {
             switch(selectorNum){
                 case 1 -> {
                     currentlySelecting = false;
+                    CalculationsManager.start();
                 }
                 case 2 -> {
                     currentlySelecting = false;
+                    FunctionsManager.start();
                 }
                 case 3 -> {
                     currentlySelecting = false;
+                    MatricesManager.start();
                 }
                 case 4 -> {
                     currentlySelecting = false;
+                    AlgebraManager.start();
+                }
+                case 5 -> {
+                    currentlySelecting = false;
+                    System.out.println("Option 5 chosen");
                 }
                 case 0 -> {
                     currentlySelecting = false;
