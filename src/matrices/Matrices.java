@@ -13,7 +13,7 @@ public class Matrices {
 
     public static void main(String[] args) {
 
-        // select function
+        // select function using a text block
         System.out.println(
                 """
                         Enter (1) for Addition
@@ -21,7 +21,7 @@ public class Matrices {
                         Enter (3) for Multiplication
                         Enter (4) for Transpose
                         Enter (5) for Inverse
-                        Enter (6) for Simultaneous Equations
+                        Enter (6) for LU Factorisation
                         Enter (7) for def(A)
                         Enter (8) for Eigenvalues
                         Enter (9) for Power""");
@@ -43,6 +43,7 @@ public class Matrices {
                 for (double[] row : matrixA) {
                     System.out.println(Arrays.toString(row));
                 }
+                //Checks if matrix is correct
                 System.out.print("Is matrix A correct Y/N: ");
                 checker = YorN();
 
@@ -59,9 +60,10 @@ public class Matrices {
                 for (double[] row : matrixB) {
                     System.out.println(Arrays.toString(row));
                 }
-                System.out.print("Is matrix B correct Y/N: ");
+                System.out.print("Is matcorrectrix B correct Y/N: ");
                 checker = YorN();
 
+                //Checks if matrix is correct
                 if(checker == 'N' || checker == 'n') {
                     matrixB = matrixCreator();
                 }
@@ -103,6 +105,7 @@ public class Matrices {
                 System.out.print("Is matrix A correct Y/N: ");
                 checker = YorN();
 
+                //Checks if matrix is correct
                 if(checker == 'N' || checker == 'n') {
                     matrixA = matrixCreator();
                 }
@@ -119,6 +122,7 @@ public class Matrices {
                 System.out.print("Is matrix B correct Y/N: ");
                 checker = YorN();
 
+                //Checks if matrix is correct
                 if(checker == 'N' || checker == 'n') {
                     matrixB = matrixCreator();
                 }
@@ -146,7 +150,42 @@ public class Matrices {
 
         }
         if(function == 4){
+            double[][]matrixA = matrixCreator();
 
+            //Used for ensuring correct matrix
+            char checker;
+            do {
+
+                //Print the out the matrix
+                for (double[] row : matrixA) {
+                    System.out.println(Arrays.toString(row));
+                }
+                //Checks if matrix is correct
+                System.out.print("Is matrix A correct Y/N: ");
+                checker = YorN();
+
+                if(checker == 'N' || checker == 'n') {
+                    matrixA = matrixCreator();
+                }
+            }while (checker == 'N' || checker == 'n');
+
+
+            //Create a matrix of with row = coloms and colums equal to rows from MatrixA
+            double[][]matrixFinal = new double[noOfColumnsMatrixOne][noOfRowsMatrixOne];
+
+            //Cycle through each row
+            for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
+
+                //Cycle through each colum
+                for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixOne; matrixColoumAdder++){
+
+                    matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
+                }
+            }
+            //Print the out the matrix
+            for (double[] row : matrixFinal) {
+                System.out.println(Arrays.toString(row));
+            }
         }
 
     }
