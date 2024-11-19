@@ -9,5 +9,4 @@ public class CalculationsManager {
         Calculations calculations = new Calculations();
         calculations.promptForCalculation();
     }
-    
 }
