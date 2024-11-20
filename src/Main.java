@@ -3,11 +3,12 @@ import calculations.CalculationsManager;
 import functions.FunctionsManager;
 import matrices.MatricesManager;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         //Initialising objects
         Scanner scanner = new Scanner(System.in);
@@ -17,51 +18,56 @@ public class Main {
 
         while(currentlySelecting) {
 
-            //Prompt user to select a calculator function
-            System.out.println("""
-                    Please enter a number
-                    
-                    Enter (1) for calculations 🧮
-                    Enter (2) for functions 📈
-                    Enter (3) for matrices ⏹️
-                    Enter (4) for algebra & complex numbers ℹ️
-                    Enter (5) for ... not sure what else to have here 🏞️
-                    
-                    Enter (0) to exit the application 👋
-                    
-                    """);
+            try {
 
-            //Scanner object scans for user inpput
-            int selectorNum = scanner.nextInt();
-            //Switch case for choosing a calculator function to use
-            switch(selectorNum){
-                case 1 -> {
-                    currentlySelecting = false;
-                    CalculationsManager.start();
+                //Prompt user to select a calculator function
+                System.out.println("""
+                        Please enter a number
+                        
+                        Enter (1) for calculations 🧮
+                        Enter (2) for functions 📈
+                        Enter (3) for matrices ⏹️
+                        Enter (4) for algebra & complex numbers ℹ️
+                        Enter (5) for ... not sure what else to have here 🏞️
+                        
+                        Enter (0) to exit the application 👋
+                        
+                        """);
+
+                //Scanner object scans for user input
+                int selectorNum = scanner.nextInt();
+                System.out.println();
+
+                //Switch case for choosing a calculator function to use
+                switch (selectorNum) {
+                    case 1 -> {
+                        currentlySelecting = false;
+                        CalculationsManager.start();
+                    }
+                    case 2 -> {
+                        currentlySelecting = false;
+                        FunctionsManager.start();
+                    }
+                    case 3 -> {
+                        currentlySelecting = false;
+                        MatricesManager.start();
+                    }
+                    case 4 -> {
+                        currentlySelecting = false;
+                        AlgebraManager.start();
+                    }
+                    case 5 -> {
+                        currentlySelecting = false;
+                        System.out.println("Option 5 chosen");
+                    }
+                    case 0 -> {
+                        currentlySelecting = false;
+                        System.out.println("Goodbye!");
+                    }
                 }
-                case 2 -> {
-                    currentlySelecting = false;
-                    FunctionsManager.start();
-                }
-                case 3 -> {
-                    currentlySelecting = false;
-                    MatricesManager.start();
-                }
-                case 4 -> {
-                    currentlySelecting = false;
-                    AlgebraManager.start();
-                }
-                case 5 -> {
-                    currentlySelecting = false;
-                    System.out.println("Option 5 chosen");
-                }
-                case 0 -> {
-                    currentlySelecting = false;
-                    System.out.println("Goodbye!");
-                }
-                default -> {
-                    currentlySelecting = true;
-                }
+            } catch (Exception e ){
+                System.out.println("Please enter a valid number!\n");
+                scanner.nextLine();
             }
         }
     }
