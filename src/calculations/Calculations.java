@@ -1,11 +1,12 @@
 package calculations;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 public class Calculations {
 
     protected String calculationInput;
-    protected double answer;
+    protected BigDecimal answer;
     protected String originalInput;
 
 
@@ -29,7 +30,7 @@ public class Calculations {
 
         calculationInput = preprocessInput(calculationInput); //Regex for calculation input
 
-        double result = evaluate(calculationInput); //Run the evaluate method with the input given by the user
+        BigDecimal result = evaluate(calculationInput); //Run the evaluate method with the input given by the user
     }
 
     // Method to preprocess the calculation input with regex
@@ -44,21 +45,49 @@ public class Calculations {
         input = input.replaceAll("--", "+");
         //Replace -(- with +(
         input = input.replaceAll("-\\(-", "+(");
+        // Replacing factorial with factorial number needed for the 2 argument constructor
+        input = input.replaceAll("!", "!0");
 
         // Constants
-        // Replace e with a string conversion of Math.E
+        // Replace e with Euler constant
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
+
+        // Replace k with Boltzmann constant
+        input = input.replaceAll("\\bk\\b", String.valueOf(1.3806505/ Math.pow(10, 23)));
+
+        // Replace F with the Faraday constant
+        input = input.replaceAll("\\bF\\b", String.valueOf(96485.3383));
+
+        // Replace eV with the electron volt
+        input = input.replaceAll("\\beV\\b", String.valueOf(1.60217653/ Math.pow(10, 19)));
+
+        // Replace G with the gravitational constant
+        input = input.replaceAll("\\bG\\b", String.valueOf(6.6742/ Math.pow(10, 11)));
+
         // Replace pi with string conversion of Math.PI
         input = input.replaceAll("\\bpi\\b", String.valueOf(Math.PI));
 
-        // Replacing factorial with factorial number needed for the 2 argument constructor
-        input = input.replaceAll("!", "!0");
+        // Replace g with gravity
+        input = input.replaceAll("\\bg\\b", String.valueOf(9.81));
+
+        // Replace h with Planck's Constant
+        input = input.replaceAll("\\bh\\b", String.valueOf(6.62607015/ Math.pow(10,34)));
+
+        // Replace c with the speed of light in vacuo
+        input = input.replaceAll("\\bc\\b", String.valueOf(2.99792458 * Math.pow(10, 8)));
+
+        // Replace R with Universal Gas Constant
+        input = input.replaceAll("\\bR\\b", String.valueOf(8.314472));
+
+        // Replace u with Unified Atomic Mass Unit
+        input = input.replaceAll("\\bu\\b", String.valueOf(1.6605402/ Math.pow(10, 27)));
+
         //More stuff other than e & pi can be added if needed
 
         return input;
     }
 
-    protected double evaluate(String calculationInput){
+    protected BigDecimal evaluate(String calculationInput){
         this.calculationInput = calculationInput;
 
         // Shunting Yard Algorithm implementation (https://brilliant.org/wiki/shunting-yard-algorithm/)
@@ -70,7 +99,7 @@ public class Calculations {
         List<String> rpn = toRPN(tokens);
 
         //Evaluate the expression in RPN
-        answer = evaluateRPN(rpn);
+        answer = BigDecimal.valueOf(evaluateRPN(rpn));
 
         return answer;
     }
@@ -157,8 +186,7 @@ public class Calculations {
         for(String token: rpn){
             if(isNumber(token)) {
                 stack.push(Double.parseDouble(token));//Converts the token string into a double if it's detected that it is a number
-            }
-            else if(isFunction(token)) { //Apply function to if a function token is detected
+            } else if(isFunction(token)) { //Apply function to if a function token is detected
                 if (stack.isEmpty()) {
                     throw new IllegalStateException("Invalid RPN expression. Not enough values for function: " + token);
                 }
@@ -254,7 +282,7 @@ public class Calculations {
         return calculationInput;
     }
 
-    public double getAnswer(){
+    public BigDecimal getAnswer(){
         return answer;
     }
 
