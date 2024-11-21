@@ -48,6 +48,8 @@ public class Calculations {
         // Replace pi with string conversion of Math.PI
         input = input.replaceAll("\\bpi\\b", String.valueOf(Math.PI));
 
+        // Replacing factorial with factorial number needed for the 2 argument constructor
+        input = input.replaceAll("!", "!0");
         //More stuff other than e & pi can be added if needed
 
         return input;
@@ -115,7 +117,7 @@ public class Calculations {
         Map<String, Integer> precedence = Map.of( //Setting levels of precendence to operators
                 "+", 1, "-", 1,
                 "*", 2, "/", 2,
-                "^", 3);
+                "^", 3, "%",3,"!",4);
 
         for (String token : tokens) {
             if (isNumber(token)) {
@@ -207,10 +209,31 @@ public class Calculations {
                 }
                 yield a / b;
             }
+            case "%" -> a%b;
             case "^" -> Math.pow(a, b);
+            case "!" ->{
+                double factorialA;
+                // checks if a is zero
+                if(a == 0){
+                    yield 1;
+
+                    //checks if a is a decimail
+                } else if (a%1==0) {
+                    factorialA = a;
+
+                    // for loop to create X!
+                    for (int factorialCounter = 1; factorialCounter < a; factorialCounter++) {
+                        factorialA *= factorialCounter;
+                    }
+                    yield factorialA; //returns a!
+                }else {
+                    throw new IllegalArgumentException("Can't get the factorial of a decimal " + operator);
+                }
+            }
             default -> throw new IllegalArgumentException("Unknown operator: " + operator);
         };
     }
+
 
     private double applyFunction(String function, double a) {
         return switch (function) {

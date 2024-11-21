@@ -12,7 +12,6 @@ public class Matrices {
     protected static byte noOfColumnsMatrixOne;
 
     public static void main(String[] args) {
-
         // select function using a text block
         System.out.println(
                 """
@@ -25,6 +24,8 @@ public class Matrices {
                         Enter (7) for def(A)
                         Enter (8) for Eigenvalues
                         Enter (9) for Power""");
+
+
 
         // checking is a valid function selected
         byte function;
