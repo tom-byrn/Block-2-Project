@@ -34,10 +34,15 @@ public class Calculations {
 
     // Method to preprocess the calculation input with regex
     private String preprocessInput(String input) {
+        //Remove all whitespace
+        input = input.replaceAll("\\s+", "");
         // Add * between a number and a letter
         input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
+        //Replace "- -" with "+" and "- ( -" with "+ ("
+        input = input.replaceAll("--", "+");
+        input = input.replaceAll("-\\(-", "+(");
         // Replace e with a string conversion of Math.E
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
         // Replace pi with string conversion of Math.PI
@@ -56,8 +61,10 @@ public class Calculations {
         //Tokenize the expression
         List<String> tokens = tokenize(calculationInput);
 
+        //Convert to RPN
         List<String> rpn = toRPN(tokens);
 
+        //Evaluate the expression in RPN
         answer = evaluateRPN(rpn);
 
         return answer;
@@ -74,13 +81,13 @@ public class Calculations {
 
             //Adding all characters to the currentToken list
             if(Character.isWhitespace(ch)){
-                continue; //ignore white space
+                continue; //ignore the white space if there is any
             }
             else if(Character.isDigit(ch) || ch == '.'){
                 currentToken.append(ch); //if digit or decimal, add to the current token
             }
             else if(Character.isLetter(ch)){
-                currentToken.append(ch);
+                currentToken.append(ch); //add letters to the current token
             }
             else {
                 if(currentToken.length() > 0){ //if an operator or parenthesis
@@ -105,7 +112,7 @@ public class Calculations {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
 
-        Map<String, Integer> precedence = Map.of(
+        Map<String, Integer> precedence = Map.of( //Setting levels of precendence to operators
                 "+", 1, "-", 1,
                 "*", 2, "/", 2,
                 "^", 3);
