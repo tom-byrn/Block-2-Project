@@ -251,15 +251,6 @@ public class Calculations {
         };
     }
 
-    //This isn't currently being used since this is being done with regex in another method
-    private double applyConstant(String constant){
-        return switch (constant) {
-            case "e" -> Math.E;
-            case "pi" -> Math.PI;
-            default -> throw new IllegalArgumentException("Unknown constant: " + constant);
-        };
-    }
-
     public String getInput(){
         return calculationInput;
     }
