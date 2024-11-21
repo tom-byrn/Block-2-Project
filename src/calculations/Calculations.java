@@ -23,7 +23,7 @@ public class Calculations {
     public void promptForCalculation() {
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
 
-        System.out.printf("Please enter a sum: ");
+        System.out.print("Please enter a sum: ");
         calculationInput = scanner.nextLine(); // Store the user input
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
@@ -121,7 +121,7 @@ public class Calculations {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
 
-        Map<String, Integer> precedence = Map.of( //Setting levels of precendence to operators
+        Map<String, Integer> precedence = Map.of( //Setting levels of precedence to operators
                 "+", 1, "-", 1,
                 "*", 2, "/", 2,
                 "^", 3, "%",3,"!",4);
