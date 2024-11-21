@@ -230,10 +230,6 @@ public class Calculations {
         //I intend to edit the log function later so that any type of log can be used
     }
 
-    //This isn't currently being used since this is being done with regex in another method
-    private boolean isConstant(String token){
-        return token.equals("e") || token.equals("pi");
-    }
 
     private double applyOperator(double a, double b, String operator) {
         return switch (operator) { //Returns one of the options depending on the case
