@@ -42,7 +42,10 @@ public class Calculations {
         input = input.replaceAll("\\)\\(", ")*(");
         //Replace "- -" with "+" and "- ( -" with "+ ("
         input = input.replaceAll("--", "+");
+        //Replace -(- with +(
         input = input.replaceAll("-\\(-", "+(");
+
+        // Constants
         // Replace e with a string conversion of Math.E
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
         // Replace pi with string conversion of Math.PI
@@ -192,10 +195,6 @@ public class Calculations {
         //I intend to edit the log function later so that any type of log can be used
     }
 
-    //This isn't currently being used since this is being done with regex in another method
-    private boolean isConstant(String token){
-        return token.equals("e") || token.equals("pi");
-    }
 
     private double applyOperator(double a, double b, String operator) {
         return switch (operator) { //Returns one of the options depending on the case
