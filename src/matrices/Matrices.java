@@ -7,11 +7,14 @@ import java.util.Scanner;
 import java.math.BigDecimal;
 
 public class Matrices {
+
+    public Matrices(){}
+
     //Declaring Variables
     protected static byte noOfRowsMatrixOne;
     protected static byte noOfColumnsMatrixOne;
 
-    public static void promptForMatrices() {
+    public static double[][] promptForMatrices() {
         // select function using a text block
         System.out.println(
                 """
@@ -61,7 +64,7 @@ public class Matrices {
                 for (double[] row : matrixB) {
                     System.out.println(Arrays.toString(row));
                 }
-                System.out.print("Is matcorrectrix B correct Y/N: ");
+                System.out.print("Is matrix B correct Y/N: ");
                 checker = YorN();
 
                 //Checks if matrix is correct
@@ -85,11 +88,7 @@ public class Matrices {
                     matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
                 }
             }
-            //Print the out the matrix
-            for (double[] row : matrixFinal) {
-                System.out.println(Arrays.toString(row));
-            }
-
+            return matrixFinal;
         }
 
         if(function == 2){
@@ -144,11 +143,7 @@ public class Matrices {
                     matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
                 }
             }
-            //Print the out the matrix
-            for (double[] row : matrixFinal) {
-                System.out.println(Arrays.toString(row));
-            }
-
+            return matrixFinal;
         }
         if(function == 4){
             double[][]matrixA = matrixCreator();
@@ -183,12 +178,10 @@ public class Matrices {
                     matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
                 }
             }
-            //Print the out the matrix
-            for (double[] row : matrixFinal) {
-                System.out.println(Arrays.toString(row));
-            }
+            return matrixFinal;
         }
 
+        return null;
     }
 
     public static char YorN(){
