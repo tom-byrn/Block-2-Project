@@ -26,7 +26,7 @@ public class Main {
                         
                         Enter (1) for calculations 🧮
                         Enter (2) for functions 📈
-                        Enter (3) for matrices ⏹️
+                        Enter (3) for matrices ⏹️ 
                         Enter (4) for algebra & complex numbers ℹ️
                         Enter (5) for ... not sure what else to have here 🏞️
                         

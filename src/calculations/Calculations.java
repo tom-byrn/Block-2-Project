@@ -40,12 +40,15 @@ public class Calculations {
         input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
-        //Replace "- -" with "+" and "- ( -" with "+ ("
-        input = input.replaceAll("--", "+");
-        //Replace -(- with +(
-        input = input.replaceAll("-\\(-", "+(");
 
-        // Constants
+        //Replace "- -" with "+" , "- ( -" with "+ (" , etc.
+        //This fixes a lot of issues with minus signs
+        input = input.replaceAll("--", "+");
+        input = input.replaceAll("-\\(-", "+(");
+        input = input.replaceAll("-\\(", "-1(");
+        input = input.replaceAll("-([a-zA-Z])", "-1*$1");
+        input = input.replaceFirst("^-", "0-");
+
         // Replace e with a string conversion of Math.E
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
         // Replace pi with string conversion of Math.PI
@@ -53,7 +56,8 @@ public class Calculations {
 
         // Replacing factorial with factorial number needed for the 2 argument constructor
         input = input.replaceAll("!", "!0");
-        //More stuff other than e & pi can be added if needed
+
+        //More things can easily be added if needed
 
         return input;
     }
@@ -160,15 +164,15 @@ public class Calculations {
             }
             else if(isFunction(token)) { //Apply function to if a function token is detected
                 if (stack.isEmpty()) {
-                    throw new IllegalStateException("Invalid RPN expression. Not enough values for function: " + token);
+                    throw new IllegalStateException("Invalid expression. Not enough values for function: " + token);
                 }
                 double a = stack.pop();
                 stack.push(applyFunction(token, a));
-            } else { //if it's not a number or a function, it is going to be an operator
+            } else {
                 if (stack.size() < 2) {
-                    throw new IllegalStateException("Invalid RPN expression. Not enough values for operator: " + token);
+                    throw new IllegalStateException("Invalid expression. Not enough values for operator: " + token);
                 }
-                double b = stack.pop();
+                double b = stack.pop(); //if it's not a number or a function, it is going to be an operator
                 double a = stack.pop();
                 stack.push(applyOperator(a, b, token)); //Apply one of the operators to a & b
             }
@@ -195,6 +199,10 @@ public class Calculations {
         //I intend to edit the log function later so that any type of log can be used
     }
 
+    //This isn't currently being used since this is being done with regex in another method
+    private boolean isConstant(String token){
+        return token.equals("e") || token.equals("pi");
+    }
 
     private double applyOperator(double a, double b, String operator) {
         return switch (operator) { //Returns one of the options depending on the case
@@ -216,7 +224,7 @@ public class Calculations {
                 if(a == 0){
                     yield 1;
 
-                    //checks if a is a decimail
+                    //checks if a is a decimal
                 } else if (a%1==0) {
                     factorialA = a;
 
