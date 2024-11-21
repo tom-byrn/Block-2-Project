@@ -24,7 +24,7 @@ public class Calculations {
     public void promptForCalculation() {
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
 
-        System.out.printf("Please enter a sum: ");
+        System.out.print("Please enter a sum: ");
         calculationInput = scanner.nextLine(); // Store the user input
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
@@ -41,15 +41,18 @@ public class Calculations {
         input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
-        //Replace "- -" with "+" and "- ( -" with "+ ("
+
+        //Replace "- -" with "+" , "- ( -" with "+ (" , etc.
+        //This fixes a lot of issues with minus signs
         input = input.replaceAll("--", "+");
-        //Replace -(- with +(
         input = input.replaceAll("-\\(-", "+(");
-        // Replacing factorial with factorial number needed for the 2 argument constructor
-        input = input.replaceAll("!", "!0");
+        input = input.replaceAll("-\\(", "-1(");
+        input = input.replaceAll("-([a-zA-Z])", "-1*$1");
+        input = input.replaceFirst("^-", "0-");
 
         // Constants
         // Replace e with Euler constant
+        // Replace e with a string conversion of Math.E
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
 
         // Replace k with Boltzmann constant
@@ -67,6 +70,10 @@ public class Calculations {
         // Replace pi with string conversion of Math.PI
         input = input.replaceAll("\\bpi\\b", String.valueOf(Math.PI));
 
+        // Replacing factorial with factorial number needed for the 2 argument constructor
+        input = input.replaceAll("!", "!0");
+
+        //More things can easily be added if needed
         // Replace g with gravity
         input = input.replaceAll("\\bg\\b", String.valueOf(9.81));
 
@@ -146,7 +153,7 @@ public class Calculations {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
 
-        Map<String, Integer> precedence = Map.of( //Setting levels of precendence to operators
+        Map<String, Integer> precedence = Map.of( //Setting levels of precedence to operators
                 "+", 1, "-", 1,
                 "*", 2, "/", 2,
                 "^", 3, "%",3,"!",4);
@@ -188,15 +195,15 @@ public class Calculations {
                 stack.push(Double.parseDouble(token));//Converts the token string into a double if it's detected that it is a number
             } else if(isFunction(token)) { //Apply function to if a function token is detected
                 if (stack.isEmpty()) {
-                    throw new IllegalStateException("Invalid RPN expression. Not enough values for function: " + token);
+                    throw new IllegalStateException("Invalid expression. Not enough values for function: " + token);
                 }
                 double a = stack.pop();
                 stack.push(applyFunction(token, a));
-            } else { //if it's not a number or a function, it is going to be an operator
+            } else {
                 if (stack.size() < 2) {
-                    throw new IllegalStateException("Invalid RPN expression. Not enough values for operator: " + token);
+                    throw new IllegalStateException("Invalid expression. Not enough values for operator: " + token);
                 }
-                double b = stack.pop();
+                double b = stack.pop(); //if it's not a number or a function, it is going to be an operator
                 double a = stack.pop();
                 stack.push(applyOperator(a, b, token)); //Apply one of the operators to a & b
             }
@@ -223,6 +230,10 @@ public class Calculations {
         //I intend to edit the log function later so that any type of log can be used
     }
 
+    //This isn't currently being used since this is being done with regex in another method
+    private boolean isConstant(String token){
+        return token.equals("e") || token.equals("pi");
+    }
 
     private double applyOperator(double a, double b, String operator) {
         return switch (operator) { //Returns one of the options depending on the case
@@ -244,7 +255,7 @@ public class Calculations {
                 if(a == 0){
                     yield 1;
 
-                    //checks if a is a decimail
+                    //checks if a is a decimal
                 } else if (a%1==0) {
                     factorialA = a;
 

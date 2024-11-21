@@ -3,7 +3,10 @@ package matrices;
 public class MatricesManager {
 
     public static void start(){
-        System.out.println("Functions function chosen");
+
+        Matrices matrices = new Matrices();
+        matrices.promptForMatrices();
+
     }
 
 }

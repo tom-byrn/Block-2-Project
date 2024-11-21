@@ -11,7 +11,7 @@ public class Matrices {
     protected static byte noOfRowsMatrixOne;
     protected static byte noOfColumnsMatrixOne;
 
-    public static void main(String[] args) {
+    public static void promptForMatrices() {
         // select function using a text block
         System.out.println(
                 """
