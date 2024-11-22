@@ -1,15 +1,13 @@
 package calculations;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
+
 import java.util.*;
 
-import static java.math.RoundingMode.HALF_UP;
 
 public class Calculations {
 
     protected String calculationInput;
-    protected BigDecimal answer;
+    protected double answer;
     protected String originalInput;
 
 
@@ -33,7 +31,7 @@ public class Calculations {
 
         calculationInput = preprocessInput(calculationInput); //Regex for calculation input
 
-        BigDecimal result = evaluate(calculationInput); //Run the evaluate method with the input given by the user
+        double result = evaluate(calculationInput); //Run the evaluate method with the input given by the user
     }
 
     // Method to preprocess the calculation input with regex
@@ -51,7 +49,8 @@ public class Calculations {
         input = input.replaceAll("-\\(-", "+(");
         input = input.replaceAll("-\\(", "-1(");
         input = input.replaceAll("-([a-zA-Z])", "-1*$1");
-        input = input.replaceFirst("^-", "0-");
+        input = input.replaceFirst("^-", "(0-");
+        input = input.replaceAll("\\(-", "(0-");
 
         // Constants
         // Replace e with Euler constant
@@ -59,16 +58,16 @@ public class Calculations {
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
 
         // Replace k with Boltzmann constant
-        input = input.replaceAll("\\bk\\b", String.valueOf(1.3806505/ Math.pow(10, 23)));
+        input = input.replaceAll("\\bk\\b", "1.38065050*10^(0-23)");
 
         // Replace F with the Faraday constant
-        input = input.replaceAll("\\bF\\b", String.valueOf(96485.3383));
+        input = input.replaceAll("\\bF\\b", "96485.3383");
 
         // Replace eV with the electron volt
-        input = input.replaceAll("\\beV\\b", String.valueOf(1.60217653/ Math.pow(10, 19)));
+        input = input.replaceAll("\\beV\\b", "1.602176530*10^(0-19)");
 
         // Replace G with the gravitational constant
-        input = input.replaceAll("\\bG\\b", String.valueOf(6.6742/ Math.pow(10, 11)));
+        input = input.replaceAll("\\bG\\b", "6.6742*10^(0-11)");
 
         // Replace pi with string conversion of Math.PI
         input = input.replaceAll("\\bpi\\b", String.valueOf(Math.PI));
@@ -78,27 +77,25 @@ public class Calculations {
 
         //More things can easily be added if needed
         // Replace g with gravity
-        input = input.replaceAll("\\bg\\b", String.valueOf(9.81));
+        input = input.replaceAll("\\bg\\b", "9.81");
 
         // Replace h with Planck's Constant
-        BigDecimal planksConstant = BigDecimal.valueOf(6.62607015/ Math.pow(10,34));
-        BigDecimal roundedPlanksConstant = planksConstant.setScale(45,HALF_UP);
-        input = input.replaceAll("\\bh\\b", String.valueOf(roundedPlanksConstant));
+        input = input.replaceAll("\\bh\\b", "6.62607015*10^(0-34)");
 
         // Replace c with the speed of light in vacuo
-        input = input.replaceAll("\\bc\\b", String.valueOf(2.99792458 * Math.pow(10, 8)));
+        input = input.replaceAll("\\bc\\b", "299792458");
 
         // Replace R with Universal Gas Constant
-        input = input.replaceAll("\\bR\\b", String.valueOf(8.314472));
+        input = input.replaceAll("\\bR\\b", "8.314472");
 
         // Replace u with Unified Atomic Mass Unit
-        input = input.replaceAll("\\bu\\b", String.valueOf(1.6605402/ Math.pow(10, 27)));
+        input = input.replaceAll("\\bu\\b", "1.6605402*10^(0-27)");
 
         //More stuff other than e & pi can be added if needed
         return input;
     }
 
-    protected BigDecimal evaluate(String calculationInput){
+    protected double evaluate(String calculationInput){
         this.calculationInput = calculationInput;
 
         // Shunting Yard Algorithm implementation (https://brilliant.org/wiki/shunting-yard-algorithm/)
@@ -110,7 +107,7 @@ public class Calculations {
         List<String> rpn = toRPN(tokens);
 
         //Evaluate the expression in RPN
-        answer = BigDecimal.valueOf(evaluateRPN(rpn));
+        answer = evaluateRPN(rpn);
 
         return answer;
     }
@@ -135,15 +132,16 @@ public class Calculations {
                 currentToken.append(ch); //add letters to the current token
             }
             else {
-                if(currentToken.length() > 0){ //if an operator or parenthesis
+                if(!currentToken.isEmpty()){ //if an operator or parenthesis
                     tokens.add(currentToken.toString()); // Corrected to add the current token
                     currentToken.setLength(0); //reset the current token list
                 }
                 tokens.add(Character.toString(ch)); //add operator / parentheses
             }
         }
+
         //Add the last token (if there is any)
-        if(currentToken.length() > 0){
+        if(!currentToken.isEmpty()){
             tokens.add(currentToken.toString());
         }
 
@@ -292,7 +290,7 @@ public class Calculations {
         return calculationInput;
     }
 
-    public BigDecimal getAnswer(){
+    public double getAnswer(){
         return answer;
     }
 
