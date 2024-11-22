@@ -1,7 +1,10 @@
 package calculations;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.*;
+
+import static java.math.RoundingMode.HALF_UP;
 
 public class Calculations {
 
@@ -78,7 +81,9 @@ public class Calculations {
         input = input.replaceAll("\\bg\\b", String.valueOf(9.81));
 
         // Replace h with Planck's Constant
-        input = input.replaceAll("\\bh\\b", String.valueOf(6.62607015/ Math.pow(10,34)));
+        BigDecimal planksConstant = BigDecimal.valueOf(6.62607015/ Math.pow(10,34));
+        BigDecimal roundedPlanksConstant = planksConstant.setScale(45,HALF_UP);
+        input = input.replaceAll("\\bh\\b", String.valueOf(roundedPlanksConstant));
 
         // Replace c with the speed of light in vacuo
         input = input.replaceAll("\\bc\\b", String.valueOf(2.99792458 * Math.pow(10, 8)));
@@ -90,7 +95,6 @@ public class Calculations {
         input = input.replaceAll("\\bu\\b", String.valueOf(1.6605402/ Math.pow(10, 27)));
 
         //More stuff other than e & pi can be added if needed
-
         return input;
     }
 
@@ -189,7 +193,6 @@ public class Calculations {
     //Evaluate the RPN expression
     private double evaluateRPN(List<String> rpn){
         Stack<Double> stack = new Stack<>();
-
         for(String token: rpn){
             if(isNumber(token)) {
                 stack.push(Double.parseDouble(token));//Converts the token string into a double if it's detected that it is a number
