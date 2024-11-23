@@ -16,9 +16,6 @@ public class Calculations {
 
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
-        System.out.println(originalInput);
-        System.out.println(calculationInput);
-
         this.calculationInput = preprocessInput(calculationInput); //Regex for calculation input
     }
 
@@ -87,7 +84,6 @@ public class Calculations {
 
         //More stuff can be added if needed
 
-        System.out.println("Preprocessor working: " + input);
         return input;
     }
 

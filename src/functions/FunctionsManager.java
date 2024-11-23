@@ -53,10 +53,12 @@ public class FunctionsManager extends Calculations {
 
         // Creating array of substituted expressions, subbing into the function
         for (double i = startRange; i <= endRange; i += stepSize) {
+
             // substituting in variables
             substitution = "(" + i + ")";
-            substitutedExpression = functionInput.replace("x", substitution);
+            substitutedExpression = functionInput.replaceAll("x", substitution);
             substitutedExpressions.add(substitutedExpression);
+
             // Calculating the result using Calculations
             Calculations calculations = new Calculations(substitutedExpression);
             double result = calculations.getAnswer();
