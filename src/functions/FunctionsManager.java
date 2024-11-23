@@ -13,15 +13,15 @@ import java.util.List;
 
 public class FunctionsManager extends Calculations {
 
+    // Initializing variables
+    public static String substitution = "";
+    public static String substitutedExpression = "";
+    public static List<String> substitutedExpressions = new ArrayList<>();
+
     public static void start() {}
 
     public static void singleVariableFunction() {
         Scanner input = new Scanner(System.in);
-
-        // Initializing variables
-        String substitution = "";
-        String substitutedExpression = "";
-        List<String> substitutedExpressions = new ArrayList<>();
 
         // Setting parameters for the function
         System.out.println("Enter a function (e.g., x^2 + 3x + 5):");
