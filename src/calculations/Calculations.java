@@ -13,13 +13,14 @@ public class Calculations {
 
     public Calculations(String calculationInput){
 
-        this.calculationInput = calculationInput;
-
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
 
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
-        calculationInput = preprocessInput(calculationInput); //Regex for calculation input
+        System.out.println(originalInput);
+        System.out.println(calculationInput);
+
+        this.calculationInput = preprocessInput(calculationInput); //Regex for calculation input
     }
 
     public Calculations(){}
@@ -85,12 +86,14 @@ public class Calculations {
         // Replace u with Unified Atomic Mass Unit
         input = input.replaceAll("\\bu\\b", "1.6605402*10^(0-27)");
 
-        //More stuff other than e & pi can be added if needed
+        //More stuff can be added if needed
+
+        System.out.println("Preprocessor working: " + input);
         return input;
     }
 
     protected double evaluate(String calculationInput){
-        this.calculationInput = calculationInput;
+        //this.calculationInput = calculationInput;
 
         // Shunting Yard Algorithm implementation (https://brilliant.org/wiki/shunting-yard-algorithm/)
 
