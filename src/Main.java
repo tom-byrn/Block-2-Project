@@ -1,5 +1,6 @@
 import algebra.AlgebraManager;
 import calculations.CalculationsManager;
+import calculations.ConstantAdder;
 import complex.ComplexManager;
 import functions.FunctionsManager;
 import matrices.MatricesManager;
@@ -30,6 +31,7 @@ public class Main {
                         Enter (3) for matrices ⏹️
                         Enter (4) for algebra 🅰️
                         Enter (5) for complex numbers ℹ️
+                        Enter (6) to add a constant
                         
                         Enter (0) to exit the application 👋
                         
@@ -64,6 +66,11 @@ public class Main {
                     case 5 -> {
                         currentlySelecting = false;
                         ComplexManager.start();
+                        break;
+                    }
+                    case 6 -> {
+                        currentlySelecting = false;
+                        ConstantAdder.start();
                         break;
                     }
                     case 0 -> {

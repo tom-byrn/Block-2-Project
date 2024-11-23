@@ -17,7 +17,10 @@ public class Calculations {
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
         this.calculationInput = preprocessInput(calculationInput); //Regex for calculation input
+
+        this.calculationInput = Constants.replaceConstants(calculationInput); //Regex to replace certain Strings with constants e.g. g=9.81
     }
+
 
     public Calculations(){}
 
@@ -45,46 +48,8 @@ public class Calculations {
         input = input.replaceFirst("^-", "(0-");
         input = input.replaceAll("\\(-", "(0-");
 
-        // Constants
-        // Replace e with Euler constant
-        // Replace e with a string conversion of Math.E
-        input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
-
-        // Replace k with Boltzmann constant
-        input = input.replaceAll("\\bk\\b", "1.38065050*10^(0-23)");
-
-        // Replace F with the Faraday constant
-        input = input.replaceAll("\\bF\\b", "96485.3383");
-
-        // Replace eV with the electron volt
-        input = input.replaceAll("\\beV\\b", "1.602176530*10^(0-19)");
-
-        // Replace G with the gravitational constant
-        input = input.replaceAll("\\bG\\b", "6.6742*10^(0-11)");
-
-        // Replace pi with string conversion of Math.PI
-        input = input.replaceAll("\\bpi\\b", String.valueOf(Math.PI));
-
         // Replacing factorial with factorial number needed for the 2 argument constructor
         input = input.replaceAll("!", "!0");
-
-        //More things can easily be added if needed
-        // Replace g with gravity
-        input = input.replaceAll("\\bg\\b", "9.81");
-
-        // Replace h with Planck's Constant
-        input = input.replaceAll("\\bh\\b", "6.62607015*10^(0-34)");
-
-        // Replace c with the speed of light in vacuo
-        input = input.replaceAll("\\bc\\b", "299792458");
-
-        // Replace R with Universal Gas Constant
-        input = input.replaceAll("\\bR\\b", "8.314472");
-
-        // Replace u with Unified Atomic Mass Unit
-        input = input.replaceAll("\\bu\\b", "1.6605402*10^(0-27)");
-
-        //More stuff can be added if needed
 
         return input;
     }
