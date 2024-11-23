@@ -31,6 +31,8 @@ public class Calculations {
         input = input.replaceAll("\\s+", "");
         // Add * between a number and a letter
         input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
+        // Add * between a number and a parenthesis
+        input = input.replaceAll("(\\d)(\\()", "$1*$2");
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
 
