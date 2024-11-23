@@ -1,5 +1,6 @@
 import algebra.AlgebraManager;
 import calculations.CalculationsManager;
+import complex.ComplexManager;
 import functions.FunctionsManager;
 import matrices.MatricesManager;
 
@@ -27,9 +28,8 @@ public class Main {
                         Enter (1) for calculations 🧮
                         Enter (2) for functions 📈
                         Enter (3) for matrices ⏹️
-                        
-                        Enter (4) for algebra & complex numbers ℹ️
-                        Enter (5) for ... not sure what else to have here 🏞️
+                        Enter (4) for algebra 🅰️
+                        Enter (5) for complex numbers ℹ️
                         
                         Enter (0) to exit the application 👋
                         
@@ -63,7 +63,7 @@ public class Main {
                     }
                     case 5 -> {
                         currentlySelecting = false;
-                        System.out.println("Option 5 chosen");
+                        ComplexManager.start();
                         break;
                     }
                     case 0 -> {
