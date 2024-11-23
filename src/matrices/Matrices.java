@@ -1,18 +1,17 @@
 package matrices;
 
 import java.math.RoundingMode;
-import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.math.BigDecimal;
 
 public class Matrices {
 
-    public Matrices(){}
 
     //Declaring Variables
     protected static byte noOfRowsMatrixOne;
     protected static byte noOfColumnsMatrixOne;
+    private static char checker;
+    private static double[][]matrixFinal;
 
     public static double[][] promptForMatrices() {
         // select function using a text block
@@ -32,7 +31,7 @@ public class Matrices {
 
         // checking is a valid function selected
         byte function;
-        while ((function = byteSizeInt()) < 1 || function > 9) {
+        while ((function = MatricesChecker.byteSizeInt()) < 1 || function > 9) {
             System.out.print("Error please enter a number between 1-9: ");
         }
         // Checks which function is selected
@@ -40,16 +39,8 @@ public class Matrices {
             double[][]matrixA = matrixCreator();
 
             //Used for ensuring correct matrix
-            char checker;
             do {
-
-                //Print the out the matrix
-                for (double[] row : matrixA) {
-                    System.out.println(Arrays.toString(row));
-                }
-                //Checks if matrix is correct
-                System.out.print("Is matrix A correct Y/N: ");
-                checker = YorN();
+                checker = MatricesChecker.YorN(matrixA);
 
                 if(checker == 'N' || checker == 'n') {
                     matrixA = matrixCreator();
@@ -59,13 +50,7 @@ public class Matrices {
             double[][]matrixB = matrixCreatorB();
             //Used for ensuring correct matrix
             do {
-
-                //Print the out the matrix
-                for (double[] row : matrixB) {
-                    System.out.println(Arrays.toString(row));
-                }
-                System.out.print("Is matrix B correct Y/N: ");
-                checker = YorN();
+                checker = MatricesChecker.YorN(matrixB);
 
                 //Checks if matrix is correct
                 if(checker == 'N' || checker == 'n') {
@@ -74,7 +59,7 @@ public class Matrices {
             }while (checker == 'N' || checker == 'n');
 
             // Create final Matrix
-            double[][]matrixFinal = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
+            matrixFinal = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
 
             //Adder for each row
             for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
@@ -95,15 +80,8 @@ public class Matrices {
             double[][]matrixA = matrixCreator();
 
             //Used for ensuring correct matrix
-            char checker;
             do {
-
-                //Print the out the matrix
-                for (double[] row : matrixA) {
-                    System.out.println(Arrays.toString(row));
-                }
-                System.out.print("Is matrix A correct Y/N: ");
-                checker = YorN();
+                checker = MatricesChecker.YorN(matrixA);
 
                 //Checks if matrix is correct
                 if(checker == 'N' || checker == 'n') {
@@ -112,15 +90,10 @@ public class Matrices {
             }while (checker == 'N' || checker == 'n');
 
             double[][]matrixB = matrixCreatorB();
+
             //Used for ensuring correct matrix
             do {
-
-                //Print the out the matrix
-                for (double[] row : matrixB) {
-                    System.out.println(Arrays.toString(row));
-                }
-                System.out.print("Is matrix B correct Y/N: ");
-                checker = YorN();
+                checker = MatricesChecker.YorN(matrixB);
 
                 //Checks if matrix is correct
                 if(checker == 'N' || checker == 'n') {
@@ -129,7 +102,7 @@ public class Matrices {
             }while (checker == 'N' || checker == 'n');
 
             // Create final Matrix
-            double[][]matrixFinal = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
+            matrixFinal = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
 
             //Adder for each row
             for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
@@ -149,16 +122,8 @@ public class Matrices {
             double[][]matrixA = matrixCreator();
 
             //Used for ensuring correct matrix
-            char checker;
             do {
-
-                //Print the out the matrix
-                for (double[] row : matrixA) {
-                    System.out.println(Arrays.toString(row));
-                }
-                //Checks if matrix is correct
-                System.out.print("Is matrix A correct Y/N: ");
-                checker = YorN();
+                checker = MatricesChecker.YorN(matrixA);
 
                 if(checker == 'N' || checker == 'n') {
                     matrixA = matrixCreator();
@@ -167,7 +132,7 @@ public class Matrices {
 
 
             //Create a matrix of with row = coloms and colums equal to rows from MatrixA
-            double[][]matrixFinal = new double[noOfColumnsMatrixOne][noOfRowsMatrixOne];
+            matrixFinal = new double[noOfColumnsMatrixOne][noOfRowsMatrixOne];
 
             //Cycle through each row
             for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
@@ -184,37 +149,19 @@ public class Matrices {
         return null;
     }
 
-    public static char YorN(){
-        Scanner input = new Scanner(System.in);
-
-        return input.next().charAt(0);
-    }
-
-    // Ensures an int of size byte is inputted
-    public static byte byteSizeInt() {
-        Scanner input = new Scanner(System.in);
-        try {
-            return input.nextByte();
-        } catch (InputMismatchException e) {
-            // This block catches InputMismatchException
-            // if patterns don't match e.g. a letter or a number too big
-            return 0;
-        }
-    }
-
     // used to create a matrix
     public static double[][] matrixCreator() {
         //input no of rows
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
-        while ((noOfRowsMatrixOne = byteSizeInt()) == 0){
+        while ((noOfRowsMatrixOne = MatricesChecker.byteSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-127: ");
         }
 
         //input no of columns
         System.out.print("Enter Number of Columns: ");
         // checks if the number of coloms is valid
-        while ((noOfColumnsMatrixOne = byteSizeInt()) == 0){
+        while ((noOfColumnsMatrixOne = MatricesChecker.byteSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-127: ");
         }
 
@@ -236,7 +183,7 @@ public class Matrices {
             // itterate through the coloums in each row and adding them to the matrix
             for(positionCounter = 0; positionCounter< noOfColumnsMatrixOne; positionCounter++){
 
-                double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
+                double numberRowCounterInMatrix = MatricesChecker.getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
                 matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
 
@@ -270,7 +217,7 @@ public class Matrices {
             // itterate through the coloums in each row and adding them to the matrix
             for(positionCounter = 0; positionCounter< noOfColumnsMatrixOne; positionCounter++){
 
-                double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
+                double numberRowCounterInMatrix = MatricesChecker.getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
                 matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
 
@@ -281,19 +228,5 @@ public class Matrices {
         }
 
         return matrixOneSize;
-    }
-
-
-    private static double getNumberRowCounterInMatrix(String rowListWithSpace, int positionCounter) {
-        double numberRowCounterInMatrix;
-        // Ensures there is a number in each coloum or enters zero
-        try{
-            numberRowCounterInMatrix = Double.parseDouble(rowListWithSpace.split(" ")[positionCounter]);
-            //NumberFormatException is an exception that occours when trying to convert a string to a number when string doesn't have an appropriate format
-            //Prevents ArrayIndexOutOfBoundsException when trying to add something out of bounds to an array
-        }catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
-            numberRowCounterInMatrix = 0;
-        }
-        return numberRowCounterInMatrix;
     }
 }
