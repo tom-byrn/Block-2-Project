@@ -1,15 +1,22 @@
 package functions;
+import algebra.AlgebraManager;
 import calculations.Calculations;
+import calculations.CalculationsManager;
+import com.sun.tools.javac.Main;
+import matrices.MatricesManager;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FunctionsManager extends Calculations {
 
-    public static void start() {
+    public static void start() {}
+
+    public static void singleVariableFunction() {
         Scanner input = new Scanner(System.in);
-        System.out.println("Function chosen: Functions");
 
         // Initializing variables
         String substitution = "";
@@ -64,6 +71,7 @@ public class FunctionsManager extends Calculations {
             double result = calculations.getAnswer();
             System.out.printf("%-10.2f%-10.2f\n", i, result);
         }
+        System.out.println();
     }
 
     // Helper method to validate double input
@@ -78,7 +86,74 @@ public class FunctionsManager extends Calculations {
         }
     }
 
+    public static void multiVariateFunction() {}
+
+    public static void composeFunctions() {
+
+    }
+
+    public static void bisectionMethod() {}
+
+    public static void secantMethod() {}
+
+    public static void exit() {
+    }
+
     public static void main(String[] args) {
-        FunctionsManager.start();
+        Scanner input = new Scanner(System.in);
+
+        boolean currentlySelecting = true;
+
+        while (currentlySelecting) {
+            try {
+
+                // Prompt user to select a calculator function
+                FunctionsManager.start();
+                System.out.println("Welcome to Functions 📈\n");
+                System.out.println("1. Evaluate a single variable function");
+                System.out.println("2. Evaluate a multi-variate function");
+                System.out.println("3. Compose functions");
+                System.out.println("4. Bisection method");
+                System.out.println("5. Secant method");
+                System.out.println("6. Exit\n");
+                System.out.print("Enter your choice: ");
+
+                // Scanner object scans for user input
+                int selectorNum = input.nextInt();
+                System.out.println();
+
+                // Switch case for choosing an option
+                switch (selectorNum) {
+                    case 1 -> {
+                        FunctionsManager.singleVariableFunction();
+                        break;
+                    }
+                    case 2 -> {
+                        FunctionsManager.multiVariateFunction();
+                        break;
+                    }
+                    case 3 -> {
+                        FunctionsManager.composeFunctions();
+                        break;
+                    }
+                    case 4 -> {
+                        FunctionsManager.bisectionMethod();
+                        break;
+                    }
+                    case 5 -> {
+                        FunctionsManager.secantMethod();
+                        break;
+                    }
+                    case 6 -> {
+                        FunctionsManager.exit();
+                        break;
+                    }
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number!\n");
+                input.nextLine(); // Clear invalid input from the scanner
+            }
+        }
     }
 }
