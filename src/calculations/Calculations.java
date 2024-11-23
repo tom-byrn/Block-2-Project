@@ -3,7 +3,6 @@ package calculations;
 
 import java.util.*;
 
-
 public class Calculations {
 
     protected String calculationInput;
