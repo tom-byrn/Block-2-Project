@@ -12,26 +12,20 @@ public class Calculations {
 
 
     public Calculations(String calculationInput){
+
         this.calculationInput = calculationInput;
+
+        Scanner scanner = new Scanner(System.in); // Create a Scanner object
+
+        originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
+
+        calculationInput = preprocessInput(calculationInput); //Regex for calculation input
     }
 
     public Calculations(){}
 
     protected String getCalculationInput(){
         return calculationInput;
-    }
-
-    // Method to prompt the user for a calculation and store the input
-    public void promptForCalculation() {
-        Scanner scanner = new Scanner(System.in); // Create a Scanner object
-
-        System.out.print("Please enter a sum: ");
-        calculationInput = scanner.nextLine(); // Store the user input
-        originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
-
-        calculationInput = preprocessInput(calculationInput); //Regex for calculation input
-
-        double result = evaluate(calculationInput); //Run the evaluate method with the input given by the user
     }
 
     // Method to preprocess the calculation input with regex
@@ -291,6 +285,7 @@ public class Calculations {
     }
 
     public double getAnswer(){
+        answer = evaluate(calculationInput);
         return answer;
     }
 

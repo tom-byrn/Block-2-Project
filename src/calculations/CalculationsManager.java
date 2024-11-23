@@ -1,19 +1,23 @@
 package calculations;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class CalculationsManager {
 
     public static void start() throws IOException {
 
-        //Create an instance of the Calculations class
-        Calculations calculations = new Calculations();
+        String calculationInput; //Initialising calculation input string
+        Scanner scanner = new Scanner(System.in); //Creating instance of the scanner class
+        Calculations calculations = new Calculations(); //Creating object using default constructor
 
         //Error handling for incorrect expressions
         boolean validInput = false;
         while(!validInput){
             try {
-                calculations.promptForCalculation(); //Prompts the user to input a sum
+                System.out.print("Please enter a sum: ");
+                calculationInput = scanner.nextLine();
+                calculations = new Calculations(calculationInput); //Updating object with the functioning constructor
                 validInput = true;
             } catch (ArithmeticException e) {
                 System.out.println("Invalid sum: Division by zero is not allowed!\n");
