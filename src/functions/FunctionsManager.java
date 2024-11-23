@@ -89,15 +89,37 @@ public class FunctionsManager extends Calculations {
     public static void multiVariateFunction() {}
 
     public static void composeFunctions() {
+        Scanner input = new Scanner(System.in);
 
+        System.out.print("Enter f(x): ");
+        String fFunction = input.nextLine();
+
+        System.out.print("Enter g(x)");
+        String gFunction = input.nextLine();
+
+        double xValue = getValidDouble(input, "Enter x:");
+
+        // finding g(x)
+        String substitution = "(" + xValue + ")";
+        String substituteIntogx = gFunction.replaceAll("x", substitution);
+        Calculations gcalculations = new Calculations(substituteIntogx);
+        double firstResult = gcalculations.getAnswer();
+
+        // finding f(g(x))
+        substitution = "(" + firstResult + ")";
+        String secondSubstitution = fFunction.replaceAll("x", substitution);
+        Calculations fcalculations = new Calculations(secondSubstitution);
+        double finalResult = fcalculations.getAnswer();
+
+        System.out.println("f(g(x)) =");
+        System.out.println(finalResult);
     }
 
     public static void bisectionMethod() {}
 
     public static void secantMethod() {}
 
-    public static void exit() {
-    }
+    public static void exit() {}
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
