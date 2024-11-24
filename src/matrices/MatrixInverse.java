@@ -1,0 +1,108 @@
+package matrices;
+
+import static matrices.Matrices.noOfColumnsMatrixA;
+import static matrices.Matrices.noOfRowsInMatrixA;
+
+public class MatrixInverse {
+
+    // Function to calculate the inverse of a matrix using Gaussian elimination
+    public static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
+        // Get the size of the matrix (n x n)
+        int matrixSize = inputMatrix.length;
+
+        // Create an augmented matrix [inputMatrix | identityMatrix]
+        // The augmented matrix will have 2 * n columns: the original matrix + the identity matrix
+        double[][] augmentedMatrix = new double[matrixSize][2 * matrixSize];
+
+        // Step 1: Construct the augmented matrix [inputMatrix | identityMatrix]
+        for (int row = 0; row < matrixSize; row++) {
+            for (int col = 0; col < matrixSize; col++) {
+                augmentedMatrix[row][col] = inputMatrix[row][col];  // Copy input matrix to the left part of the augmented matrix
+                augmentedMatrix[row][col + matrixSize] = (row == col) ? 1 : 0;  // Identity matrix on the right part
+            }
+        }
+
+        // Step 2: Apply Gaussian elimination to make the left part of the augmented matrix the identity matrix
+        // and the right part the inverse of the original matrix (if it's invertible).
+        for (int row = 0; row < matrixSize; row++) {
+            // If the diagonal element (pivot element) is 0, the matrix is singular (not invertible).
+            if (augmentedMatrix[row][row] == 0) {
+                return false;  // Matrix is singular, return false.
+            }
+
+            // Step 3: Normalize the pivot row to make the diagonal element 1.
+            // This is done by dividing the entire row by the pivot element.
+            double pivotValue = augmentedMatrix[row][row];
+            for (int col = 0; col < 2 * matrixSize; col++) {
+                augmentedMatrix[row][col] /= pivotValue;  // Normalize the pivot row.
+            }
+
+            // Step 4: Eliminate the elements below the pivot (make them 0) for the current column.
+            for (int belowRow = row + 1; belowRow < matrixSize; belowRow++) {
+                // Calculate the factor to eliminate the element below the pivot.
+                double eliminationFactor = augmentedMatrix[belowRow][row];
+                for (int col = 0; col < 2 * matrixSize; col++) {
+                    augmentedMatrix[belowRow][col] -= eliminationFactor * augmentedMatrix[row][col];
+                }
+            }
+        }
+
+        // Step 5: Perform back substitution to eliminate the elements above the pivots, making the matrix in reduced row echelon form.
+        // This will make the upper triangle of the matrix zero, leaving the left part as the identity matrix.
+        for (int row = matrixSize - 1; row >= 0; row--) {
+            // Eliminate the elements above the pivot (make them 0) for the current column.
+            for (int aboveRow = row - 1; aboveRow >= 0; aboveRow--) {
+                // Calculate the factor to eliminate the element above the pivot.
+                double eliminationFactor = augmentedMatrix[aboveRow][row];
+                for (int col = 0; col < 2 * matrixSize; col++) {
+                    augmentedMatrix[aboveRow][col] -= eliminationFactor * augmentedMatrix[row][col];
+                }
+            }
+        }
+
+        // Step 6: After the Gaussian elimination process, the augmented matrix is in the form:
+        // [ identityMatrix | inverseMatrix ].
+        // At this point, the left part of the augmented matrix has been transformed into the identity matrix,
+        // and the right part now contains the inverse of the original matrix.
+        // Extract the right part (inverse matrix) and copy it into the 'inverseMatrix' array.
+        for (int row = 0; row < matrixSize; row++) {
+            // For each row in the augmented matrix, Copy the elements from the right part (which is the inverse matrix)
+            // into the corresponding row of the 'inverseMatrix'.
+            // The right part starts from index 'matrixSize' in each row, so we copy from that position to the beginning of the inverseMatrix row.
+
+            System.arraycopy(augmentedMatrix[row], matrixSize, inverseMatrix[row], 0, matrixSize);
+        }
+
+
+        return true;  // The matrix was successfully inverted
+    }
+
+    // Main function to run the program
+    protected static double[][] Inverse(){
+
+        System.out.println("Remember you can only get the inverse to a square matrix");
+
+        // Step 1: Create a matrix to store the input values
+        double[][] inputMatrix = Matrices.matrixFirstCreator();
+
+        if(noOfRowsInMatrixA != noOfColumnsMatrixA){
+            System.out.println("Sorry can only get the inverse to a square matrix");
+        }else {
+
+            // Step 2: Create a matrix to store the inverse of the input matrix
+            double[][] inverseMatrix = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
+
+            // Step 3: Call the calculateInverse function to compute the inverse matrix
+            if (calculateInverse(inputMatrix, inverseMatrix)) {
+                // If the inverse was successfully calculated, print the inverse matrix
+                System.out.println("The inverse of the matrix is:");
+
+                return inverseMatrix;
+            } else {
+                // If the matrix is not invertible (singular), print a message indicating this
+                System.out.println("This matrix is not invertible.");
+            }
+        }
+        return inputMatrix;
+    }
+}

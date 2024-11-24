@@ -9,12 +9,12 @@ public class Matrices {
 
 
     //Declaring Variables
-    protected static byte noOfRowsMatrixOne;
-    protected static byte noOfColumnsMatrixOne;
+    protected static byte noOfRowsInMatrixA;
+    protected static byte noOfColumnsMatrixA;
     protected static char checker;
-    protected static double[][]matrixFinal;
 
     public static double[][] promptForMatrices() {
+
         // select function using a text block
         System.out.println(
                 """
@@ -40,39 +40,22 @@ public class Matrices {
         // Checks which function is selected
         if(function == 1){
             //Calls Addition method
-            return MatrixAdder.Addition();
+            return MatrixAdder.addition();
         }
 
         if(function == 2){
-            return MatrixAdder.Subtraction();
+            return MatrixAdder.subtraction();
+        }
+
+        if(function == 3){
+            return MatrixMultiplication.multiplication();
         }
 
         if(function == 4){
-            double[][]matrixA = matrixFirstCreator();
-
-            //Used for ensuring correct matrix
-            do {
-                checker = YorN(matrixA);
-
-                if(checker == 'N' || checker == 'n') {
-                    matrixA = matrixFirstCreator();
-                }
-            }while (checker == 'N' || checker == 'n');
-
-
-            //Create a matrix of with row = coloms and colums equal to rows from MatrixA
-            matrixFinal = new double[noOfColumnsMatrixOne][noOfRowsMatrixOne];
-
-            //Cycle through each row
-            for(int matrixRowAdder = 0; matrixRowAdder<noOfRowsMatrixOne; matrixRowAdder++){
-
-                //Cycle through each colum
-                for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixOne; matrixColoumAdder++){
-
-                    matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
-                }
-            }
-            return matrixFinal;
+            return TransposeOfAMatrix.Transpose();
+        }
+        if(function == 5){
+            return MatrixInverse.Inverse();
         }
 
         return null;
@@ -83,26 +66,26 @@ public class Matrices {
         //input no of rows
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
-        while ((noOfRowsMatrixOne = byteSizeInt()) == 0){
+        while ((noOfRowsInMatrixA = byteSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-127: ");
         }
 
         //input no of columns
         System.out.print("Enter Number of Columns: ");
         // checks if the number of coloms is valid
-        while ((noOfColumnsMatrixOne = byteSizeInt()) == 0){
+        while ((noOfColumnsMatrixA = byteSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-127: ");
         }
 
         //Create a 2D array or Matrix
-        double[][]matrixOneSize = new double[noOfRowsMatrixOne][noOfColumnsMatrixOne];
+        double[][]matrixOneSize = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
 
         // using scanner to find the numbers
         Scanner input = new Scanner(System.in);
         System.out.print("Enter first row:\t");
 
         // itterate through the rows
-        for(int rowCounter = 0; rowCounter<noOfRowsMatrixOne; rowCounter++){
+        for(int rowCounter = 0; rowCounter< noOfRowsInMatrixA; rowCounter++){
             int positionCounter;
 
             // Input each row
@@ -110,17 +93,27 @@ public class Matrices {
             String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
 
             // itterate through the coloums in each row and adding them to the matrix
-            for(positionCounter = 0; positionCounter< noOfColumnsMatrixOne; positionCounter++){
+            for(positionCounter = 0; positionCounter< noOfColumnsMatrixA; positionCounter++){
 
                 double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
                 matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
 
             // for printing out next row before you enter each row
-            if(noOfRowsMatrixOne != (rowCounter+1)){
+            if(noOfRowsInMatrixA != (rowCounter+1)){
                 System.out.print("Enter next row:\t\t");
             }
         }
+
+
+        //Used for ensuring correct matrix
+        do {
+            checker = MatricesChecker.YorN(matrixOneSize);
+
+            if(checker == 'N' || checker == 'n') {
+                matrixOneSize = Matrices.matrixFirstCreator();
+            }
+        }while (checker == 'N' || checker == 'n');
 
         return matrixOneSize;
     }
