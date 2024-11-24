@@ -35,7 +35,7 @@ public class MatricesChecker {
     }
 
     // Ensures an int of size byte is inputted
-    public static byte byteSizeInt() {
+    protected static byte byteSizeInt() {
         Scanner input = new Scanner(System.in);
         try {
             return input.nextByte();

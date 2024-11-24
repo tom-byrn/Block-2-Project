@@ -9,7 +9,7 @@ public class MatrixMultiplication {
     private static byte noOfColumnsInMatrixInB;
 
     //Method for multiplying matrixes
-    protected static double[][] multiplication(){
+    protected static void multiplication(){
 
         //Calls matrixFirstCreator and sets matrixA to answer
         //Initilize matrices
@@ -39,7 +39,7 @@ public class MatrixMultiplication {
             }
         }
 
-        return matrixFinal;
+        Matrices.printMatrix(matrixFinal);
     }
 
 

@@ -3,7 +3,7 @@ import calculations.CalculationsManager;
 import calculations.ConstantAdder;
 import complex.ComplexManager;
 import functions.FunctionsManager;
-import matrices.MatricesManager;
+import matrices.Matrices;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -55,7 +55,7 @@ public class Main {
                     }
                     case 3 -> {
                         currentlySelecting = false;
-                        MatricesManager.start();
+                        Matrices.start();
                         break;
                     }
                     case 4 -> {

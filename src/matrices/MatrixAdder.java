@@ -16,7 +16,7 @@ public class MatrixAdder {
 
 
     //Used to add 2 matrixs
-    protected static double[][] addition(){
+    protected static void addition(){
 
         //Calls AdditionOrSubtraction Method
         additionOrSubtraction();
@@ -33,11 +33,11 @@ public class MatrixAdder {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        return matrixFinal;
+        Matrices.printMatrix(matrixFinal);
     }
 
     //Used to subtract 2 matrixs
-    protected static double[][] subtraction(){
+    protected static void subtraction(){
 
         //Calls AdditionOrSubtraction Method
         additionOrSubtraction();
@@ -54,7 +54,7 @@ public class MatrixAdder {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        return matrixFinal;
+        Matrices.printMatrix(matrixFinal);
     }
 
 

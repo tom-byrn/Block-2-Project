@@ -3,7 +3,7 @@ package matrices;
 import static matrices.Matrices.*;
 
 public class TransposeOfAMatrix {
-    protected static double[][] Transpose(){
+    protected static void transpose(){
         double[][]matrixA = matrixFirstCreator();
 
         //Create a matrix of with row = coloms and colums equal to rows from MatrixA
@@ -18,6 +18,6 @@ public class TransposeOfAMatrix {
                 matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
             }
         }
-        return matrixFinal;
+        Matrices.printMatrix(matrixFinal);
     }
 }

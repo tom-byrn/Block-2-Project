@@ -8,7 +8,7 @@ public class MatrixInverse {
     // Function to calculate the inverse of a matrix using Gaussian elimination
     public static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
         // Get the size of the matrix (n x n)
-        int matrixSize = inputMatrix.length;
+        int matrixSize = inputMatrix.length; //.lenght here finds the number of rows
 
         // Create an augmented matrix [inputMatrix | identityMatrix]
         // The augmented matrix will have 2 * n columns: the original matrix + the identity matrix
@@ -69,7 +69,7 @@ public class MatrixInverse {
             // For each row in the augmented matrix, Copy the elements from the right part (which is the inverse matrix)
             // into the corresponding row of the 'inverseMatrix'.
             // The right part starts from index 'matrixSize' in each row, so we copy from that position to the beginning of the inverseMatrix row.
-
+            // System.arraycopy copies a specific range of elements from one array to another
             System.arraycopy(augmentedMatrix[row], matrixSize, inverseMatrix[row], 0, matrixSize);
         }
 
@@ -78,31 +78,26 @@ public class MatrixInverse {
     }
 
     // Main function to run the program
-    protected static double[][] Inverse(){
+    protected static void inverse(){
 
         System.out.println("Remember you can only get the inverse to a square matrix");
 
         // Step 1: Create a matrix to store the input values
-        double[][] inputMatrix = Matrices.matrixFirstCreator();
+        double[][] inputMatrix = Matrices.squareMatrixCreator();
 
-        if(noOfRowsInMatrixA != noOfColumnsMatrixA){
-            System.out.println("Sorry can only get the inverse to a square matrix");
-        }else {
 
-            // Step 2: Create a matrix to store the inverse of the input matrix
-            double[][] inverseMatrix = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
+        // Step 2: Create a matrix to store the inverse of the input matrix
+        double[][] inverseMatrix = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
 
-            // Step 3: Call the calculateInverse function to compute the inverse matrix
-            if (calculateInverse(inputMatrix, inverseMatrix)) {
-                // If the inverse was successfully calculated, print the inverse matrix
-                System.out.println("The inverse of the matrix is:");
+        // Step 3: Call the calculateInverse function to compute the inverse matrix
+        if (calculateInverse(inputMatrix, inverseMatrix)) {
+            // If the inverse was successfully calculated, print the inverse matrix
+            System.out.println("The inverse of the matrix is:");
 
-                return inverseMatrix;
-            } else {
-                // If the matrix is not invertible (singular), print a message indicating this
-                System.out.println("This matrix is not invertible.");
-            }
+        } else {
+            // If the matrix is not invertible (singular), print a message indicating this
+            System.out.println("This matrix is not invertible.");
         }
-        return inputMatrix;
+        Matrices.printMatrix(inverseMatrix);
     }
 }
