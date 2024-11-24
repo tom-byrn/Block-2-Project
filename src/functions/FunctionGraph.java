@@ -13,6 +13,10 @@ import static functions.FunctionsManager.singleVariableFunction;
 
 public class FunctionGraph extends Functions {
 
+    public FunctionGraph(String function){
+
+    }
+
     public FunctionGraph(){}
 
 
