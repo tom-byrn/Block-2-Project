@@ -49,7 +49,7 @@ public class MatrixInverse {
             }
 
             // Step 4: Eliminate the elements below the pivot (make them 0) for the current column.
-            double eliminationFactor = 0;
+            double eliminationFactor;
             for (int belowRow = row + 1; belowRow < matrixSize; belowRow++) {
                 // Calculate the factor to eliminate the element below the pivot.
                 eliminationFactor = augmentedMatrix[belowRow][row];

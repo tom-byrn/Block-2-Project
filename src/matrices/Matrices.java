@@ -62,7 +62,7 @@ public class Matrices {
             LUFactorisation.factoriser();
         }
         if(function == 7){
-
+            Determinant.getDeterminantOfAMatrix();
         }
     }
 
