@@ -10,8 +10,8 @@ public class Matrices {
 
 
     //Declaring Variables
-    protected static byte noOfRowsInMatrixA;
-    protected static byte noOfColumnsMatrixA;
+    protected static short noOfRowsInMatrixA;
+    protected static short noOfColumnsMatrixA;
     protected static char checker;
 
     public static void start() {
@@ -61,6 +61,9 @@ public class Matrices {
         if(function == 6){
             LUFactorisation.factoriser();
         }
+        if(function == 7){
+
+        }
     }
 
     // used to create a matrix
@@ -68,15 +71,15 @@ public class Matrices {
         //input no of rows
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = byteSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-127: ");
+        while ((noOfRowsInMatrixA = shortSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-32767: ");
         }
 
         //input no of columns
         System.out.print("Enter Number of Columns: ");
         // checks if the number of coloms is valid
-        while ((noOfColumnsMatrixA = byteSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-127: ");
+        while ((noOfColumnsMatrixA = shortSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-32767: ");
         }
 
         //Create a 2D array or Matrix
@@ -125,7 +128,7 @@ public class Matrices {
         //input no of rows
         System.out.print("Enter Number of Rows and columns (n * n): ");
         // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = noOfColumnsMatrixA = byteSizeInt()) == 0){
+        while ((noOfRowsInMatrixA = noOfColumnsMatrixA = shortSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-127: ");
         }
 

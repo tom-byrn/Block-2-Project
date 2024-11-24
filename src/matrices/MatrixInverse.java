@@ -1,7 +1,6 @@
 package matrices;
 
-import static matrices.Matrices.noOfColumnsMatrixA;
-import static matrices.Matrices.noOfRowsInMatrixA;
+import static matrices.Matrices.*;
 
 public class MatrixInverse {
 
@@ -15,8 +14,15 @@ public class MatrixInverse {
         double[][] augmentedMatrix = new double[matrixSize][2 * matrixSize];
 
         // Step 1: Construct the augmented matrix [inputMatrix | identityMatrix]
+        /*  | 9 8 3     1 0 0 |
+            | 7 2 1     0 1 0 |
+            | 3 4 4     0 0 1 |*/
+        // cycles through each row
         for (int row = 0; row < matrixSize; row++) {
+            //cycles throught each colunm
             for (int col = 0; col < matrixSize; col++) {
+
+
                 augmentedMatrix[row][col] = inputMatrix[row][col];  // Copy input matrix to the left part of the augmented matrix
                 augmentedMatrix[row][col + matrixSize] = (row == col) ? 1 : 0;  // Identity matrix on the right part
             }
@@ -24,6 +30,10 @@ public class MatrixInverse {
 
         // Step 2: Apply Gaussian elimination to make the left part of the augmented matrix the identity matrix
         // and the right part the inverse of the original matrix (if it's invertible).
+        /*  | 1 0 0             |
+            | 0 1 0     A^-1    |
+            | 0 0 1             |
+         */
         for (int row = 0; row < matrixSize; row++) {
             // If the diagonal element (pivot element) is 0, the matrix is singular (not invertible).
             if (augmentedMatrix[row][row] == 0) {
@@ -33,14 +43,16 @@ public class MatrixInverse {
             // Step 3: Normalize the pivot row to make the diagonal element 1.
             // This is done by dividing the entire row by the pivot element.
             double pivotValue = augmentedMatrix[row][row];
+
             for (int col = 0; col < 2 * matrixSize; col++) {
                 augmentedMatrix[row][col] /= pivotValue;  // Normalize the pivot row.
             }
 
             // Step 4: Eliminate the elements below the pivot (make them 0) for the current column.
+            double eliminationFactor = 0;
             for (int belowRow = row + 1; belowRow < matrixSize; belowRow++) {
                 // Calculate the factor to eliminate the element below the pivot.
-                double eliminationFactor = augmentedMatrix[belowRow][row];
+                eliminationFactor = augmentedMatrix[belowRow][row];
                 for (int col = 0; col < 2 * matrixSize; col++) {
                     augmentedMatrix[belowRow][col] -= eliminationFactor * augmentedMatrix[row][col];
                 }
@@ -93,11 +105,11 @@ public class MatrixInverse {
         if (calculateInverse(inputMatrix, inverseMatrix)) {
             // If the inverse was successfully calculated, print the inverse matrix
             System.out.println("The inverse of the matrix is:");
-
+            Matrices.printMatrix(inverseMatrix);
         } else {
             // If the matrix is not invertible (singular), print a message indicating this
             System.out.println("This matrix is not invertible.");
+            Matrices.printMatrix(inputMatrix);
         }
-        Matrices.printMatrix(inverseMatrix);
     }
 }

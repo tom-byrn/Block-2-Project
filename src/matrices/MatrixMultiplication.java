@@ -3,10 +3,10 @@ package matrices;
 import java.util.Scanner;
 
 import static matrices.Matrices.*;
-import static matrices.MatricesChecker.byteSizeInt;
+import static matrices.MatricesChecker.shortSizeInt;
 
 public class MatrixMultiplication {
-    private static byte noOfColumnsInMatrixInB;
+    private static short noOfColumnsInMatrixInB;
 
     //Method for multiplying matrixes
     protected static void multiplication(){
@@ -50,16 +50,16 @@ public class MatrixMultiplication {
         //input no of rows
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
-        byte noOfRowsInMatrixInB;
-        while (!((noOfRowsInMatrixInB = byteSizeInt()) == noOfColumnsMatrixA)){
+        short noOfRowsInMatrixInB;
+        while (!((noOfRowsInMatrixInB = shortSizeInt()) == noOfColumnsMatrixA)){
             System.out.println("Sorry your matrix must have the same number of columns as matrix A: " + noOfColumnsMatrixA);
         }
 
         //input no of rows
         System.out.print("Enter Number of Columns: ");
         // checks if the number of rows is valid
-        while ((noOfColumnsInMatrixInB = byteSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-127: ");
+        while ((noOfColumnsInMatrixInB = shortSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-32767: ");
         }
 
 

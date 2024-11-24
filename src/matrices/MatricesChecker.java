@@ -45,4 +45,15 @@ public class MatricesChecker {
             return 0;
         }
     }
+    // Ensures an int of size byte is inputted
+    protected static short shortSizeInt() {
+        Scanner input = new Scanner(System.in);
+        try {
+            return input.nextShort();
+        } catch (InputMismatchException e) {
+            // This block catches InputMismatchException
+            // if patterns don't match e.g. a letter or a number too big
+            return 0;
+        }
+    }
 }

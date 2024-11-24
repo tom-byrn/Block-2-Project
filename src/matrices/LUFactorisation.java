@@ -6,11 +6,11 @@ public class LUFactorisation {
 
     // Method to perform LU Decomposition
     public static boolean luFactorisation(double[][] inputMatrix, double[][] lowerTriangularMatrix, double[][] upperTriangularMatrix) {
-        int matrixSize = inputMatrix.length;  // Get the size of the matrix (assuming inputMatrix is square)
+        short matrixSize = (short) inputMatrix.length;  // Get the size of the matrix (assuming inputMatrix is square)
 
         // Initialize lowerTriangularMatrix as the identity matrix (for L)
-        for (int currentRow = 0; currentRow < noOfRowsInMatrixA; currentRow++) {
-            for (int currentCol = 0; currentCol < noOfColumnsMatrixA; currentCol++) {
+        for (int currentRow = 0; currentRow < matrixSize; currentRow++) {
+            for (int currentCol = 0; currentCol < matrixSize; currentCol++) {
                 if (currentRow == currentCol) {
                     lowerTriangularMatrix[currentRow][currentCol] = 1.0;  // Set diagonal elements of L to 1
                 } else {
@@ -21,15 +21,15 @@ public class LUFactorisation {
         }
 
         // Perform the LU decomposition using Gaussian elimination
-        for (int pivotRow = 0; pivotRow < noOfRowsInMatrixA; pivotRow++) {
+        for (int pivotRow = 0; pivotRow < matrixSize; pivotRow++) {
 
             // Eliminate the elements below the pivot (in column pivotRow) to update the upper triangular matrix (U)
-            for (int currentRow = pivotRow + 1; currentRow < noOfRowsInMatrixA; currentRow++) {
+            for (int currentRow = pivotRow + 1; currentRow < matrixSize; currentRow++) {
 
                 // Check if the pivot element (upperTriangularMatrix[pivotRow][pivotRow]) is zero
                 // If it's zero, LU decomposition cannot proceed without pivoting
                 if (upperTriangularMatrix[pivotRow][pivotRow] == 0) {
-                    System.out.println("Pivot element is zero, LU Decomposition cannot be performed.");
+                    System.out.println("Pivot element is zero, LU Factorisation cannot be performed.");
                     return false;  // Return false indicating failure
                 }
 
@@ -51,9 +51,12 @@ public class LUFactorisation {
         // Define the input matrix for LU Factorisation
         double[][] inputMatrix = Matrices.squareMatrixCreator();
 
+        // Find the size of it
+        short matrixSize = (short) inputMatrix.length;
+
         // Create matrices for lower and upper triangular matrices
-        double[][] lowerTriangularMatrix = new double[noOfRowsInMatrixA][noOfColumnsMatrixA]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
-        double[][] upperTriangularMatrix = new double[noOfRowsInMatrixA][noOfColumnsMatrixA]; // Declare upperTriangularMatrix as a n x n matrix for upper triangular matrix (U)
+        double[][] lowerTriangularMatrix = new double[matrixSize][matrixSize]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
+        double[][] upperTriangularMatrix = new double[matrixSize][matrixSize]; // Declare upperTriangularMatrix as a n x n matrix for upper triangular matrix (U)
 
         // Perform LU Factorisation
         if (luFactorisation(inputMatrix, lowerTriangularMatrix, upperTriangularMatrix)) {
