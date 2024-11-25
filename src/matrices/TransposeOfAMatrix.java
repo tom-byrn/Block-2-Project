@@ -1,6 +1,6 @@
 package matrices;
 
-import static matrices.Matrices.*;
+import static matrices.MatricesManager.*;
 
 public class TransposeOfAMatrix {
     protected static void transpose(){
@@ -18,6 +18,6 @@ public class TransposeOfAMatrix {
                 matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
             }
         }
-        Matrices.printMatrix(matrixFinal);
+        MatricesManager.printMatrix(matrixFinal);
     }
 }

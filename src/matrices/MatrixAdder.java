@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Scanner;
 
-import static matrices.Matrices.*;
+import static matrices.MatricesManager.*;
 
 public class MatrixAdder {
 
@@ -33,7 +33,7 @@ public class MatrixAdder {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        Matrices.printMatrix(matrixFinal);
+        MatricesManager.printMatrix(matrixFinal);
     }
 
     //Used to subtract 2 matrixs
@@ -54,7 +54,7 @@ public class MatrixAdder {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        Matrices.printMatrix(matrixFinal);
+        MatricesManager.printMatrix(matrixFinal);
     }
 
 
@@ -62,7 +62,7 @@ public class MatrixAdder {
     private static void additionOrSubtraction(){
 
         //Calls matrixFirstCreator and sets matrixA to answer
-        matrixA = Matrices.matrixFirstCreator();
+        matrixA = MatricesManager.matrixFirstCreator();
 
         //Calls matrixCreatorB and sets matrixB to answer
         matrixB = addingMatrixB();

@@ -1,11 +1,11 @@
 package matrices;
 
-import static matrices.Matrices.*;
+import static matrices.MatricesManager.*;
 
 public class MatrixInverse {
 
     // Function to calculate the inverse of a matrix using Gaussian elimination
-    public static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
+    private static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
         // Get the size of the matrix (n x n)
         int matrixSize = inputMatrix.length; //.lenght here finds the number of rows
 
@@ -95,7 +95,7 @@ public class MatrixInverse {
         System.out.println("Remember you can only get the inverse to a square matrix");
 
         // Step 1: Create a matrix to store the input values
-        double[][] inputMatrix = Matrices.squareMatrixCreator();
+        double[][] inputMatrix = MatricesManager.squareMatrixCreator();
 
 
         // Step 2: Create a matrix to store the inverse of the input matrix
@@ -105,11 +105,11 @@ public class MatrixInverse {
         if (calculateInverse(inputMatrix, inverseMatrix)) {
             // If the inverse was successfully calculated, print the inverse matrix
             System.out.println("The inverse of the matrix is:");
-            Matrices.printMatrix(inverseMatrix);
+            MatricesManager.printMatrix(inverseMatrix);
         } else {
             // If the matrix is not invertible (singular), print a message indicating this
             System.out.println("This matrix is not invertible.");
-            Matrices.printMatrix(inputMatrix);
+            MatricesManager.printMatrix(inputMatrix);
         }
     }
 }

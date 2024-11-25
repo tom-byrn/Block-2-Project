@@ -1,11 +1,11 @@
 package matrices;
 
-import static matrices.Matrices.*;
+import static matrices.MatricesManager.*;
 
 public class LUFactorisation {
 
     // Method to perform LU Decomposition
-    public static boolean luFactorisation(double[][] inputMatrix, double[][] lowerTriangularMatrix, double[][] upperTriangularMatrix) {
+    protected static boolean luFactorisation(double[][] inputMatrix, double[][] lowerTriangularMatrix, double[][] upperTriangularMatrix) {
         short matrixSize = (short) inputMatrix.length;  // Get the size of the matrix (assuming inputMatrix is square)
 
         // Initialize lowerTriangularMatrix as the identity matrix (for L)
@@ -49,7 +49,7 @@ public class LUFactorisation {
 
     protected static void factoriser(){
         // Define the input matrix for LU Factorisation
-        double[][] inputMatrix = Matrices.squareMatrixCreator();
+        double[][] inputMatrix = MatricesManager.squareMatrixCreator();
 
         // Find the size of it
         short matrixSize = (short) inputMatrix.length;

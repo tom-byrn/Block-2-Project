@@ -3,7 +3,7 @@ package matrices;
 public class Determinant {
 
     // Function to compute the determinant using LU decomposition
-    public static double computeDeterminant(double[][] inputMatrix) {
+    private static double computeDeterminant(double[][] inputMatrix) {
         short matrixSize = (short) inputMatrix.length;  // Get the size of the matrix (n x n)
 
         // Create the lower and upper triangular matrices to store the LU decomposition result
@@ -31,7 +31,7 @@ public class Determinant {
 
     protected static void getDeterminantOfAMatrix(){
         // Test matrix (3x3 example matrix)
-        double[][] inputMatrix = Matrices.squareMatrixCreator();
+        double[][] inputMatrix = MatricesManager.squareMatrixCreator();
 
         // Compute and print the determinant using LU decomposition
         double determinant = computeDeterminant(inputMatrix);

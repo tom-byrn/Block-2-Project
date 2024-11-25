@@ -1,11 +1,6 @@
 package functions;
-import algebra.AlgebraManager;
 import calculations.Calculations;
-import calculations.CalculationsManager;
-import com.sun.tools.javac.Main;
-import matrices.Matrices;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;

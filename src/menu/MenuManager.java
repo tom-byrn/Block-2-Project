@@ -6,7 +6,7 @@ import calculations.CalculationsManager;
 import calculations.ConstantAdder;
 import complex.ComplexManager;
 import functions.FunctionsManager;
-import matrices.Matrices;
+import matrices.MatricesManager;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -59,7 +59,7 @@ public class MenuManager {
                     }
                     case 3 -> {
                         currentlySelecting = false;
-                        Matrices.start();
+                        MatricesManager.start();
                         break;
                     }
                     case 4 -> {

@@ -2,22 +2,35 @@ package matrices;
 
 import java.util.Scanner;
 
-import static matrices.Matrices.*;
+import static matrices.MatricesManager.*;
 import static matrices.MatricesChecker.shortSizeInt;
 
 public class MatrixMultiplication {
     private static short noOfColumnsInMatrixInB;
 
-    //Method for multiplying matrixes
-    protected static void multiplication(){
-
+    protected static void multiplicationStart(){
         //Calls matrixFirstCreator and sets matrixA to answer
         //Initilize matrices
         //creates a 2D matrix
-        double[][] matrixA = Matrices.matrixFirstCreator();
+        double[][] matrixA = MatricesManager.matrixFirstCreator();
 
         //Calls multiplyingMatrixB and sets matrixB to answer
         double[][] matrixB = multiplyingMatrixB();
+
+        double[][]matrixFinal = multiplication(matrixA,matrixB);
+
+        MatricesManager.printMatrix(matrixFinal);
+    }
+
+    //Method for multiplying matrixes
+    protected static double[][] multiplication(double[][] matrixA, double[][] matrixB){
+
+        //Get the number of rows for matrix
+        noOfRowsInMatrixA = (short) matrixA.length;
+        noOfColumnsInMatrixInB = (short) matrixB.length;
+
+        // Get the number of columns
+        noOfColumnsMatrixA = (short) matrixA[0].length;
 
         // Create final Matrix
         double[][]matrixFinal = new double[noOfRowsInMatrixA][noOfColumnsInMatrixInB];
@@ -38,8 +51,7 @@ public class MatrixMultiplication {
                 }
             }
         }
-
-        Matrices.printMatrix(matrixFinal);
+        return matrixFinal;
     }
 
 

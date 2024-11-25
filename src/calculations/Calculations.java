@@ -16,9 +16,10 @@ public class Calculations {
 
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
+        this.calculationInput = Constants.replaceConstants(calculationInput); //Regex to replace certain Strings with constants e.g. g=9.81
+
         this.calculationInput = preprocessInput(calculationInput); //Regex for calculation input
 
-        this.calculationInput = Constants.replaceConstants(calculationInput); //Regex to replace certain Strings with constants e.g. g=9.81
     }
 
 

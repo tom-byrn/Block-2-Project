@@ -6,7 +6,7 @@ import java.util.Scanner;
 // Class imports
 import static matrices.MatricesChecker.*;
 
-public class Matrices {
+public class MatricesManager {
 
 
     //Declaring Variables
@@ -25,9 +25,10 @@ public class Matrices {
                         Enter (4) for Transpose
                         Enter (5) for Inverse
                         Enter (6) for LU Factorisation
-                        Enter (7) for def(A)
-                        Enter (8) for Eigenvalues
-                        Enter (9) for Power""");
+                        Enter (7) for det(A)
+                        Enter (8) for Dominant Eigenvalues
+                        Enter (9) for Power
+                        Enter (0) to Solve Simultaneous Equations""");
 
 
 
@@ -49,7 +50,7 @@ public class Matrices {
         }
 
         if(function == 3){
-            MatrixMultiplication.multiplication();
+            MatrixMultiplication.multiplicationStart();
         }
 
         if(function == 4){
@@ -116,7 +117,7 @@ public class Matrices {
             checker = MatricesChecker.YorN(matrixOneSize);
 
             if(checker == 'N' || checker == 'n') {
-                matrixOneSize = Matrices.matrixFirstCreator();
+                matrixOneSize = MatricesManager.matrixFirstCreator();
             }
         }while (checker == 'N' || checker == 'n');
 
