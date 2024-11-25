@@ -34,8 +34,8 @@ public class MatricesManager {
 
         // checking is a valid function selected
         byte function;
-        while ((function = byteSizeInt()) < 1 || function > 9) {
-            System.out.print("Error please enter a number between 1-9: ");
+        while ((function = byteSizeInt()) < 0 || function > 9) {
+            System.out.print("Error please enter a number between 0-9: ");
         }
 
 
