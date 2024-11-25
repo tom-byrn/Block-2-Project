@@ -28,7 +28,7 @@ public class MatricesManager {
                         Enter (7) for det(A)
                         Enter (8) for Dominant Eigenvalues
                         Enter (9) for Power
-                        Enter (0) to Solve Simultaneous Equations""");
+                        Enter (0) to  Solve Simultaneous Equations""");
 
 
 
@@ -54,16 +54,23 @@ public class MatricesManager {
         }
 
         if(function == 4){
-            TransposeOfAMatrix.transpose();
+            TransposeOfAMatrix.transposeStart();
         }
+
         if(function == 5){
             MatrixInverse.inverse();
         }
+
         if(function == 6){
             LUFactorisation.factoriser();
         }
+
         if(function == 7){
             Determinant.getDeterminantOfAMatrix();
+        }
+
+        if(function == 8) {
+            EigenvalueCalculator.getDominantEigenvalue();
         }
     }
 

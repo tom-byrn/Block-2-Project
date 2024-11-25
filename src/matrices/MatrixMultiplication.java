@@ -27,10 +27,10 @@ public class MatrixMultiplication {
 
         //Get the number of rows for matrix
         noOfRowsInMatrixA = (short) matrixA.length;
-        noOfColumnsInMatrixInB = (short) matrixB.length;
 
         // Get the number of columns
         noOfColumnsMatrixA = (short) matrixA[0].length;
+        noOfColumnsInMatrixInB = (short) matrixB[0].length;
 
         // Create final Matrix
         double[][]matrixFinal = new double[noOfRowsInMatrixA][noOfColumnsInMatrixInB];
@@ -64,7 +64,7 @@ public class MatrixMultiplication {
         // checks if the number of rows is valid
         short noOfRowsInMatrixInB;
         while (!((noOfRowsInMatrixInB = shortSizeInt()) == noOfColumnsMatrixA)){
-            System.out.println("Sorry your matrix must have the same number of columns as matrix A: " + noOfColumnsMatrixA);
+            System.out.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + noOfColumnsMatrixA);
         }
 
         //input no of rows

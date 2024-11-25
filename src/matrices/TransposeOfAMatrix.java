@@ -3,8 +3,21 @@ package matrices;
 import static matrices.MatricesManager.*;
 
 public class TransposeOfAMatrix {
-    protected static void transpose(){
+
+    protected static void transposeStart(){
         double[][]matrixA = matrixFirstCreator();
+
+        double[][] matrixFinal = transpose(matrixA);
+
+        MatricesManager.printMatrix(matrixFinal);
+    }
+    protected static double[][] transpose(double[][]matrixA){
+
+        //Get the number of rows for matrix
+        noOfRowsInMatrixA = (short) matrixA.length;
+
+        // Get the number of columns
+        noOfColumnsMatrixA = (short) matrixA[0].length;
 
         //Create a matrix of with row = coloms and colums equal to rows from MatrixA
         double[][]matrixFinal = new double[noOfColumnsMatrixA][noOfRowsInMatrixA];
@@ -18,6 +31,6 @@ public class TransposeOfAMatrix {
                 matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
             }
         }
-        MatricesManager.printMatrix(matrixFinal);
+        return matrixFinal;
     }
 }
