@@ -9,15 +9,68 @@ import static functions.FunctionsManager.*;
 
 public class Functions extends Algebra {
 
+    static Scanner scanner = new Scanner(System.in);
+    String functionInput;
+    double startRange;
+    double endRange;
+    double stepSize;
+
+    public Functions(String functionInput){ //Constructor that takes initial input
+        this.functionInput = functionInput;
+    }
+
+    public Functions(String functionInput, double startRange, double endRange){ //Constructor taking input and range
+        this.functionInput = functionInput;
+        this.startRange = startRange;
+    }
+
+    public Functions(){
+
+    }
+
+    public String promptFunctionInput(){
+        System.out.print("Enter a function (e.g., x^2 + 3x + 5): ");
+        functionInput = scanner.nextLine();
+        return functionInput;
+    }
+
+    public double promptStartRange(){
+        startRange = getValidDouble(scanner, "Enter the start of the range: ");
+        return startRange;
+    }
+
+    public double promptEndRange(){
+        endRange = getValidDouble(scanner, "Enter the end of the range: ");
+        return endRange;
+    }
+
+    public double promptStepSize(){
+        stepSize = getValidDouble(scanner, "Enter the step size: ");
+        return stepSize;
+    }
+
+    public double getStartRange(){
+        return startRange;
+    }
+
+    public double getEndRange(){
+        return endRange;
+    }
+
+    public double getStepSize(){
+        return stepSize;
+    }
+
+
     public static void singleVariableFunction() {
         Scanner input = new Scanner(System.in);
 
         // Setting parameters for the function
-        System.out.println("Enter a function (e.g., x^2 + 3x + 5):");
-        String functionInput = input.nextLine();
+        Functions f = new Functions();
+        String functionInput = f.promptFunctionInput();
 
         // Error handling for start range
-        double startRange = getValidDouble(input, "Enter the start of the range:");
+        double startRange = getValidDouble(scanner, "Enter the start of the range:");
 
         double endRange;
         // Error handling for end range

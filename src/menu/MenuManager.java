@@ -27,8 +27,6 @@ public class MenuManager {
 
                 // Prompt user to select a calculator function
                 System.out.println("""
-                        Please enter a number
-                        
                         Enter (1) for calculations 🧮
                         Enter (2) for functions 📈
                         Enter (3) for matrices ⏹️
@@ -36,10 +34,9 @@ public class MenuManager {
                         Enter (5) for complex numbers ℹ️
                         Enter (6) to add a constant
                         Enter (7) to check factors
-                        
                         Enter (0) to exit the application 👋
-                        
                         """);
+                System.out.print("Enter a choice: ");
 
                 // Scanner object scans for user input
                 int selectorNum = scanner.nextInt();
