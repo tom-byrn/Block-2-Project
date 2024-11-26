@@ -3,10 +3,10 @@ package matrices;
 import java.util.Scanner;
 
 import static matrices.MatricesManager.*;
-import static matrices.MatricesChecker.shortSizeInt;
+import static matrices.MatricesChecker.intSizeInt;
 
 public class MatrixMultiplication {
-    private static short noOfColumnsInMatrixInB;
+    private static int noOfColumnsInMatrixInB;
 
     protected static void multiplicationStart(){
         //Calls matrixFirstCreator and sets matrixA to answer
@@ -26,11 +26,11 @@ public class MatrixMultiplication {
     protected static double[][] multiplication(double[][] matrixA, double[][] matrixB){
 
         //Get the number of rows for matrix
-        noOfRowsInMatrixA = (short) matrixA.length;
+        noOfRowsInMatrixA =  matrixA.length;
 
         // Get the number of columns
-        noOfColumnsMatrixA = (short) matrixA[0].length;
-        noOfColumnsInMatrixInB = (short) matrixB[0].length;
+        noOfColumnsMatrixA = matrixA[0].length;
+        noOfColumnsInMatrixInB = matrixB[0].length;
 
         // Create final Matrix
         double[][]matrixFinal = new double[noOfRowsInMatrixA][noOfColumnsInMatrixInB];
@@ -42,7 +42,7 @@ public class MatrixMultiplication {
 
                 // Multiply corresponding elements from the row of matrix A and the column of matrix B
                 // The loop variable "columnMatrixA" refers to the shared dimension (columns of A, rows of B)
-                for (int columnMatrixA = 0; columnMatrixA < noOfColumnsMatrixA; columnMatrixA++) {
+                for (int columnMatrixA = 0; columnMatrixA < noOfColumnsMatrixA; columnMatrixA++) { // Iterate over the columns of A (or rows of B)
 
                     // Multiply the element from matrix A (at rowMatrixA, columnMatrixA)
                     // with the element from matrix B (at columnMatrixA, colMatrixB)
@@ -62,16 +62,16 @@ public class MatrixMultiplication {
         //input no of rows
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
-        short noOfRowsInMatrixInB;
-        while (!((noOfRowsInMatrixInB = shortSizeInt()) == noOfColumnsMatrixA)){
+        int noOfRowsInMatrixInB;
+        while (!((noOfRowsInMatrixInB = intSizeInt()) == noOfColumnsMatrixA)){
             System.out.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + noOfColumnsMatrixA);
         }
 
         //input no of rows
         System.out.print("Enter Number of Columns: ");
         // checks if the number of rows is valid
-        while ((noOfColumnsInMatrixInB = shortSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-32767: ");
+        while ((noOfColumnsInMatrixInB = intSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-2147483647: ");
         }
 
 

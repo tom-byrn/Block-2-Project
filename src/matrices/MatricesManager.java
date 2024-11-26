@@ -10,8 +10,8 @@ public class MatricesManager {
 
 
     //Declaring Variables
-    protected static short noOfRowsInMatrixA;
-    protected static short noOfColumnsMatrixA;
+    protected static int noOfRowsInMatrixA;
+    protected static int noOfColumnsMatrixA;
     protected static char checker;
 
     public static void start() {
@@ -23,19 +23,18 @@ public class MatricesManager {
                         Enter (2) for Subtraction
                         Enter (3) for Multiplication
                         Enter (4) for Transpose
-                        Enter (5) for Inverse
+                        Enter (5) for Power
                         Enter (6) for LU Factorisation
                         Enter (7) for det(A)
                         Enter (8) for Dominant Eigenvalues
-                        Enter (9) for Power
-                        Enter (0) to  Solve Simultaneous Equations""");
+                        Enter (9) to  Solve Simultaneous Equations""");
 
 
 
         // checking is a valid function selected
         byte function;
-        while ((function = byteSizeInt()) < 0 || function > 9) {
-            System.out.print("Error please enter a number between 0-9: ");
+        while ((function = byteSizeInt()) < 1 || function > 9) {
+            System.out.print("Error please enter a number between 1-9: ");
         }
 
 
@@ -58,7 +57,7 @@ public class MatricesManager {
         }
 
         if(function == 5){
-            MatrixInverse.inverse();
+            MatrixPower.powerCalculationStart();
         }
 
         if(function == 6){
@@ -79,15 +78,15 @@ public class MatricesManager {
         //input no of rows
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = shortSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-32767: ");
+        while ((noOfRowsInMatrixA = intSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-2147483647: ");
         }
 
         //input no of columns
         System.out.print("Enter Number of Columns: ");
         // checks if the number of coloms is valid
-        while ((noOfColumnsMatrixA = shortSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-32767: ");
+        while ((noOfColumnsMatrixA = intSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-2147483647: ");
         }
 
         //Create a 2D array or Matrix
@@ -136,8 +135,8 @@ public class MatricesManager {
         //input no of rows
         System.out.print("Enter Number of Rows and columns (n * n): ");
         // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = noOfColumnsMatrixA = shortSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-127: ");
+        while ((noOfRowsInMatrixA = noOfColumnsMatrixA = intSizeInt()) == 0){
+            System.out.print("Error please enter a number between 1-2147483647: ");
         }
 
         //Create a 2D array or Matrix

@@ -4,15 +4,15 @@ import static matrices.MatrixMultiplication.multiplication;
 
 public class EigenvalueCalculator {
 
-    private static short noOfRowsInVector;
+    private static int noOfRowsInVector;
     private static void powerIteration(double[][] origialMatrix, int noOfIterations) {
 
-        noOfRowsInVector = (short) origialMatrix.length; // Size of the matrix (assuming a square matrix)
+        noOfRowsInVector = origialMatrix.length; // Size of the matrix (assuming a square matrix)
 
         // Initial vector (randomly chosen as all ones) (Can't be 0)
         double[][] eigenVectorMatrix = new double[noOfRowsInVector][1];   // Vector to hold the result of matrix-vector multiplication
         // Fill the first column of each row with 1
-        for (short defaultEveryElementTo1 = 0; defaultEveryElementTo1 < noOfRowsInVector; defaultEveryElementTo1++) {
+        for (int defaultEveryElementTo1 = 0; defaultEveryElementTo1 < noOfRowsInVector; defaultEveryElementTo1++) {
             eigenVectorMatrix[defaultEveryElementTo1][0] = 1;  //fills every element with 1
         }
 

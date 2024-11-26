@@ -1,11 +1,9 @@
 package matrices;
 
-import static matrices.MatricesManager.*;
-
 public class MatrixInverse {
 
     // Function to calculate the inverse of a matrix using Gaussian elimination
-    private static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
+    protected static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
         // Get the size of the matrix (n x n)
         int matrixSize = inputMatrix.length; //.lenght here finds the number of rows
 
@@ -87,29 +85,5 @@ public class MatrixInverse {
 
 
         return true;  // The matrix was successfully inverted
-    }
-
-    // Main function to run the program
-    protected static void inverse(){
-
-        System.out.println("Remember you can only get the inverse to a square matrix");
-
-        // Step 1: Create a matrix to store the input values
-        double[][] inputMatrix = MatricesManager.squareMatrixCreator();
-
-
-        // Step 2: Create a matrix to store the inverse of the input matrix
-        double[][] inverseMatrix = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
-
-        // Step 3: Call the calculateInverse function to compute the inverse matrix
-        if (calculateInverse(inputMatrix, inverseMatrix)) {
-            // If the inverse was successfully calculated, print the inverse matrix
-            System.out.println("The inverse of the matrix is:");
-            MatricesManager.printMatrix(inverseMatrix);
-        } else {
-            // If the matrix is not invertible (singular), print a message indicating this
-            System.out.println("This matrix is not invertible.");
-            MatricesManager.printMatrix(inputMatrix);
-        }
     }
 }

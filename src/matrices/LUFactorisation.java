@@ -6,7 +6,7 @@ public class LUFactorisation {
 
     // Method to perform LU Decomposition
     protected static boolean luFactorisation(double[][] inputMatrix, double[][] lowerTriangularMatrix, double[][] upperTriangularMatrix) {
-        short matrixSize = (short) inputMatrix.length;  // Get the size of the matrix (assuming inputMatrix is square)
+        int matrixSize = inputMatrix.length;  // Get the size of the matrix (assuming inputMatrix is square)
 
         // Initialize lowerTriangularMatrix as the identity matrix (for L)
         for (int currentRow = 0; currentRow < matrixSize; currentRow++) {
@@ -52,7 +52,7 @@ public class LUFactorisation {
         double[][] inputMatrix = MatricesManager.squareMatrixCreator();
 
         // Find the size of it
-        short matrixSize = (short) inputMatrix.length;
+        int matrixSize = inputMatrix.length;
 
         // Create matrices for lower and upper triangular matrices
         double[][] lowerTriangularMatrix = new double[matrixSize][matrixSize]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)

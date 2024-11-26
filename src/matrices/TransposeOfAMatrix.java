@@ -14,10 +14,10 @@ public class TransposeOfAMatrix {
     protected static double[][] transpose(double[][]matrixA){
 
         //Get the number of rows for matrix
-        noOfRowsInMatrixA = (short) matrixA.length;
+        noOfRowsInMatrixA = matrixA.length;
 
         // Get the number of columns
-        noOfColumnsMatrixA = (short) matrixA[0].length;
+        noOfColumnsMatrixA = matrixA[0].length;
 
         //Create a matrix of with row = coloms and colums equal to rows from MatrixA
         double[][]matrixFinal = new double[noOfColumnsMatrixA][noOfRowsInMatrixA];

@@ -45,11 +45,12 @@ public class MatricesChecker {
             return 0;
         }
     }
+
     // Ensures an int of size byte is inputted
-    protected static short shortSizeInt() {
+    protected static int intSizeInt() {
         Scanner input = new Scanner(System.in);
         try {
-            return input.nextShort();
+            return input.nextInt();
         } catch (InputMismatchException e) {
             // This block catches InputMismatchException
             // if patterns don't match e.g. a letter or a number too big

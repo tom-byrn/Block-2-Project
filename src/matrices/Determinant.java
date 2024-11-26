@@ -4,7 +4,7 @@ public class Determinant {
 
     // Function to compute the determinant using LU decomposition
     private static double computeDeterminant(double[][] inputMatrix) {
-        short matrixSize = (short) inputMatrix.length;  // Get the size of the matrix (n x n)
+        int matrixSize = inputMatrix.length;  // Get the size of the matrix (n x n)
 
         // Create the lower and upper triangular matrices to store the LU decomposition result
         double[][] lowerMatrix = new double[matrixSize][matrixSize];
