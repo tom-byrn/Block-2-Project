@@ -16,9 +16,7 @@ public class Calculations {
 
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
-        this.calculationInput = Constants.replaceConstants(calculationInput); //Regex to replace certain Strings with constants e.g. g=9.81
-
-        this.calculationInput = preprocessInput(calculationInput); //Regex for calculation input
+        this.calculationInput = InputProcessor.preprocessInput(calculationInput); //Regex to replace certain Strings with constants e.g. g=9.81
 
     }
 
@@ -27,32 +25,6 @@ public class Calculations {
 
     protected String getCalculationInput(){
         return calculationInput;
-    }
-
-    // Method to preprocess the calculation input with regex
-    private String preprocessInput(String input) {
-        //Remove all whitespace
-        input = input.replaceAll("\\s+", "");
-        // Add * between a number and a letter
-        input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
-        // Add * between a number and a parenthesis
-        input = input.replaceAll("(\\d)(\\()", "$1*$2");
-        // Replace ")(" with ")*("
-        input = input.replaceAll("\\)\\(", ")*(");
-
-        //Replace "- -" with "+" , "- ( -" with "+ (" , etc.
-        //This fixes a lot of issues with minus signs
-        input = input.replaceAll("--", "+");
-        input = input.replaceAll("-\\(-", "+(");
-        input = input.replaceAll("-\\(", "-1(");
-        input = input.replaceAll("-([a-zA-Z])", "-1*$1");
-        input = input.replaceFirst("^-", "(0-");
-        input = input.replaceAll("\\(-", "(0-");
-
-        // Replacing factorial with factorial number needed for the 2 argument constructor
-        input = input.replaceAll("!", "!0");
-
-        return input;
     }
 
     protected double evaluate(String calculationInput){
@@ -118,7 +90,8 @@ public class Calculations {
         Map<String, Integer> precedence = Map.of( //Setting levels of precedence to operators
                 "+", 1, "-", 1,
                 "*", 2, "/", 2,
-                "^", 3, "%",3,"!",4);
+                "^", 3, "%",3,
+                "!",4);
 
         for (String token : tokens) {
             if (isNumber(token)) {

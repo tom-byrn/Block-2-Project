@@ -9,7 +9,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import javax.swing.*;
 
-import static functions.FunctionsManager.singleVariableFunction;
+import static functions.Functions.singleVariableFunction;
 
 public class FunctionGraph extends Functions {
 
@@ -19,5 +19,16 @@ public class FunctionGraph extends Functions {
 
     public FunctionGraph(){}
 
+    public static void graphFunction(){
+
+        Functions f = new Functions();
+
+        String functionInput = f.promptFunctionInput();
+        double startRange = f.promptStartRange();
+        double endRange = f.promptEndRange();
+
+        f = new Functions(functionInput, startRange, endRange);
+
+    }
 
 }
