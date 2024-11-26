@@ -18,18 +18,17 @@ public class CalculationsManager {
                 System.out.print("Please enter a sum: ");
                 calculationInput = scanner.nextLine();
                 calculations = new Calculations(calculationInput); //Updating object with the functioning constructor
+                System.out.println("\n" + calculations.getOriginalInput() + " = " + calculations.getAnswer());
                 validInput = true;
             } catch (ArithmeticException e) {
-                System.out.println("Invalid sum: Division by zero is not allowed!\n");
+                System.out.println("\nInvalid sum: Division by zero is not allowed!\n");
             } catch (IllegalArgumentException e) {
-                System.out.println("Invalid sum: Unsupported operator or function!\n");
+                System.out.println("\nInvalid sum: Unsupported operator or function!\n");
             } catch (IllegalStateException e) {
-                System.out.println("Invalid sum: Improper expression format!\n");
+                System.out.println("\nInvalid sum: Improper expression format!\n");
             } catch (Exception e) {
-                System.out.println("Invalid sum!\n");
+                System.out.println("\nInvalid sum!\n");
             }
         }
-
-        System.out.println("\n" + calculations.getOriginalInput() + " = " + calculations.getAnswer());
     }
 }

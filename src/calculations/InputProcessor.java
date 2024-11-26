@@ -1,8 +1,30 @@
 package calculations;
 
-public class Constants {
+public class InputProcessor {
     // method that takes and "String input" and returns a String
-    protected static String replaceConstants(String input){
+    protected static String preprocessInput(String input){
+
+        //Remove all whitespace
+        input = input.replaceAll("\\s+", "");
+        // Add * between a number and a letter
+        input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
+        // Add * between a number and a parenthesis
+        input = input.replaceAll("(\\d)(\\()", "$1*$2");
+        // Replace ")(" with ")*("
+        input = input.replaceAll("\\)\\(", ")*(");
+
+        //Replace "- -" with "+" , "- ( -" with "+ (" , etc.
+        //This fixes a lot of issues with minus signs
+        input = input.replaceAll("--", "+");
+        input = input.replaceAll("-\\(-", "+(");
+        input = input.replaceAll("-\\(", "-1(");
+        input = input.replaceAll("-([a-zA-Z])", "-1*$1");
+        input = input.replaceFirst("^-", "(0-");
+        input = input.replaceAll("\\(-", "(0-");
+
+        // Replacing factorial with factorial number needed for the 2 argument constructor
+        input = input.replaceAll("!", "!0");
+
 
         // Constants
         // Replace e with Euler constant
