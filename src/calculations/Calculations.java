@@ -27,7 +27,7 @@ public class Calculations {
         return calculationInput;
     }
 
-    protected double evaluate(String calculationInput){
+    public double evaluate(String calculationInput){
         //this.calculationInput = calculationInput;
 
         // Shunting Yard Algorithm implementation (https://brilliant.org/wiki/shunting-yard-algorithm/)

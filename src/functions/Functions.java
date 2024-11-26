@@ -19,9 +19,11 @@ public class Functions extends Algebra {
         this.functionInput = functionInput;
     }
 
-    public Functions(String functionInput, double startRange, double endRange){ //Constructor taking input and range
+    public Functions(String functionInput, double startRange, double endRange, double stepSize){ //Constructor taking input, range, step size
         this.functionInput = functionInput;
         this.startRange = startRange;
+        this.endRange = endRange;
+        this.stepSize = stepSize;
     }
 
     public Functions(){
@@ -61,22 +63,23 @@ public class Functions extends Algebra {
         return stepSize;
     }
 
+    public String getFunctionInput(){
+        return functionInput;
+    }
+
 
     public static void singleVariableFunction() {
-        Scanner input = new Scanner(System.in);
 
-        // Setting parameters for the function
         Functions f = new Functions();
         String functionInput = f.promptFunctionInput();
 
         // Error handling for start range
-        double startRange = getValidDouble(scanner, "Enter the start of the range:");
+        double startRange = f.promptStartRange();
 
-        double endRange;
         // Error handling for end range
+        double endRange;
         while (true) {
-            endRange = getValidDouble(input, "Enter the end of the range:");
-
+            endRange = f.promptEndRange();
             if (endRange > startRange) {
                 break; // Valid end of range, exit the loop
             } else {
@@ -84,11 +87,10 @@ public class Functions extends Algebra {
             }
         }
 
-        double stepSize;
         // Error handling for step size
+        double stepSize;
         while (true) {
-            stepSize = getValidDouble(input, "Enter the step size:");
-
+            stepSize = f.promptStepSize();
             if (stepSize > 0) {
                 break; // valid step size, exit the loop
             } else {
@@ -136,7 +138,6 @@ public class Functions extends Algebra {
 
     public static void secantMethod() {}
 
-    public static void exit() {
-    }
+    public static void exit() {}
 
 }
