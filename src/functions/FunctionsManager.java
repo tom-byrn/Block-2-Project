@@ -27,7 +27,8 @@ public class FunctionsManager extends Calculations {
                 System.out.println("3. Compose functions");
                 System.out.println("4. Bisection method");
                 System.out.println("5. Secant method");
-                System.out.println("6. Exit\n");
+                System.out.println("6. Graph a function");
+                System.out.println("7. Exit\n");
                 System.out.print("Enter your choice: ");
 
                 // Scanner object scans for user input
@@ -57,6 +58,11 @@ public class FunctionsManager extends Calculations {
                         break;
                     }
                     case 6 -> {
+                        FunctionGraph fg = new FunctionGraph();
+                        fg.graphFunction();
+                        break;
+                    }
+                    case 7 -> {
                         Functions.exit();
                         break;
                     }
