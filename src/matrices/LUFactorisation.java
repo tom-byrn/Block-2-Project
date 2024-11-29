@@ -2,7 +2,28 @@ package matrices;
 
 import static matrices.MatricesManager.*;
 
+// LU = A
 public class LUFactorisation {
+
+    private static double[][] lowerTriangularMatrix;
+    private static double[][] upperTriangularMatrix;
+
+    // Getters and setters for upper and lower triangular matrices
+    public static double[][] getLowerTriangularMatrix(){
+        return lowerTriangularMatrix;
+    }
+
+    public static void setLowerTriangularMatrix(double[][] lowerTriangularMatrix) {
+        LUFactorisation.lowerTriangularMatrix = lowerTriangularMatrix;
+    }
+
+    public static double[][] getUpperTriangularMatrix() {
+        return upperTriangularMatrix;
+    }
+
+    public static void setUpperTriangularMatrix(double[][] upperTriangularMatrix) {
+        LUFactorisation.upperTriangularMatrix = upperTriangularMatrix;
+    }
 
     // Method to perform LU Decomposition
     protected static boolean luFactorisation(double[][] inputMatrix, double[][] lowerTriangularMatrix, double[][] upperTriangularMatrix) {
@@ -55,8 +76,8 @@ public class LUFactorisation {
         int matrixSize = inputMatrix.length;
 
         // Create matrices for lower and upper triangular matrices
-        double[][] lowerTriangularMatrix = new double[matrixSize][matrixSize]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
-        double[][] upperTriangularMatrix = new double[matrixSize][matrixSize]; // Declare upperTriangularMatrix as a n x n matrix for upper triangular matrix (U)
+        lowerTriangularMatrix = new double[matrixSize][matrixSize]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
+        upperTriangularMatrix = new double[matrixSize][matrixSize]; // Declare upperTriangularMatrix as a n x n matrix for upper triangular matrix (U)
 
         // Perform LU Factorisation
         if (luFactorisation(inputMatrix, lowerTriangularMatrix, upperTriangularMatrix)) {

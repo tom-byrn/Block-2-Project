@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class CalculationsManager {
 
-    public static void start() throws IOException {
+    public static void start()  {
 
         String calculationInput; //Initialising calculation input string
         Scanner scanner = new Scanner(System.in); //Creating instance of the scanner class

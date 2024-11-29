@@ -31,12 +31,12 @@ public class MatrixPower {
 
         // Step 4: Check if the exponent is less than zero and if so find the inverse of the matrix
         if(exponent < 0){
-            // Step 3: Call the calculateInverse function to compute the inverse matrix
+            // Call the calculateInverse function to compute the inverse matrix
             if (MatrixInverse.calculateInverse(inputMatrix, resultMatrix)) {
 
                 // If the inverse was successfully calculated, print the inverse matrix
                 System.out.println("The inverse of the matrix is:");
-                MatricesManager.printMatrix(resultMatrix);
+
             } else {
                 // If the matrix is not invertible (singular), print a message indicating this
                 System.out.println("This matrix is not invertible.");

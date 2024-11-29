@@ -12,7 +12,7 @@ public class FactorManager {
     public static long n = 0;
     public static Factors f = new Factors();
 
-    public static void start() throws IOException {
+    public static void start() {
 
         boolean validInput = false;
         while(!validInput) {

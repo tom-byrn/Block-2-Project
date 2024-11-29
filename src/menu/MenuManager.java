@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class MenuManager {
 
-    public static void callMenu() throws IOException {
+    public static void callMenu()  {
 
         // Initialising objects
         Scanner scanner = new Scanner(System.in);
