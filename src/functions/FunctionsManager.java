@@ -11,7 +11,6 @@ public class FunctionsManager extends Calculations {
     // Initializing variables
     public static String substitution = "";
     public static String substitutedExpression = "";
-    public static List<String> substitutedExpressions = new ArrayList<>();
 
     public static void start() {
         Scanner input = new Scanner(System.in);
@@ -21,6 +20,7 @@ public class FunctionsManager extends Calculations {
             try {
 
                 // Prompt user to select a calculator function
+                System.out.println("--------------------------------------");
                 System.out.println("Welcome to Functions 📈\n");
                 System.out.println("1. Evaluate a single variable function");
                 System.out.println("2. Evaluate a multi-variate function");
