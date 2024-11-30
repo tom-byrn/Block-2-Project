@@ -71,6 +71,9 @@ public class MatricesManager {
         if(function == 8) {
             EigenvalueCalculator.getDominantEigenvalue();
         }
+        if(function == 9) {
+            SolveSimulationsEquations.solveEquation();
+        }
     }
 
     // used to create a matrix
@@ -84,7 +87,7 @@ public class MatricesManager {
 
         //input no of columns
         System.out.print("Enter Number of Columns: ");
-        // checks if the number of coloms is valid
+        // checks if the number of columns is valid
         while ((noOfColumnsMatrixA = intSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-2147483647: ");
         }
@@ -96,7 +99,7 @@ public class MatricesManager {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter first row:\t");
 
-        // itterate through the rows
+        // iterate through the rows
         for(int rowCounter = 0; rowCounter< noOfRowsInMatrixA; rowCounter++){
             int positionCounter;
 
@@ -104,7 +107,7 @@ public class MatricesManager {
             // uses regex and trim to remove tabs and multiple spaces
             String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
 
-            // itterate through the coloums in each row and adding them to the matrix
+            // iterate through the columns in each row and adding them to the matrix
             for(positionCounter = 0; positionCounter< noOfColumnsMatrixA; positionCounter++){
 
                 double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
