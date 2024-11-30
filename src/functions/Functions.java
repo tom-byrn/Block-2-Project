@@ -135,7 +135,6 @@ public class Functions extends Algebra {
 
     public static void bisectionMethod() {
         Functions f = new Functions();
-
         String functionInput = f.promptFunctionInput(); // gets function
 
         double a; // a, start of range
@@ -165,16 +164,7 @@ public class Functions extends Algebra {
             }
         }
 
-        double tolerance;
-        while (true) {
-            tolerance = f.promptValidDouble("Enter tolerance: ");
-            if (tolerance > 0) {
-                break; // valid step size, exit the loop
-            } else {
-                System.out.println("Tolerance must be greater than 0. Please enter a valid value:");
-            }
-        }
-
+        double tolerance = tolerance();
 
         double c;
         double fC;
@@ -195,7 +185,45 @@ public class Functions extends Algebra {
         System.out.printf("The root is approximately %.2f\n", root);
     }
 
-    public static void secantMethod() {}
+    private static double tolerance() {
+        Functions f = new Functions();
+        double tolerance;
+        while (true) {
+            tolerance = f.promptValidDouble("Enter tolerance: ");
+            if (tolerance > 0) {
+                break; // valid step size, exit the loop
+            } else {
+                System.out.println("Tolerance must be greater than 0. Please enter a valid value:");
+            }
+        }
+        return tolerance;
+    }
+
+    public static void secantMethod() {
+        Functions f = new Functions();
+        String functionInput = f.promptFunctionInput(); // enter f(x)
+
+        double x0 = f.promptValidDouble("Enter first guess, x0: ");
+        double x1 = f.promptValidDouble("Enter second guess, x1: ");
+        double x2;
+        double tolerance = tolerance();
+        double fX0;
+        double fX1;
+        double fX3;
+
+        while (true) {
+            fX0 = subIn(functionInput, x0);
+            fX1 = subIn(functionInput, x1);
+
+            x2 = x1 - (fX1 * (x1-x0) / (fX1 - fX0));
+            if ( Math.abs((x2 - x1)) < tolerance ) {
+                break; // within tolerance, exit loop
+            }
+            x0 = x1;
+            x1 = x2;
+        }
+        System.out.printf("The root is approximately %.2f\n", x2);
+    }
 
     public static void exit() {
     }
