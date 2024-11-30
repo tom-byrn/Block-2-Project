@@ -46,8 +46,8 @@ public class Functions extends Algebra {
         return endRange;
     }
 
-    public double promptStepSize(){
-        stepSize = getValidDouble(scanner, "Enter the step size: ");
+    public double promptValidDouble(String message){
+        stepSize = getValidDouble(scanner, message);
         return stepSize;
     }
 
@@ -69,7 +69,6 @@ public class Functions extends Algebra {
 
 
     public static void singleVariableFunction() {
-
         Functions f = new Functions();
         String functionInput = f.promptFunctionInput();
 
@@ -90,7 +89,7 @@ public class Functions extends Algebra {
         // Error handling for step size
         double stepSize;
         while (true) {
-            stepSize = f.promptStepSize();
+            stepSize = f.promptValidDouble("Enter the step size:");
             if (stepSize > 0) {
                 break; // valid step size, exit the loop
             } else {
@@ -102,17 +101,9 @@ public class Functions extends Algebra {
         System.out.printf("%-10s%-10s\n", "x", "f(x)");
         System.out.println("--------------------");
 
-        // Creating array of substituted expressions, subbing into the function
+        // subbing into the function and printing
         for (double i = startRange; i <= endRange; i += stepSize) {
-
-            // substituting in variables
-            substitution = "(" + i + ")";
-            substitutedExpression = functionInput.replaceAll("x", substitution);
-            substitutedExpressions.add(substitutedExpression);
-
-            // Calculating the result using Calculations
-            Calculations calculations = new Calculations(substitutedExpression);
-            double result = calculations.getAnswer();
+            double result = subIn(functionInput, i);
             System.out.printf("%-10.2f%-10.2f\n", i, result);
         }
         System.out.println();
@@ -130,14 +121,83 @@ public class Functions extends Algebra {
         }
     }
 
+    // method to sub a variable into a function
+    private static double subIn(String function, double variable) {
+        substitution = "(" + variable + ")";
+        substitutedExpression = function.replaceAll("x", substitution);
+        Calculations calculations = new Calculations(substitutedExpression);
+        return calculations.getAnswer();
+    }
+
     public static void multiVariateFunction() {}
 
     public static void composeFunctions() {}
 
-    public static void bisectionMethod() {}
+    public static void bisectionMethod() {
+        Functions f = new Functions();
+
+        String functionInput = f.promptFunctionInput(); // gets function
+
+        double a; // a, start of range
+        double b; // b, end of range
+        double fA; // f(a)
+        double fB; // f(b)
+
+        while (true) {
+            a = f.promptStartRange();
+
+            while (true) {
+                b = f.promptEndRange();
+                if (b > a) {
+                    break; // Valid end of range, exit the loop
+                } else {
+                    System.out.printf("b must be greater than %.2f. Please enter a valid value for b.\n", a);
+                }
+            }
+
+            fA = subIn(functionInput, a);
+            fB = subIn(functionInput, b);
+
+            if ((fA * fB) < 0) {
+                break;
+            } else {
+                System.out.println("There is no root in this interval.");
+            }
+        }
+
+        double tolerance;
+        while (true) {
+            tolerance = f.promptValidDouble("Enter tolerance: ");
+            if (tolerance > 0) {
+                break; // valid step size, exit the loop
+            } else {
+                System.out.println("Tolerance must be greater than 0. Please enter a valid value:");
+            }
+        }
+
+
+        double c;
+        double fC;
+        while ( (Math.abs(b-a)) /2 > tolerance) {
+            c = (a+b) /2;
+            fC = subIn(functionInput, c);
+            if (fC == 0) {
+                break;
+            }
+            fA = subIn(functionInput, a);
+            if ((fA * fC) < 0) {
+                b=c;
+            } else {
+                a=c;
+            }
+        }
+        double root = (a+b) /2;
+        System.out.printf("The root is approximately %.2f\n", root);
+    }
 
     public static void secantMethod() {}
 
-    public static void exit() {}
+    public static void exit() {
+    }
 
 }
