@@ -1,38 +1,44 @@
 package functions;
 import calculations.Calculations;
+import menu.MenuManager;
+
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionsManager extends Calculations {
+public class FunctionsManager {
 
     // Initializing variables
     public static String substitution = "";
     public static String substitutedExpression = "";
+    public static List<String> substitutedExpressions = new ArrayList<>();
 
     public static void start() {
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
         boolean currentlySelecting = true;
         while (currentlySelecting) {
             try {
 
-                // Prompt user to select a calculator function
-                System.out.println("--------------------------------------");
-                System.out.println("Welcome to Functions 📈\n");
-                System.out.println("1. Evaluate a single variable function");
-                System.out.println("2. Evaluate a multi-variate function");
-                System.out.println("3. Compose functions");
-                System.out.println("4. Bisection method");
-                System.out.println("5. Secant method");
-                System.out.println("6. Graph a function");
-                System.out.println("7. Exit\n");
-                System.out.print("Enter your choice: ");
+                // Prompt user to select a choice for functions
+                System.out.println("""
+                        Welcome to Functions 📈
+                        
+                        Enter (1) to evaluate a single-variate function
+                        Enter (2) to evaluate a multivariate function
+                        Enter (3) to compose a function
+                        Enter (4) for the bisection method
+                        Enter (5) for the secant method
+                        Enter (6) to graph a function
+                        Enter (0) to return to the menu
+                        
+                        """);
+                System.out.print("Enter a choice: ");
 
                 // Scanner object scans for user input
-                int selectorNum = input.nextInt();
+                int selectorNum = scanner.nextInt();
                 System.out.println();
 
                 // Switch case for choosing an option
@@ -62,15 +68,16 @@ public class FunctionsManager extends Calculations {
                         fg.graphFunction();
                         break;
                     }
-                    case 7 -> {
-                        Functions.exit();
+                    case 0 -> {
+                        MenuManager.clearScreen();
+                        MenuManager.callMenu();
                         break;
                     }
                 }
 
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid number!\n");
-                input.nextLine(); // Clear invalid input from the scanner
+                scanner.nextLine(); // Clear invalid input from the scanner
             }
         }
     }

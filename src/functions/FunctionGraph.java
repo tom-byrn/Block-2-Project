@@ -1,6 +1,7 @@
 package functions;
 
 import calculations.Calculations;
+import calculations.InputProcessor;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -24,9 +25,25 @@ public class FunctionGraph extends Functions {
         Functions f = new Functions();
         String functionInput = f.promptFunctionInput();
         double startRange = f.promptStartRange();
-        double endRange = f.promptEndRange();
-        double stepSize = f.promptValidDouble("Enter the step size: ");
 
+        do {
+            double endRange = f.promptEndRange();
+            if(endRange < startRange){
+                System.out.println("End range value must be greater than start range value!");
+            }
+        }
+        while(endRange < startRange);
+
+        //Calculate a step size
+        if((f.getStartRange() < 0 && f.getEndRange() <= 0) || (f.getStartRange() >= 0 && f.getEndRange() > 0)){
+            f.setStepSize(Math.abs((f.getStartRange() + f.getEndRange()) * 0.01 ));
+        }
+        else{
+            f.setStepSize(Math.abs((f.getEndRange() - f.getStartRange()) * 0.01));
+        }
+
+        System.out.println(f.toString());
+        f = new Functions(f.getFunctionInput(), f.getStartRange(), f.getEndRange(), f.getStepSize());
         displayGraph(setGraph(f));
     }
 
@@ -41,7 +58,9 @@ public class FunctionGraph extends Functions {
 
         // Loop through the range and calculate values
         for (double x = startRange; x <= endRange; x += stepSize) {
-            String function = functionInput.replaceAll("\\bx\\b", "(" + x + ")");
+
+            String function = InputProcessor.preprocessInput(functionInput);
+            function = function.replaceAll("\\bx\\b", String.valueOf(x));
             double y = calculations.evaluate(function); // Replace with your actual evaluation logic
             series.add(x, y);
         }

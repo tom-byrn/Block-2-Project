@@ -10,7 +10,7 @@ public class Calculations {
     protected String originalInput;
 
 
-    public Calculations(String calculationInput){
+    public Calculations(String calculationInput) {
 
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
 
@@ -21,7 +21,7 @@ public class Calculations {
     }
 
 
-    public Calculations(){}
+    public Calculations(){} //Default constructor
 
     protected String getCalculationInput(){
         return calculationInput;

@@ -2,7 +2,7 @@ package calculations;
 
 public class InputProcessor {
     // method that takes and "String input" and returns a String
-    protected static String preprocessInput(String input){
+    public static String preprocessInput(String input){
 
         //Remove all whitespace
         input = input.replaceAll("\\s+", "");

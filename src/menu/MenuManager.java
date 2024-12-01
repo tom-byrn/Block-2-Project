@@ -5,8 +5,8 @@ import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import calculations.ConstantAdder;
 import complex.ComplexManager;
-import functions.FunctionsManager;
 import matrices.MatricesManager;
+import functions.*;
 
 import java.io.IOException;
 import java.util.InputMismatchException;

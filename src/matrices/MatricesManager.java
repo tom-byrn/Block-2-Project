@@ -1,5 +1,9 @@
 package matrices;
 
+import functions.FunctionGraph;
+import functions.Functions;
+import menu.MenuManager;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -16,6 +20,8 @@ public class MatricesManager {
 
     public static void start() {
 
+        Scanner scanner = new Scanner(System.in);
+
         // select function using a text block
         System.out.println(
                 """
@@ -27,52 +33,47 @@ public class MatricesManager {
                         Enter (6) for LU Factorisation
                         Enter (7) for det(A)
                         Enter (8) for Dominant Eigenvalues
-                        Enter (9) to  Solve Simultaneous Equations""");
+                        Enter (9) to  Solve Simultaneous Equations
+                        Enter (0) to return to the menu
+                        """);
+        System.out.print("Enter a choice: ");
 
+        // Scanner object scans for user input
+        int selectorNum = scanner.nextInt();
+        System.out.println();
 
-
-        // checking is a valid function selected
-        byte function;
-        while ((function = byteSizeInt()) < 1 || function > 9) {
-            System.out.print("Error please enter a number between 1-9: ");
-        }
-
-
-        // Checks which function is selected
-        if(function == 1){
-            //Calls Addition method
-            MatrixAdder.addition();
-        }
-
-        if(function == 2){
-            MatrixAdder.subtraction();
-        }
-
-        if(function == 3){
-            MatrixMultiplication.multiplicationStart();
-        }
-
-        if(function == 4){
-            TransposeOfAMatrix.transposeStart();
-        }
-
-        if(function == 5){
-            MatrixPower.powerCalculationStart();
-        }
-
-        if(function == 6){
-            LUFactorisation.factoriser();
-        }
-
-        if(function == 7){
-            Determinant.getDeterminantOfAMatrix();
-        }
-
-        if(function == 8) {
-            EigenvalueCalculator.getDominantEigenvalue();
-        }
-        if(function == 9) {
-            SolveSimulationsEquations.solveEquation();
+        // Switch case for choosing an option
+        switch (selectorNum) {
+            case 1 -> {
+                Functions.singleVariableFunction();
+                break;
+            }
+            case 2 -> {
+                Functions.multiVariateFunction();
+                break;
+            }
+            case 3 -> {
+                Functions.composeFunctions();
+                break;
+            }
+            case 4 -> {
+                Functions.bisectionMethod();
+                break;
+            }
+            case 5 -> {
+                Functions.secantMethod();
+                break;
+            }
+            case 6 -> {
+                FunctionGraph fg = new FunctionGraph();
+                fg.graphFunction();
+                break;
+            }
+            case 0 -> {
+                MenuManager.clearScreen();
+                MenuManager.callMenu();
+                break;
+            }
         }
     }
 
