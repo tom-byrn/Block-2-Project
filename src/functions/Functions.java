@@ -31,7 +31,7 @@ public class Functions extends Algebra {
     }
 
     public String promptFunctionInput(){
-        System.out.print("Enter a function (e.g., x^2 + 3x + 5): ");
+        System.out.print("Enter a function (e.g., x^2 -5x +6): ");
         functionInput = scanner.nextLine();
         return functionInput;
     }
