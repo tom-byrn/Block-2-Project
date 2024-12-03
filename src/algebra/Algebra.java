@@ -7,19 +7,15 @@ public class Algebra {
 
     // Helper class to represent a single term in an algebraic expression
     static class Term {
-        int coefficient;  // The coefficient of the term (e.g., 2 in 2x^2)
-        String variable;  // The variable part of the term (e.g., x in 2x^2)
+        double coefficient;  // The coefficient of the term (e.g., 2.5 in 2.5x^2)
+        String variable;  // The variable part of the term (e.g., x in 2.5x^2)
         int power;  // The exponent of the variable (e.g., 2 in x^2)
-        String trigonometricFunction;  // The trigonometric function (e.g., sin, cos, tan)
-        boolean isTrigonometric;  // Flag to indicate if this is a trigonometric function term
 
-        // Constructor to create a new Term with a coefficient, variable, power, and trigonometric function
-        Term(int coefficient, String variable, int power, String trigonometricFunction) {
+        // Constructor to create a new Term with a coefficient, variable, and power
+        Term(double coefficient, String variable, int power) {
             this.coefficient = coefficient;
             this.variable = variable;
             this.power = power;
-            this.trigonometricFunction = trigonometricFunction;
-            this.isTrigonometric = trigonometricFunction != null;
         }
 
         // Combine two terms if they have the same variable and power
@@ -35,9 +31,9 @@ public class Algebra {
             if (!term1.variable.equals(term2.variable)) {
                 throw new IllegalArgumentException("Cannot multiply terms with different variables.");
             }
-            int newCoefficient = term1.coefficient * term2.coefficient;
+            double newCoefficient = term1.coefficient * term2.coefficient;
             int newPower = term1.power + term2.power;  // The powers are added when multiplying
-            return new Term(newCoefficient, term1.variable, newPower, null);
+            return new Term(newCoefficient, term1.variable, newPower);
         }
 
         // Convert the term to a string for displaying in a simplified expression
@@ -48,15 +44,6 @@ public class Algebra {
 
             // Handle the case where coefficient is 1 (don't display it) or -1 (display "-")
             String coefficientString = (coefficient == 1 && !variable.isEmpty()) ? "" : String.valueOf(coefficient);
-
-            // If it's a trigonometric function, format it
-            if (isTrigonometric) {
-                if (variable.isEmpty()) {
-                    return coefficientString + trigonometricFunction + "(x)";
-                } else {
-                    return coefficientString + trigonometricFunction + "(" + variable + "^" + power + ")";
-                }
-            }
 
             // If there's no variable, return just the coefficient
             if (variable.isEmpty()) {
@@ -96,16 +83,8 @@ public class Algebra {
                 continue;
             }
 
-            // Handle cases of trigonometric functions: sin, cos, or tan
-            if (part.startsWith("sin") || part.startsWith("cos") || part.startsWith("tan")) {
-                String trigonometricFunction = part.split("\\(")[0];
-                String inside = part.split("\\(")[1].replaceAll("\\)", ""); // Get the expression inside parentheses
-                Term term = parseSingleTerm(inside);
-                term.trigonometricFunction = trigonometricFunction;
-                term.isTrigonometric = true;
-                terms.add(term);
-            } else if (part.contains("*") || part.contains("/")) {
-                // Handle multiplication/division
+            // Handle multiplication/division
+            if (part.contains("*") || part.contains("/")) {
                 String[] factors = part.split("[*/]");
                 Term term1 = parseSingleTerm(factors[0]);
                 Term term2 = parseSingleTerm(factors[1]);
@@ -114,8 +93,8 @@ public class Algebra {
                     terms.add(Term.multiply(term1, term2));
                 } else if (part.contains("/")) {
                     // Handle division by calculating the new coefficient and power
-                    int coefficient = term1.coefficient / term2.coefficient;
-                    terms.add(new Term(coefficient, term1.variable, term1.power - term2.power, null));
+                    double coefficient = term1.coefficient / term2.coefficient;
+                    terms.add(new Term(coefficient, term1.variable, term1.power - term2.power));
                 }
             } else {
                 // If no multiplication or division, just parse the term normally
@@ -125,17 +104,17 @@ public class Algebra {
         return terms;
     }
 
-    // Helper method to parse a single term like "2x^2", "x^3", or "5"
+    // Helper method to parse a single term like "2x^2", "x^3", or constants like "5"
     private static Term parseSingleTerm(String term) {
-        // Regular expression to match terms like "2x^2", "x^3", or constants like "5"
-        String regex = "([+-]?\\d*)([a-zA-Z])(\\^\\d+)?";
+        // Regular expression to match terms like "2.5x^2", "x^3", or constants like "5.0"
+        String regex = "([+-]?\\d*\\.?\\d+)([a-zA-Z])(\\^\\d+)?";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(term);
 
         // If the term matches the expected format, parse it
         if (matcher.matches()) {
             // Default coefficient is 1 if not specified, handle the optional sign (+ or -)
-            int coefficient = matcher.group(1).isEmpty() ? 1 : Integer.parseInt(matcher.group(1));
+            double coefficient = matcher.group(1).isEmpty() ? 1.0 : Double.parseDouble(matcher.group(1));
             if (matcher.group(1) != null && matcher.group(1).equals("-")) {
                 coefficient = -Math.abs(coefficient);  // Ensure negative coefficients are handled
             }
@@ -144,7 +123,7 @@ public class Algebra {
             // If no power is specified, the default power is 1
             int power = matcher.group(3) == null ? 1 : Integer.parseInt(matcher.group(3).substring(1));
 
-            return new Term(coefficient, variable, power, null);
+            return new Term(coefficient, variable, power);
         }
         // If the term doesn't match the expected format, throw an error
         throw new IllegalArgumentException("Invalid term: " + term);
@@ -157,22 +136,15 @@ public class Algebra {
         // Use a map to group terms by their variable and power
         Map<String, Map<Integer, Term>> groupedTerms = new HashMap<>();
         for (Term term : terms) {
-            // If it's a trigonometric function term, treat it separately
-            if (term.isTrigonometric) {
-                groupedTerms.putIfAbsent(term.trigonometricFunction, new HashMap<>());
-                groupedTerms.get(term.trigonometricFunction).putIfAbsent(0, new Term(term.coefficient, "", 0, term.trigonometricFunction));
-                groupedTerms.get(term.trigonometricFunction).get(0).coefficient += term.coefficient;
+            // Regular terms (not trigonometric)
+            if (term.variable.isEmpty()) {
+                groupedTerms.putIfAbsent("", new HashMap<>());
+                groupedTerms.get("").putIfAbsent(0, new Term(0, "", 0));
+                groupedTerms.get("").get(0).coefficient += term.coefficient;
             } else {
-                // Regular terms (not trigonometric)
-                if (term.variable.isEmpty()) {
-                    groupedTerms.putIfAbsent("", new HashMap<>());
-                    groupedTerms.get("").putIfAbsent(0, new Term(0, "", 0, null));
-                    groupedTerms.get("").get(0).coefficient += term.coefficient;
-                } else {
-                    groupedTerms.putIfAbsent(term.variable, new HashMap<>());
-                    groupedTerms.get(term.variable).putIfAbsent(term.power, new Term(0, term.variable, term.power, null));
-                    groupedTerms.get(term.variable).get(term.power).combine(term);
-                }
+                groupedTerms.putIfAbsent(term.variable, new HashMap<>());
+                groupedTerms.get(term.variable).putIfAbsent(term.power, new Term(0, term.variable, term.power));
+                groupedTerms.get(term.variable).get(term.power).combine(term);
             }
         }
 
