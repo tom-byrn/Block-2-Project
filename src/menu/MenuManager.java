@@ -66,7 +66,7 @@ public class MenuManager {
                     }
                     case 5 -> {
                         currentlySelecting = false;
-                        ComplexManager.start();
+                        //ComplexManager.start();
                         break;
                     }
                     case 6 -> {

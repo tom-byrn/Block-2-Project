@@ -17,8 +17,6 @@ public class MatricesManager {
 
     public static void start() {
 
-        Scanner scanner = new Scanner(System.in);
-
         // select function using a text block
         System.out.println(
                 """
@@ -31,7 +29,6 @@ public class MatricesManager {
                         Enter (7) for det(A)
                         Enter (8) for Dominant Eigenvalues
                         Enter (9) to  Solve Simultaneous Equations
-                        Enter (0) to return to the menu
                         """);
         // checking is a valid function selected
         byte function;
