@@ -7,46 +7,61 @@ import menu.MenuManager;
 import java.util.Scanner;
 
 public class ComplexManager {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
 
-    public static void start() {
-        Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter the real and imaginary parts of the first complex number:");
+            double real1 = scanner.nextDouble();
+            double imaginary1 = scanner.nextDouble();
+            Complex num1 = new Complex(real1, imaginary1);
 
-        boolean currentlySelecting = true;
-        while (currentlySelecting) {
+            System.out.println("Enter the real and imaginary parts of the second complex number:");
+            double real2 = scanner.nextDouble();
+            double imaginary2 = scanner.nextDouble();
+            Complex num2 = new Complex(real2, imaginary2);
 
-                // Prompt user to select a choice for functions
-                System.out.println("""
-                        Welcome to Functions 📈
-                        
-                        Enter (1) to add complex numbers
-                        Enter (2) to multiply complex numbers
-                        Enter (3) to graph complex numbers
-                        Enter (0) to return to the menu
-                        """);
-                System.out.print("Enter a choice: ");
+            System.out.println("Choose an operation: ");
+            System.out.println("1. Add");
+            System.out.println("2. Subtract");
+            System.out.println("3. Multiply");
+            System.out.println("4. Divide");
+            System.out.println("5. Polar Form of First Complex Number");
+            System.out.println("6. Polar Form of Second Complex Number");
+            int choice = scanner.nextInt();
 
-                // Scanner object scans for user input
-                int selectorNum = scanner.nextInt();
-                System.out.println();
-
-                // Switch case for choosing an option
-                switch (selectorNum) {
-                    case 1 -> {
-                        //Addition
+            Complex result;
+            switch (choice) {
+                case 1: // Addition
+                    result = num1.add(num2);
+                    System.out.println("Result: " + result);
+                    break;
+                case 2: // Subtraction
+                    result = num1.subtract(num2);
+                    System.out.println("Result: " + result);
+                    break;
+                case 3: // Multiplication
+                    result = num1.multiply(num2);
+                    System.out.println("Result: " + result);
+                    break;
+                case 4: // Division
+                    try {
+                        result = num1.divide(num2);
+                        System.out.println("Result: " + result);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Error: " + e.getMessage());
                     }
-                    case 2 -> {
-                        //multiplication
-                    }
-                    case 3 -> {
-                        //graphing
-                    }
-                    case 0 -> {
-                        MenuManager.clearScreen();
-                        MenuManager.callMenu();
-                        break;
-                    }
+                    break;
+                case 5: // Polar form of the first complex number
+                    System.out.println(num1.toPolarForm());
+                    break;
+                case 6: // Polar form of the second complex number
+                    System.out.println(num2.toPolarForm());
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
+
+            scanner.close();
         }
     }
-}
 
