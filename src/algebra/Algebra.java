@@ -3,66 +3,67 @@ package algebra;
 import java.util.*;
 import java.util.regex.*;
 
-public class Algebra {
 
-    // Helper class to represent a single algebraic term.
-    // A "term" could be something like "3x^2", "-2x", "5", etc.
-    static class AlgebraicTerm {
-        double coefficient;  // The coefficient of the term, e.g., 2.5 in 2.5x^2
-        String variable;  // The variable part of the term, e.g., 'x' in 2.5x^2
-        int exponent;  // The exponent (or power) of the variable, e.g., 2 in x^2
+// Helper class to represent a single algebraic term.
+// A "term" could be something like "3x^2", "-2x", "5", etc.
+class AlgebraicTerm {
+    double coefficient;  // The coefficient of the term, e.g., 2.5 in 2.5x^2
+    String variable;  // The variable part of the term, e.g., 'x' in 2.5x^2
+    int exponent;  // The exponent (or power) of the variable, e.g., 2 in x^2
 
-        // Constructor to create a new term with a coefficient, variable, and exponent
-        AlgebraicTerm(double coefficient, String variable, int exponent) {
-            this.coefficient = coefficient;
-            this.variable = variable;
-            this.exponent = exponent;
-        }
+    // Constructor to create a new term with a coefficient, variable, and exponent
+    AlgebraicTerm(double coefficient, String variable, int exponent) {
+        this.coefficient = coefficient;
+        this.variable = variable;
+        this.exponent = exponent;
+    }
 
-        // Method to combine two terms if they have the same variable and exponent
-        public void combineLikeTerm(AlgebraicTerm otherTerm) {
-            if (this.variable.equals(otherTerm.variable) && this.exponent == otherTerm.exponent) {
-                // Combine the coefficients of like terms (e.g., "3x^2" and "2x^2" become "5x^2")
-                this.coefficient += otherTerm.coefficient;
-            }
-        }
-
-        // Method to multiply two terms and return a new term with the resulting coefficient and exponent
-        public static AlgebraicTerm multiplyTerms(AlgebraicTerm term1, AlgebraicTerm term2) {
-            // Ensure both terms have the same variable (e.g., can't multiply x^2 and y^3)
-            if (!term1.variable.equals(term2.variable)) {
-                throw new IllegalArgumentException("Cannot multiply terms with different variables.");
-            }
-            // Multiply the coefficients and add the exponents (power rules of multiplication)
-            double newCoefficient = term1.coefficient * term2.coefficient;
-            int newExponent = term1.exponent + term2.exponent;
-            return new AlgebraicTerm(newCoefficient, term1.variable, newExponent); // Return the resulting term
-        }
-
-        // Method to convert the term into a string representation (used for output formatting)
-        @Override
-        public String toString() {
-            // If the coefficient is 0, the term doesn't appear in the expression (e.g., "0x^2" is omitted)
-            if (coefficient == 0) return "";
-
-            // Handle the case where coefficient is 1 or -1 and avoid displaying the "1" in the output for simplicity
-            String coefficientStr = (coefficient == 1 && !variable.isEmpty()) ? "" : String.valueOf(coefficient);
-            if (coefficient == -1 && !variable.isEmpty()) {
-                coefficientStr = "-";  // For -1, display only the negative sign
-            }
-
-            // If there's no variable, return just the coefficient (constant term like "5")
-            if (variable.isEmpty()) {
-                return coefficientStr;
-            } else if (exponent == 1) {
-                // If the exponent is 1, display the term as just "x" instead of "x^1"
-                return coefficientStr + variable;
-            } else {
-                // For higher exponents, format as "x^n" (e.g., x^2)
-                return coefficientStr + variable + "^" + exponent;
-            }
+    // Method to combine two terms if they have the same variable and exponent
+    public void combineLikeTerm(AlgebraicTerm otherTerm) {
+        if (this.variable.equals(otherTerm.variable) && this.exponent == otherTerm.exponent) {
+            // Combine the coefficients of like terms (e.g., "3x^2" and "2x^2" become "5x^2")
+            this.coefficient += otherTerm.coefficient;
         }
     }
+
+    // Method to multiply two terms and return a new term with the resulting coefficient and exponent
+    public static AlgebraicTerm multiplyTerms(AlgebraicTerm term1, AlgebraicTerm term2) {
+        // Ensure both terms have the same variable (e.g., can't multiply x^2 and y^3)
+        if (!term1.variable.equals(term2.variable)) {
+            throw new IllegalArgumentException("Cannot multiply terms with different variables.");
+        }
+        // Multiply the coefficients and add the exponents (power rules of multiplication)
+        double newCoefficient = term1.coefficient * term2.coefficient;
+        int newExponent = term1.exponent + term2.exponent;
+        return new AlgebraicTerm(newCoefficient, term1.variable, newExponent); // Return the resulting term
+    }
+
+    // Method to convert the term into a string representation (used for output formatting)
+    @Override
+    public String toString() {
+        // If the coefficient is 0, the term doesn't appear in the expression (e.g., "0x^2" is omitted)
+        if (coefficient == 0) return "";
+
+        // Handle the case where coefficient is 1 or -1 and avoid displaying the "1" in the output for simplicity
+        String coefficientStr = (coefficient == 1 && !variable.isEmpty()) ? "" : String.valueOf(coefficient);
+        if (coefficient == -1 && !variable.isEmpty()) {
+            coefficientStr = "-";  // For -1, display only the negative sign
+        }
+
+        // If there's no variable, return just the coefficient (constant term like "5")
+        if (variable.isEmpty()) {
+            return coefficientStr;
+        } else if (exponent == 1) {
+            // If the exponent is 1, display the term as just "x" instead of "x^1"
+            return coefficientStr + variable;
+        } else {
+            // For higher exponents, format as "x^n" (e.g., x^2)
+            return coefficientStr + variable + "^" + exponent;
+        }
+    }
+}
+
+public class Algebra {
 
     // Method to parse an algebraic expression into a list of individual terms.
     // Example: "2x^2 - 3x + 5" -> List of terms: [2x^2, -3x, 5]
