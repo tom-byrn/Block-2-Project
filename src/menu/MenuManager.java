@@ -5,8 +5,8 @@ import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import calculations.ConstantAdder;
 import complex.ComplexManager;
-import functions.FunctionsManager;
 import matrices.MatricesManager;
+import functions.*;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -66,7 +66,7 @@ public class MenuManager {
                     }
                     case 5 -> {
                         currentlySelecting = false;
-                        ComplexManager.start();
+                        //ComplexManager.start();
                         break;
                     }
                     case 6 -> {

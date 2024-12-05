@@ -10,18 +10,25 @@ public class Calculations {
     protected String originalInput;
 
 
-    public Calculations(String calculationInput){
+    public Calculations(String calculationInput) {
 
         Scanner scanner = new Scanner(System.in); // Create a Scanner object
 
         originalInput = calculationInput; //Just saving the original input to output to terminal later as it looks cleaner than the version with the regex
 
-        this.calculationInput = InputProcessor.preprocessInput(calculationInput); //Regex to replace certain Strings with constants e.g. g=9.81
+        // Add * between a number and a letter
+        calculationInput = calculationInput.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
+
+
+        //Regex to replace certain Strings with constants e.g. g=9.81
+        CalculationsProcessor processor = new CalculationsProcessor(calculationInput);
+
+        this.calculationInput = processor.toString();
 
     }
 
 
-    public Calculations(){}
+    public Calculations(){} //Default constructor
 
     protected String getCalculationInput(){
         return calculationInput;

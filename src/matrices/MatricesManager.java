@@ -1,5 +1,6 @@
 package matrices;
 
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -27,10 +28,8 @@ public class MatricesManager {
                         Enter (6) for LU Factorisation
                         Enter (7) for det(A)
                         Enter (8) for Dominant Eigenvalues
-                        Enter (9) to  Solve Simultaneous Equations""");
-
-
-
+                        Enter (9) to  Solve Simultaneous Equations
+                        """);
         // checking is a valid function selected
         byte function;
         while ((function = byteSizeInt()) < 1 || function > 9) {

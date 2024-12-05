@@ -2,12 +2,9 @@ package calculations;
 
 public class InputProcessor {
     // method that takes and "String input" and returns a String
-    protected static String preprocessInput(String input){
-
+    InputProcessor(String input){
         //Remove all whitespace
         input = input.replaceAll("\\s+", "");
-        // Add * between a number and a letter
-        input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         // Add * between a number and a parenthesis
         input = input.replaceAll("(\\d)(\\()", "$1*$2");
         // Replace ")(" with ")*("
@@ -16,7 +13,6 @@ public class InputProcessor {
         //Replace "- -" with "+" , "- ( -" with "+ (" , etc.
         //This fixes a lot of issues with minus signs
         input = input.replaceAll("--", "+");
-        input = input.replaceAll("-\\(-", "+(");
         input = input.replaceAll("-\\(", "-1(");
         input = input.replaceAll("-([a-zA-Z])", "-1*$1");
         input = input.replaceFirst("^-", "(0-");
@@ -63,7 +59,6 @@ public class InputProcessor {
 
         // Replace u with Unified Atomic Mass Unit
         input = input.replaceAll("\\bu\\b", "1.6605402*10^(0-27)");
-
-       return input;
+        CalculationsProcessor.setProcessedString(input);
     }
 }

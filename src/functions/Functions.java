@@ -6,8 +6,6 @@ import calculations.Calculations;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static functions.FunctionsManager.*;
-
 public class Functions extends Algebra {
 
     static Scanner scanner = new Scanner(System.in);
@@ -68,6 +66,17 @@ public class Functions extends Algebra {
         return functionInput;
     }
 
+    public void setStartRange(double startRange){
+        this.startRange = startRange;
+    }
+
+    public void setEndRange(double endRange){
+        this.endRange = endRange;
+    }
+
+    public void setStepSize(double stepSize){
+        this.stepSize = stepSize;
+    }
 
     public static void singleVariableFunction() {
         Functions f = new Functions();
@@ -113,7 +122,7 @@ public class Functions extends Algebra {
     // Helper method to validate double input
     private static double getValidDouble(Scanner input, String prompt) {
         while (true) {
-            System.out.println(prompt);
+            System.out.print(prompt);
             try {
                 return Double.parseDouble(input.nextLine()); // Parse user input as a double
             } catch (NumberFormatException e) {
@@ -124,8 +133,8 @@ public class Functions extends Algebra {
 
     // method to sub a variable into a function
     private static double subIn(String function, double variable) {
-        substitution = "(" + variable + ")";
-        substitutedExpression = function.replaceAll("x", substitution);
+        String substitution = "(" + variable + ")";
+        String substitutedExpression = function.replaceAll("x", substitution);
         Calculations calculations = new Calculations(substitutedExpression);
         return calculations.getAnswer();
     }
@@ -273,7 +282,9 @@ public class Functions extends Algebra {
         System.out.printf("The root is approximately %.2f\n", x2);
     }
 
-    public static void exit() {
+    @Override //The toString method can be used for debugging e.g. print(f.toString)
+    public String toString(){
+        return String.format("Function: %s %nStart Range: %f %nEnd Range: %f %nStep Size: %f %n", getFunctionInput(), getStartRange(), getEndRange(), getStepSize());
     }
 
 }
