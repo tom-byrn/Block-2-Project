@@ -1,5 +1,6 @@
 package algebra;
 
+//imports
 import java.util.*;
 import java.util.regex.*;
 
@@ -224,8 +225,58 @@ public class Algebra {
     // Main method to test the functionality
     public static void main(String[] args) {
         // Example of simplifying an algebraic expression with multiple divisions and multiplications
-        String expression = "6x + 4y * 2x^3 /8x^0 - 4x^0";
+        String expression = "((0x^0-8x * 5x^0 +7x^3)^2) + 4x + (3x)";
         System.out.println("Original Expression: " + expression);
+
+
+        while (expression.contains("(") && expression.contains(")")){
+
+            // Stack to keep track of the indices of opening parentheses '('
+            Stack<Integer> openingParenthesesStack = new Stack<>();
+
+            // Variables to track the position of the deepest nested parentheses
+            int maxNestingLevel = -1;  // The current maximum nesting level
+            int centerStartIndex = -1; // The start index of the most deeply nested pair
+            int centerEndIndex = -1;  // The end index of the most deeply nested pair
+
+            // Traverse the string character by character
+            for (int characterPosition = 0; characterPosition < expression.length(); characterPosition++) {
+                char currentChar = expression.charAt(characterPosition);
+
+                // Check if the current character is an opening parenthesis '('
+                if (currentChar == '(') {
+                    // Push the index of the opening parenthesis onto the stack
+                    openingParenthesesStack.push(characterPosition);
+                }
+                // Check if the current character is a closing parenthesis ')'
+                else if (currentChar == ')') {
+                    // Ensure that the stack is not empty (there must be a matching opening parenthesis)
+                    if (!openingParenthesesStack.isEmpty()) {
+                        // Pop the index of the matching opening parenthesis from the stack
+                        int matchingOpeningIndex = openingParenthesesStack.pop();
+
+                        // Calculate the current depth (nesting level) of parentheses
+                        int currentNestingLevel = openingParenthesesStack.size();
+
+                        // If this nesting level is deeper than any previously encountered,
+                        // we update the center-most pair of parentheses
+                        if (currentNestingLevel > maxNestingLevel) {
+                            maxNestingLevel = currentNestingLevel;
+                            centerStartIndex = matchingOpeningIndex;
+                            centerEndIndex = characterPosition;
+                        }
+                    }
+                }
+            }
+
+            String mostInsideBrackets = expression.substring(centerStartIndex, centerEndIndex + 1);
+            String mostInsideBracketSolved = simplifyAlgebraicExpression(mostInsideBrackets.replaceAll("\\(","").replaceAll("\\)",""));
+
+            // Create a new string with the center-most parentheses replaced
+                        //part of expression before bracket           //solved inside bracket     //part of expression after the bracket
+            expression = expression.substring(0, centerStartIndex) + mostInsideBracketSolved + expression.substring(centerEndIndex + 1);
+            System.out.println(expression);
+        }
 
         // Simplify the algebraic expression and print the result
         String simplifiedExpression = simplifyAlgebraicExpression(expression);
