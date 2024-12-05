@@ -64,7 +64,7 @@ public class FunctionGraph extends Functions {
 
 
             // Add * between a number and a letter
-            functionInput = functionInput.replaceAll("(\\d)([a-zA-Z])", "$1*$2")
+            functionInput = functionInput.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
 
 
             //Regex to replace certain Strings with constants e.g. g=9.81
