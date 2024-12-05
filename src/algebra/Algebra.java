@@ -225,7 +225,7 @@ public class Algebra {
     // Main method to test the functionality
     public static void main(String[] args) {
         // Example of simplifying an algebraic expression with multiple divisions and multiplications
-        String expression = "((0x^0-8x * 5x^0 +7x^3)^2) + 4x + (3x)";
+        String expression = "(0x^0+8x * (-5x^0)x^0 +7x^3) + 4x + (3x)";
         System.out.println("Original Expression: " + expression);
 
 
@@ -269,6 +269,7 @@ public class Algebra {
                 }
             }
 
+            //get the sum inside the innermost brackets
             String mostInsideBrackets = expression.substring(centerStartIndex, centerEndIndex + 1);
             String mostInsideBracketSolved = simplifyAlgebraicExpression(mostInsideBrackets.replaceAll("\\(","").replaceAll("\\)",""));
 
