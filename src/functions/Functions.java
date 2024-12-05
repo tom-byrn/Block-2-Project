@@ -3,7 +3,8 @@ package functions;
 import algebra.Algebra;
 import calculations.Calculations;
 
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static functions.FunctionsManager.*;
 
@@ -129,9 +130,56 @@ public class Functions extends Algebra {
         return calculations.getAnswer();
     }
 
-    public static void multiVariateFunction() {}
+    public static void multiVariateFunction() {
+        Functions f = new Functions();
+        String functionInput = f.promptFunctionInput();
 
-    public static void composeFunctions() {}
+        String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        ArrayList<String> variables = new ArrayList<>(); // a list of all the variables in the function
+        for (String letter : alphabet) {
+            for (int i=0; i<functionInput.length(); i++) {
+                if (letter.equalsIgnoreCase(String.valueOf(functionInput.charAt(i)))) {
+                    variables.add(String.valueOf(functionInput.charAt(i)));
+                }
+            }
+        }
+        // remove duplicates
+        Set<String> uniqueVariables = new HashSet<>();
+        for (String variable : variables) {
+            uniqueVariables.add(variable);
+        }
+
+        // subbing into function
+        substitutedExpression = functionInput;
+        for (String variable: uniqueVariables) {
+            System.out.printf("%s = ", variable);
+            double value = scanner.nextDouble();
+            substitution = "(" + value + ")";
+            substitutedExpression = substitutedExpression.replaceAll(variable, substitution);
+        }
+
+        Calculations calculations = new Calculations(substitutedExpression);
+        System.out.println(calculations.getAnswer());
+    }
+
+    public static void composeFunctions() {
+        Scanner input = new Scanner(System.in);
+        Functions f = new Functions();
+        String fX = f.promptFunctionInput(); // f(x)
+        String gX = f.promptFunctionInput(); // g(x)
+
+        System.out.println("Enter a value for x: ");
+        double x = input.nextDouble();
+
+        // finding g(variable)
+        double gVariable = subIn(gX, x);
+
+        // finding f(g(x))
+        double result = subIn(fX, gVariable);
+
+        System.out.print("f(g(x)) = ");
+        System.out.println(result);
+    }
 
     public static void bisectionMethod() {
         Functions f = new Functions();
