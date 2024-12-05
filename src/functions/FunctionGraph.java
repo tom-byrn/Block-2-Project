@@ -1,6 +1,7 @@
 package functions;
 
 import calculations.Calculations;
+import calculations.CalculationsProcessor;
 import calculations.InputProcessor;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -62,7 +63,14 @@ public class FunctionGraph extends Functions {
         // Loop through the range and calculate values
         for (double x = startRange; x <= endRange; x += stepSize) {
 
-            String function = InputProcessor.preprocessInput(functionInput);
+
+            // Add * between a number and a letter
+            String function = functionInput.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
+
+
+            //Regex to replace certain Strings with constants e.g. g=9.81
+            CalculationsProcessor processor = new CalculationsProcessor(functionInput);
+            function = processor.toString();
             function = function.replaceAll("\\bx\\b", String.valueOf(x));
             double y = calculations.evaluate(function); // Replace with your actual evaluation logic
             series.add(x, y);
