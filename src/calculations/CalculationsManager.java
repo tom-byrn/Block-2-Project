@@ -2,8 +2,9 @@ package calculations;
 
 import java.io.IOException;
 import java.util.Scanner;
+import menu.Start;
 
-public class CalculationsManager {
+public class CalculationsManager implements Start {
 
     public static void start()  {
 

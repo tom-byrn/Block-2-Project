@@ -83,7 +83,11 @@ public class FunctionGraph extends Functions {
                 "",                   // Y-axis label
                 dataset                // Dataset
         );
-        applyDarkTheme(chart);
+
+        //Need to add switch function for choosing a theme
+        GraphTheme.applyDarkTheme(chart);
+
+
         return new ChartPanel(chart);
     }
 
