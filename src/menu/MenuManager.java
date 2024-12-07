@@ -7,6 +7,7 @@ import calculations.ConstantAdder;
 import complex.ComplexManager;
 import matrices.MatricesManager;
 import functions.*;
+import settings.SettingsManager;
 
 import java.io.IOException;
 import java.util.InputMismatchException;
@@ -32,8 +33,9 @@ public class MenuManager {
                         Enter (3) for matrices ⏹️
                         Enter (4) for algebra 🅰️
                         Enter (5) for complex numbers ℹ️
-                        Enter (6) to add a constant
-                        Enter (7) to check factors
+                        Enter (6) to add a constant ⚡
+                        Enter (7) to check factors 🔢
+                        Enter (9) to edit settings ⚙️
                         Enter (0) to exit the application 👋
                         """);
                 System.out.print("Enter a choice: ");
@@ -77,6 +79,11 @@ public class MenuManager {
                     case 7 -> {
                         currentlySelecting = false;
                         FactorManager.start();
+                        break;
+                    }
+                    case 8 -> {
+                        currentlySelecting = false;
+                        SettingsManager.start();
                         break;
                     }
                     case 0 -> {

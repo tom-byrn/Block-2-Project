@@ -8,8 +8,8 @@ public class SettingsManager implements Start {
 
         //Implement settings stuff here
         System.out.println("""
-                
-                
+                Enter (1) to edit trigonometric functions
+                Enter (2) to edit the graph theme
                 
                 
                 

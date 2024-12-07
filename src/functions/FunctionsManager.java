@@ -33,6 +33,7 @@ public class FunctionsManager implements Start {
                         Enter (4) for the bisection method
                         Enter (5) for the secant method
                         Enter (6) to graph a function
+                        Enter (7) to solve polynomials
                         Enter (0) to return to the menu
                         
                         """);
@@ -67,6 +68,10 @@ public class FunctionsManager implements Start {
                     case 6 -> {
                         FunctionGraph fg = new FunctionGraph();
                         fg.graphFunction();
+                        break;
+                    }
+                    case 7 -> {
+                        Polynomial.promptDegree();
                         break;
                     }
                     case 0 -> {
