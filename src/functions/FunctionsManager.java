@@ -1,6 +1,7 @@
 package functions;
 import calculations.Calculations;
 import menu.MenuManager;
+import menu.Start;
 
 
 import java.util.InputMismatchException;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionsManager {
+public class FunctionsManager implements Start {
 
     // Initializing variables
     public static String substitution = "";

@@ -1,13 +1,15 @@
 package matrices;
 
 
+import menu.Start;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
 // Class imports
 import static matrices.MatricesChecker.*;
 
-public class MatricesManager {
+public class MatricesManager implements Start {
 
 
     //Declaring Variables
