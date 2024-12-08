@@ -96,7 +96,6 @@ public class FunctionGraph extends Functions {
         frame.add(graphPanel); // Add the graph panel to the frame
 
         URL resource = getClass().getResource("/GraphIcon.png");
-        System.out.println("Resource URL: " + resource);
         ImageIcon icon = new ImageIcon(resource);
         frame.setIconImage(icon.getImage()); //Setting the window icon
 
