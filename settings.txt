@@ -1,2 +1,2 @@
-trigFunctions=degrees
 graphTheme=dark
+trigFunctions=degrees

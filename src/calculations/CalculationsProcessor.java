@@ -21,7 +21,6 @@ public class CalculationsProcessor extends InputProcessor{
         CalculationsProcessor.processedString = processedString;
     }
 
-
     @Override
     public String toString() {
         return getProcessedString();

@@ -3,7 +3,7 @@ package calculations;
 
 import java.util.*;
 
-public class Calculations {
+public class Calculations{
 
     protected String calculationInput;
     protected double answer;

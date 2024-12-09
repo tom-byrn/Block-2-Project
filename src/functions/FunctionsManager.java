@@ -1,6 +1,7 @@
 package functions;
 import calculations.Calculations;
 import menu.MenuManager;
+import menu.Start;
 
 
 import java.util.InputMismatchException;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionsManager {
+public class FunctionsManager implements Start {
 
     // Initializing variables
     public static String substitution = "";
@@ -32,6 +33,7 @@ public class FunctionsManager {
                         Enter (4) for the bisection method
                         Enter (5) for the secant method
                         Enter (6) to graph a function
+                        Enter (7) to solve polynomials
                         Enter (0) to return to the menu
                         
                         """);
@@ -66,6 +68,10 @@ public class FunctionsManager {
                     case 6 -> {
                         FunctionGraph fg = new FunctionGraph();
                         fg.graphFunction();
+                        break;
+                    }
+                    case 7 -> {
+                        Polynomial.promptDegree();
                         break;
                     }
                     case 0 -> {

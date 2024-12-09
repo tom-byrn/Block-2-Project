@@ -2,11 +2,12 @@ package Factors;
 
 import com.sun.tools.javac.Main;
 import menu.MenuManager;
+import menu.Start;
 
 import java.io.IOException;
 import java.util.Scanner;
 
-public class FactorManager {
+public class FactorManager implements Start {
 
     public static Scanner scanner = new Scanner(System.in);
     public static long n = 0;
