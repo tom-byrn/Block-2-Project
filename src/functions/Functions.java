@@ -6,6 +6,8 @@ import calculations.Calculations;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static functions.FunctionsManager.*;
+
 public class Functions extends Algebra {
 
     static Scanner scanner = new Scanner(System.in);
@@ -29,8 +31,9 @@ public class Functions extends Algebra {
 
     }
 
-    public String promptFunctionInput(){
-        System.out.print("Enter a function (e.g., x^2 -5x +6): ");
+    public String promptFunctionInput(String message){
+        // Consume leftover newline if needed
+        System.out.print(message);
         functionInput = scanner.nextLine();
         return functionInput;
     }
@@ -80,7 +83,7 @@ public class Functions extends Algebra {
 
     public static void singleVariableFunction() {
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput();
+        String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 + 3x + 4): ");
 
         // Error handling for start range
         double startRange = f.promptStartRange();
@@ -141,7 +144,7 @@ public class Functions extends Algebra {
 
     public static void multiVariateFunction() {
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput();
+        String functionInput = f.promptFunctionInput("Enter a function (e.g. a^2 + 2b + c): ");
 
         String[] alphabet = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
         ArrayList<String> variables = new ArrayList<>(); // a list of all the variables in the function
@@ -174,8 +177,8 @@ public class Functions extends Algebra {
     public static void composeFunctions() {
         Scanner input = new Scanner(System.in);
         Functions f = new Functions();
-        String fX = f.promptFunctionInput(); // f(x)
-        String gX = f.promptFunctionInput(); // g(x)
+        String fX = f.promptFunctionInput("Enter f(x) (e.g. 2x + 5): "); // f(x)
+        String gX = f.promptFunctionInput("Enter g(x) (e.g. x^2): "); // g(x)
 
         System.out.println("Enter a value for x: ");
         double x = input.nextDouble();
@@ -192,7 +195,7 @@ public class Functions extends Algebra {
 
     public static void bisectionMethod() {
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput(); // gets function
+        String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4): "); // gets function
 
         double a; // a, start of range
         double b; // b, end of range
@@ -258,7 +261,7 @@ public class Functions extends Algebra {
 
     public static void secantMethod() {
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput(); // enter f(x)
+        String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4)"); // enter f(x)
 
         double x0 = f.promptValidDouble("Enter first guess, x0: ");
         double x1 = f.promptValidDouble("Enter second guess, x1: ");

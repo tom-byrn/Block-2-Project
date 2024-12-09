@@ -25,7 +25,7 @@ public class FunctionGraph extends Functions {
     public void graphFunction(){
 
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput();
+        String functionInput = f.promptFunctionInput("Enter a function");
         double startRange = f.promptStartRange();
 
         do {
