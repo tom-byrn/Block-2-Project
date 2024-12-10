@@ -171,7 +171,12 @@ public class Functions extends Algebra {
         }
 
         Calculations calculations = new Calculations(substitutedExpression);
-        System.out.println(calculations.getAnswer());
+        String variablesInputted ="";
+        for (String uniqueVariable : uniqueVariables) {
+            variablesInputted += uniqueVariable;
+        }
+        System.out.println(variablesInputted);
+        System.out.printf("f(%s) = %.2f\n", variablesInputted, calculations.getAnswer());
     }
 
     public static void composeFunctions() {
