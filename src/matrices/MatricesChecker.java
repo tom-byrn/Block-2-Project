@@ -1,6 +1,5 @@
 package matrices;
 
-import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,10 +8,8 @@ public class MatricesChecker {
 
     //Used to ensure Matrix entered is correct
     protected static char YorN(double[][]matrixToBeChecked) {
-        //Print the out the matrix
-        for (double[] row : matrixToBeChecked) {
-            System.out.println(Arrays.toString(row));
-        }
+        MatricesManager.printMatrix(matrixToBeChecked);
+
         System.out.print("Is matrix correct Y/N: ");
 
         Scanner input = new Scanner(System.in);

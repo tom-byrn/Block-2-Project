@@ -4,7 +4,6 @@ package matrices;
 import menu.Start;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 // Class imports
 import static matrices.MatricesChecker.*;
@@ -79,8 +78,10 @@ public class MatricesManager implements Start {
 
     // used to create a matrix
     protected static double[][] matrixFirstCreator() {
+
         //input no of rows
         System.out.print("Enter Number of Rows: ");
+
         // checks if the number of rows is valid
         while ((noOfRowsInMatrixA = intSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-2147483647: ");
@@ -93,95 +94,46 @@ public class MatricesManager implements Start {
             System.out.print("Error please enter a number between 1-2147483647: ");
         }
 
-        //Create a 2D array or Matrix
-        double[][]matrixOneSize = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
-
-        // using scanner to find the numbers
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter first row:\t");
-
-        // iterate through the rows
-        for(int rowCounter = 0; rowCounter< noOfRowsInMatrixA; rowCounter++){
-            int positionCounter;
-
-            // Input each row
-            // uses regex and trim to remove tabs and multiple spaces
-            String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
-
-            // iterate through the columns in each row and adding them to the matrix
-            for(positionCounter = 0; positionCounter< noOfColumnsMatrixA; positionCounter++){
-
-                double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
-                matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
-            }
-
-            // for printing out next row before you enter each row
-            if(noOfRowsInMatrixA != (rowCounter+1)){
-                System.out.print("Enter next row:\t\t");
-            }
-        }
-
+        //Calls the matrixCreator class
+        MatrixCreator matrixCreator = new MatrixCreator(noOfRowsInMatrixA,noOfColumnsMatrixA);
 
         //Used for ensuring correct matrix
         do {
-            checker = MatricesChecker.YorN(matrixOneSize);
+            checker = MatricesChecker.YorN(matrixCreator.getMatrixOne());
 
             if(checker == 'N' || checker == 'n') {
-                matrixOneSize = MatricesManager.matrixFirstCreator();
+                matrixFirstCreator();
             }
         }while (checker == 'N' || checker == 'n');
 
-        return matrixOneSize;
+        return matrixCreator.getMatrixOne();
     }
 
     // used to create a square matrix
     protected static double[][] squareMatrixCreator() {
         //input no of rows
-        System.out.print("Enter Number of Rows and columns (n * n): ");
+        System.out.print("Enter Number of Rows and Columns (n * n): ");
+        System.out.println("The Number of Rows and Columns will be identical");
+
         // checks if the number of rows is valid
         while ((noOfRowsInMatrixA = noOfColumnsMatrixA = intSizeInt()) == 0){
             System.out.print("Error please enter a number between 1-2147483647: ");
         }
 
-        //Create a 2D array or Matrix
-        double[][]matrixOneSize = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
-
-        // using scanner to find the numbers
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter first row:\t");
-
-        // itterate through the rows
-        for(int rowCounter = 0; rowCounter< noOfRowsInMatrixA; rowCounter++){
-            int positionCounter;
-
-            // Input each row
-            // uses regex and trim to remove tabs and multiple spaces
-            String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
-
-            // itterate through the coloums in each row and adding them to the matrix
-            for(positionCounter = 0; positionCounter< noOfColumnsMatrixA; positionCounter++){
-
-                double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
-                matrixOneSize[rowCounter][positionCounter] = numberRowCounterInMatrix;
-            }
-
-            // for printing out next row before you enter each row
-            if(noOfRowsInMatrixA != (rowCounter+1)){
-                System.out.print("Enter next row:\t\t");
-            }
-        }
+        //Calls the matrixCreator class
+        MatrixCreator matrixCreator = new MatrixCreator(noOfRowsInMatrixA,noOfColumnsMatrixA);
 
 
         //Used for ensuring correct matrix
         do {
-            checker = MatricesChecker.YorN(matrixOneSize);
+            checker = MatricesChecker.YorN(matrixCreator.getMatrixOne());
 
             if(checker == 'N' || checker == 'n') {
-                matrixOneSize = squareMatrixCreator() ;
+                matrixFirstCreator();
             }
         }while (checker == 'N' || checker == 'n');
 
-        return matrixOneSize;
+        return matrixCreator.getMatrixOne();
     }
 
     protected static void printMatrix(double[][] matrixToPrint) {

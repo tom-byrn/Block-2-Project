@@ -1,6 +1,7 @@
 package calculations;
 
-public class CalculationsProcessor extends InputProcessor{
+
+public class CalculationsProcessor extends processor.InputProcessor {
 
     private static String processedString;
 

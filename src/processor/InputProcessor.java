@@ -1,8 +1,8 @@
-package calculations;
+package processor;
 
 public class InputProcessor {
     // method that takes and "String input" and returns a String
-    InputProcessor(String input){
+    protected InputProcessor(String input){
         //Remove all whitespace
         input = input.replaceAll("\\s+", "");
         // Add * between a number and a parenthesis
@@ -10,7 +10,7 @@ public class InputProcessor {
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
 
-        //Replace "- -" with "+" , "- ( -" with "+ (" , etc.
+        //Replace "- -" with "+" , "- (" with "-1 (" , etc.
         //This fixes a lot of issues with minus signs
         input = input.replaceAll("--", "+");
         input = input.replaceAll("-\\(", "-1(");
@@ -59,6 +59,9 @@ public class InputProcessor {
 
         // Replace u with Unified Atomic Mass Unit
         input = input.replaceAll("\\bu\\b", "1.6605402*10^(0-27)");
-        CalculationsProcessor.setProcessedString(input);
+
+
+        calculations.CalculationsProcessor.setProcessedString(input);
+        algebra.AlgebraProcessor.setProcessedString(input);
     }
 }
