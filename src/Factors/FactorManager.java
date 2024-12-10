@@ -1,19 +1,67 @@
 package Factors;
 
-import com.sun.tools.javac.Main;
+import functions.Functions;
 import menu.MenuManager;
 import menu.Start;
 
-import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class FactorManager implements Start {
 
     public static Scanner scanner = new Scanner(System.in);
-    public static long n = 0;
-    public static Factors f = new Factors();
 
     public static void start() {
+
+        boolean currentlySelecting = true;
+        while (currentlySelecting) {
+            try {
+
+                // Prompt user to select a choice for functions
+                System.out.println("""
+                        Welcome to Functions 📈
+                        
+                        Enter (1) to find the factors of a number
+                        Enter (2) to find prime numbers
+                        
+                        """);
+                System.out.print("Enter a choice: ");
+
+                // Scanner object scans for user input
+                int selectorNum = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println();
+
+                // Switch case for choosing an option
+                switch (selectorNum) {
+                    case 1 -> {
+                        currentlySelecting = false;
+                        FactorManager.factorPrompt();
+                        break;
+                    }
+                    case 2 -> {
+                        currentlySelecting = false;
+                        FactorManager.primePrompt();
+                        break;
+                    }
+
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number!\n");
+                scanner.nextLine(); // Clear invalid input from the scanner
+            }
+        }
+    }
+
+    public static void primePrompt(){
+
+    }
+
+
+    public static void factorPrompt() {
+
+        Factors f = new Factors();
+        long n = 0;
 
         boolean validInput = false;
         while(!validInput) {

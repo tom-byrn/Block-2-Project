@@ -31,7 +31,7 @@ public class FunctionGraph extends Functions {
         do {
             double endRange = f.promptEndRange();
             if(endRange < startRange){
-                System.out.println("End range value must be greater than start range value!");
+                System.out.println("End range value must be greater than factorPrompt range value!");
             }
         }
         while(endRange < startRange);
