@@ -2,11 +2,14 @@ package functions;
 
 import algebra.Algebra;
 import calculations.Calculations;
+import functions.FunctionsManager.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static functions.FunctionsManager.*;
+import static functions.FunctionsManager.substitutedExpression;
+import static functions.FunctionsManager.substitution;
+
 
 public class Functions extends Algebra {
 

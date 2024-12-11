@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FunctionsManager implements Start {
+public class FunctionsManager implements Start{
 
     // Initializing variables
     public static String substitution = "";

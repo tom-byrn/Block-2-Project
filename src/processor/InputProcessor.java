@@ -62,6 +62,5 @@ public class InputProcessor {
 
 
         calculations.CalculationsProcessor.setProcessedString(input);
-        algebra.AlgebraProcessor.setProcessedString(input);
     }
 }
