@@ -1,19 +1,20 @@
 package matrices;
 
 import static matrices.MatricesManager.*;
-import static matrices.MatricesChecker.intSizeInt;
 
 public class MatrixMultiplication {
-    private static int noOfColumnsInMatrixInB;
+    protected static int noOfColumnsInMatrixInB;
 
     protected static void multiplicationStart(){
         //Calls matrixFirstCreator and sets matrixA to answer
         //Initilize matrices
         //creates a 2D matrix
-        double[][] matrixA = MatricesManager.matrixFirstCreator();
+        MatrixCreator createFirstMatrix = new CreateFirstMatrix();
+        double[][] matrixA = createFirstMatrix.createMatrixAndIncludeSize();
 
         //Calls multiplyingMatrixB and sets matrixB to answer
-        double[][] matrixB = multiplyingMatrixB();
+        MatrixCreator createMultiplyingMatrixB = new CreateMultiplyingMatrixB();
+        double[][] matrixB = createMultiplyingMatrixB.createMatrixAndIncludeSize();
 
         double[][]matrixFinal = multiplication(matrixA,matrixB);
 
@@ -50,42 +51,5 @@ public class MatrixMultiplication {
             }
         }
         return matrixFinal;
-    }
-
-
-
-    // used to create a matrix B
-    private static double[][] multiplyingMatrixB() {
-
-        //input no of rows
-        System.out.print("Enter Number of Rows: ");
-        // checks if the number of rows is valid
-        int noOfRowsInMatrixInB;
-        while (!((noOfRowsInMatrixInB = intSizeInt()) == noOfColumnsMatrixA)){
-            System.out.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + noOfColumnsMatrixA);
-        }
-
-        //input no of rows
-        System.out.print("Enter Number of Columns: ");
-        // checks if the number of rows is valid
-        while ((noOfColumnsInMatrixInB = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
-        }
-
-
-        //Calls the matrixCreator class
-        MatrixCreator matrixCreator = new MatrixCreator(noOfRowsInMatrixInB,noOfColumnsInMatrixInB);
-
-
-        //Used for ensuring correct matrix
-        do {
-            checker = MatricesChecker.YorN(matrixCreator.getMatrixOne());
-
-            if(checker == 'N' || checker == 'n') {
-                matrixFirstCreator();
-            }
-        }while (checker == 'N' || checker == 'n');
-
-        return matrixCreator.getMatrixOne();
     }
 }

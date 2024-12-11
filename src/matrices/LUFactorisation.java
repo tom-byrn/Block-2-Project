@@ -70,7 +70,8 @@ public class LUFactorisation {
 
     protected static void factoriser(){
         // Define the input matrix for LU Factorisation
-        double[][] inputMatrix = MatricesManager.squareMatrixCreator();
+        MatrixCreator createSquareMatrix = new CreateSquareMatrix();
+        double[][] inputMatrix = createSquareMatrix.createMatrixAndIncludeSize();
 
         // Find the size of it
         int matrixSize = inputMatrix.length;

@@ -5,7 +5,8 @@ import static matrices.MatricesManager.*;
 public class TransposeOfAMatrix {
 
     protected static void transposeStart(){
-        double[][]matrixA = matrixFirstCreator();
+        MatrixCreator matrixFirstCreator = new CreateFirstMatrix();
+        double[][]matrixA = matrixFirstCreator.createMatrixAndIncludeSize();
 
         double[][] matrixFinal = transpose(matrixA);
 

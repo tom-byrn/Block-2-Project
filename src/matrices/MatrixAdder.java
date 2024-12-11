@@ -61,32 +61,14 @@ public class MatrixAdder {
     private static void additionOrSubtraction(){
 
         //Calls matrixFirstCreator and sets matrixA to answer
-        matrixA = MatricesManager.matrixFirstCreator();
+        MatrixCreator matrixCreatorMatrixA = new CreateFirstMatrix();
+        matrixA = matrixCreatorMatrixA.createMatrixAndIncludeSize();
 
-        //Calls matrixCreatorB and sets matrixB to answer
-        matrixB = addingMatrixB();
+        // Calls matrixFirstCreator and sets matrixB to answer
+        MatrixCreator matrixCreatormatrixB = new CreateAddingMatrixB();
+        matrixB = matrixCreatormatrixB.createMatrixAndIncludeSize();
 
         // Create final Matrix
         matrixFinal = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
-    }
-
-
-    // used to create a matrix B
-    private static double[][] addingMatrixB() {
-
-        //Calls the matrixCreator class
-        MatrixCreator matrixCreator = new MatrixCreator(noOfRowsInMatrixA,noOfColumnsMatrixA);
-
-
-        //Used for ensuring correct matrix
-        do {
-            checker = MatricesChecker.YorN(matrixCreator.getMatrixOne());
-
-            if(checker == 'N' || checker == 'n') {
-                matrixFirstCreator();
-            }
-        }while (checker == 'N' || checker == 'n');
-
-        return matrixCreator.getMatrixOne();
     }
 }

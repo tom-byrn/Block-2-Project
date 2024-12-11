@@ -64,7 +64,8 @@ public class EigenvalueCalculator {
     protected static void getDominantEigenvalue(){
 
         // Define a sample matrix A (e.g., 3x3 matrix)
-        double[][] matrix = MatricesManager.squareMatrixCreator();
+        MatrixCreator createSquareMatrix = new CreateSquareMatrix();
+        double[][] matrix = createSquareMatrix.createMatrixAndIncludeSize();
 
         // Parameters for power iteration: max iterations
         int maxIterations = 25;

@@ -6,7 +6,7 @@ import menu.Start;
 import java.util.Arrays;
 
 // Class imports
-import static matrices.MatricesChecker.*;
+import static matrices.NumberChecker.*;
 
 public class MatricesManager implements Start {
 
@@ -14,7 +14,6 @@ public class MatricesManager implements Start {
     //Declaring Variables
     protected static int noOfRowsInMatrixA;
     protected static int noOfColumnsMatrixA;
-    protected static char checker;
 
     public static void start() {
 
@@ -31,6 +30,7 @@ public class MatricesManager implements Start {
                         Enter (8) for Dominant Eigenvalues
                         Enter (9) to  Solve Simultaneous Equations
                         """);
+
         // checking is a valid function selected
         byte function;
         while ((function = byteSizeInt()) < 1 || function > 9) {
@@ -67,73 +67,12 @@ public class MatricesManager implements Start {
         if(function == 7){
             Determinant.getDeterminantOfAMatrix();
         }
-
         if(function == 8) {
             EigenvalueCalculator.getDominantEigenvalue();
         }
         if(function == 9) {
             SolveSimulationsEquations.solveEquation();
         }
-    }
-
-    // used to create a matrix
-    protected static double[][] matrixFirstCreator() {
-
-        //input no of rows
-        System.out.print("Enter Number of Rows: ");
-
-        // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
-        }
-
-        //input no of columns
-        System.out.print("Enter Number of Columns: ");
-        // checks if the number of columns is valid
-        while ((noOfColumnsMatrixA = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
-        }
-
-        //Calls the matrixCreator class
-        MatrixCreator matrixCreator = new MatrixCreator(noOfRowsInMatrixA,noOfColumnsMatrixA);
-
-        //Used for ensuring correct matrix
-        do {
-            checker = MatricesChecker.YorN(matrixCreator.getMatrixOne());
-
-            if(checker == 'N' || checker == 'n') {
-                matrixFirstCreator();
-            }
-        }while (checker == 'N' || checker == 'n');
-
-        return matrixCreator.getMatrixOne();
-    }
-
-    // used to create a square matrix
-    protected static double[][] squareMatrixCreator() {
-        //input no of rows
-        System.out.print("Enter Number of Rows and Columns (n * n): ");
-        System.out.println("The Number of Rows and Columns will be identical");
-
-        // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = noOfColumnsMatrixA = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
-        }
-
-        //Calls the matrixCreator class
-        MatrixCreator matrixCreator = new MatrixCreator(noOfRowsInMatrixA,noOfColumnsMatrixA);
-
-
-        //Used for ensuring correct matrix
-        do {
-            checker = MatricesChecker.YorN(matrixCreator.getMatrixOne());
-
-            if(checker == 'N' || checker == 'n') {
-                matrixFirstCreator();
-            }
-        }while (checker == 'N' || checker == 'n');
-
-        return matrixCreator.getMatrixOne();
     }
 
     protected static void printMatrix(double[][] matrixToPrint) {

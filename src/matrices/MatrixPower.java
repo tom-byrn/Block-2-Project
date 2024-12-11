@@ -71,7 +71,8 @@ public class MatrixPower {
     protected static void powerCalculationStart(){
 
         // To get a matrix to the power the matrix must be square
-        double[][] matrix = MatricesManager.squareMatrixCreator();
+        MatrixCreator squareMatrix = new CreateSquareMatrix();
+        double[][] matrix = squareMatrix.createMatrixAndIncludeSize();
 
         // Define the exponent to which the matrix will be raised
         int exponent = getExponent();

@@ -30,8 +30,9 @@ public class Determinant {
 
 
     protected static void getDeterminantOfAMatrix(){
-        // Test matrix (3x3 example matrix)
-        double[][] inputMatrix = MatricesManager.squareMatrixCreator();
+        // Create a Square matrix
+        MatrixCreator squareMatrix = new CreateSquareMatrix();
+        double[][] inputMatrix = squareMatrix.createMatrixAndIncludeSize();
 
         // Compute and print the determinant using LU decomposition
         double determinant = computeDeterminant(inputMatrix);

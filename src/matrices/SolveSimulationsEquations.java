@@ -2,22 +2,19 @@ package matrices;
 
 import menu.MenuManager;
 
-import java.util.Objects;
-import java.util.Scanner;
-
 import static matrices.LUFactorisation.*;
-import static matrices.MatricesChecker.getNumberRowCounterInMatrix;
-import static matrices.MatricesManager.checker;
 import static matrices.MatricesManager.printMatrix;
 
 public class SolveSimulationsEquations {
 
     protected static void solveEquation(){
         // Create Matrix A
-        double[][] coefficientMatrix = MatricesManager.squareMatrixCreator();
+        MatrixCreator squareMatrix = new CreateSquareMatrix();
+        double[][] coefficientMatrix = squareMatrix.createMatrixAndIncludeSize();
 
         // Create solution Vector
-        double[][] rightHandSide = createSolutionVector(coefficientMatrix);
+        MatrixCreator solutionVector = new CreateSolutionVector(coefficientMatrix);
+        double[][] rightHandSide = solutionVector.createMatrixAndIncludeSize();
 
         // Solve the system of equations using LU factorization
         double[][] solution = solveUsingLU(coefficientMatrix, rightHandSide);
@@ -101,50 +98,5 @@ public class SolveSimulationsEquations {
 
         // Return the final solution vector x
         return solutionVectorX;
-    }
-
-    // used to create a square matrix
-    protected static double[][] createSolutionVector(double[][] coefficientMatrix) {
-
-        // Get Vector size
-        int vectorSize = coefficientMatrix.length;
-
-        //Create an array or Matrix
-        double[][]vectorSolution = new double[vectorSize][1];
-
-
-        // using scanner to find the numbers
-        System.out.println("Enter values for the solution vector");
-        Scanner input = new Scanner(System.in);
-        System.out.print("Enter first row:\t");
-
-        // itterate through the rows
-        for(int rowCounter = 0; rowCounter< vectorSize; rowCounter++){
-
-            // Input each row
-            // uses regex and trim to remove tabs and multiple spaces
-            String rowListWithSpace = input.nextLine().replaceAll("\\s+", " ").trim();
-
-            double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, 0);
-            vectorSolution[rowCounter][0] = numberRowCounterInMatrix;
-
-
-            // for printing out next row before you enter each row
-            if(vectorSize != (rowCounter+1)){
-                System.out.print("Enter next row:\t\t");
-            }
-        }
-
-
-        //Used for ensuring correct matrix
-        do {
-            checker = MatricesChecker.YorN(Objects.requireNonNull(vectorSolution));
-
-            if(checker == 'N' || checker == 'n') {
-                vectorSolution = createSolutionVector(coefficientMatrix) ;
-            }
-        }while (checker == 'N' || checker == 'n');
-
-        return vectorSolution;
     }
 }
