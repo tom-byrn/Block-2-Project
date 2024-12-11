@@ -2,11 +2,14 @@ package functions;
 
 import algebra.Algebra;
 import calculations.Calculations;
+import functions.FunctionsManager.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static functions.FunctionsManager.*;
+import static functions.FunctionsManager.substitutedExpression;
+import static functions.FunctionsManager.substitution;
+
 
 public class Functions extends Algebra {
 
@@ -39,7 +42,7 @@ public class Functions extends Algebra {
     }
 
     public double promptStartRange(){
-        startRange = getValidDouble(scanner, "Enter the start of the range: ");
+        startRange = getValidDouble(scanner, "Enter the factorPrompt of the range: ");
         return startRange;
     }
 
@@ -85,7 +88,7 @@ public class Functions extends Algebra {
         Functions f = new Functions();
         String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 + 3x + 4): ");
 
-        // Error handling for start range
+        // Error handling for factorPrompt range
         double startRange = f.promptStartRange();
 
         // Error handling for end range
@@ -202,7 +205,7 @@ public class Functions extends Algebra {
         Functions f = new Functions();
         String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4): "); // gets function
 
-        double a; // a, start of range
+        double a; // a, factorPrompt of range
         double b; // b, end of range
         double fA; // f(a)
         double fB; // f(b)

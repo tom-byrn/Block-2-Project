@@ -16,7 +16,9 @@ public class Factors {
     }
 
     // Default constructor
-    public Factors() {}
+    public Factors() {
+        this.factorList = new ArrayList<>();
+    }
 
     // Method to calculate factors (optimized)
     private void calculateFactors() {
@@ -29,7 +31,7 @@ public class Factors {
             if (n % i == 0) {
                 factorList.add(i); // Smaller factor
                 if (i != n / i) {
-                    largerFactors.add(0, n / i); // Larger factor (added at the start of the list)
+                    largerFactors.add(0, n / i); // Larger factor (added at the factorPrompt of the list)
                 }
             }
         }

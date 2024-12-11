@@ -96,7 +96,7 @@ public class Algebra {
         // Remove all spaces from the expression to simplify parsing
         expression = expression.replaceAll("\\s+", "");
 
-        // Add a leading '+' if the expression doesn't start with a '+' or '-' to help with parsing
+        // Add a leading '+' if the expression doesn't factorPrompt with a '+' or '-' to help with parsing
         if (!expression.startsWith("+") && !expression.startsWith("-")) {
             expression = "+" + expression;
         }
@@ -236,7 +236,7 @@ public class Algebra {
 
             // Variables to track the position of the deepest nested parentheses
             int maxNestingLevel = -1;  // The current maximum nesting level
-            int centerStartIndex = -1; // The start index of the most deeply nested pair
+            int centerStartIndex = -1; // The factorPrompt index of the most deeply nested pair
             int centerEndIndex = -1;  // The end index of the most deeply nested pair
 
             // Traverse the string character by character

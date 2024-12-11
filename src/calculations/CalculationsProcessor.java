@@ -11,7 +11,6 @@ public class CalculationsProcessor extends processor.InputProcessor {
 
         setProcessedString(input);
 
-
     }
 
     public static String getProcessedString() {

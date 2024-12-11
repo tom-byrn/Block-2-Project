@@ -4,12 +4,10 @@ import Factors.FactorManager;
 import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import calculations.ConstantAdder;
-import complex.ComplexManager;
 import matrices.MatricesManager;
 import functions.*;
 import settings.SettingsManager;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -34,7 +32,7 @@ public class MenuManager {
                         Enter (4) for algebra 🅰️
                         Enter (5) for complex numbers ℹ️
                         Enter (6) to add a constant ⚡
-                        Enter (7) to check factors 🔢
+                        Enter (7) to find factors and primes 🔢
                         Enter (9) to edit settings ⚙️
                         Enter (0) to exit the application 👋
                         """);
@@ -68,7 +66,7 @@ public class MenuManager {
                     }
                     case 5 -> {
                         currentlySelecting = false;
-                        //ComplexManager.start();
+                        //ComplexManager.
                         break;
                     }
                     case 6 -> {

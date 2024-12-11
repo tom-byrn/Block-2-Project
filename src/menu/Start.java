@@ -1,6 +1,6 @@
 package menu;
 
-//To be implemented for all MenuManagers for their start methods
+//To be implemented for all MenuManagers for their factorPrompt methods
 public interface Start {
 
     public static void start() {
