@@ -55,6 +55,12 @@ public class FactorManager implements Start {
 
     public static void primePrompt(){
 
+        System.out.print("Please enter the nth prime number you would like to find: ");
+        int n = scanner.nextInt();
+
+        PrimeFinder primeFinder = new PrimeFinder(n);
+        primeFinder.findNthPrime();
+        System.out.println("The nth prime number is: " + primeFinder.getNthPrime());
     }
 
 
