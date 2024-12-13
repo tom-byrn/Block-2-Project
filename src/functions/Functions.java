@@ -227,7 +227,7 @@ public class Functions extends Algebra {
 
     public static void secantMethod() {
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4)"); // enter f(x)
+        String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4): "); // enter f(x)
 
         double x0 = getValidDouble("Enter first guess, x0: ");
         double x1 = getValidDouble("Enter second guess, x1: ");
