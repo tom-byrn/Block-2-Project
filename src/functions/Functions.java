@@ -42,7 +42,7 @@ public class Functions extends Algebra {
     }
 
     public double promptStartRange(){
-        startRange = getValidDouble(scanner, "Enter the factorPrompt of the range: ");
+        startRange = getValidDouble(scanner, "Enter the start of the range: ");
         return startRange;
     }
 
