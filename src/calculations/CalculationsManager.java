@@ -1,6 +1,5 @@
 package calculations;
 
-import java.io.IOException;
 import java.util.Scanner;
 import menu.Start;
 

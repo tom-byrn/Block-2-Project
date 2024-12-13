@@ -3,17 +3,16 @@ package matrices;
 import menu.MenuManager;
 
 import static matrices.LUFactorisation.*;
-import static matrices.MatricesManager.printMatrix;
 
 public class SolveSimulationsEquations {
 
     protected static void solveEquation(){
         // Create Matrix A
-        MatrixCreator squareMatrix = new CreateSquareMatrix();
+        Matrix squareMatrix = new CreateSquareMatrix();
         double[][] coefficientMatrix = squareMatrix.createMatrixAndIncludeSize();
 
         // Create solution Vector
-        MatrixCreator solutionVector = new CreateSolutionVector(coefficientMatrix);
+        Matrix solutionVector = new CreateSolutionVector(coefficientMatrix);
         double[][] rightHandSide = solutionVector.createMatrixAndIncludeSize();
 
         // Solve the system of equations using LU factorization

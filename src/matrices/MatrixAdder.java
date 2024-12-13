@@ -3,9 +3,7 @@ package matrices;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import static matrices.MatricesManager.*;
-
-public class MatrixAdder {
+public class MatrixAdder extends PrintMatrix{
 
     //Initilize matrices
     //creates a 2D matrix
@@ -21,18 +19,15 @@ public class MatrixAdder {
         additionOrSubtraction();
 
         //Adder for each row
-        for(int matrixRowAdder = 0; matrixRowAdder< noOfRowsInMatrixA; matrixRowAdder++){
+        for(int matrixRowAdder = 0; matrixRowAdder < matrixA.length; matrixRowAdder++){
 
             //Adder for each colum
-            for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixA; matrixColoumAdder++){
-                //Adds A to B
-                BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] + matrixB[matrixRowAdder][matrixColoumAdder]));
-                BigDecimal finalMatrixNumberRounded = finalMatrixNumberBigDecimal.setScale(45, RoundingMode.HALF_UP); // Rounds to 8 decimal places
+            for(int matrixColoumAdder = 0; matrixColoumAdder < matrixA[matrixRowAdder].length; matrixColoumAdder++){
 
-                matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
+                matrixFinal[matrixRowAdder][matrixColoumAdder] = matrixA[matrixRowAdder][matrixColoumAdder] + matrixB[matrixRowAdder][matrixColoumAdder];
             }
         }
-        MatricesManager.printMatrix(matrixFinal);
+        printMatrix(matrixFinal);
     }
 
     //Used to subtract 2 matrixs
@@ -42,10 +37,10 @@ public class MatrixAdder {
         additionOrSubtraction();
 
         //Adder for each row
-        for(int matrixRowAdder = 0; matrixRowAdder< noOfRowsInMatrixA; matrixRowAdder++){
+        for(int matrixRowAdder = 0; matrixRowAdder< matrixA.length; matrixRowAdder++){
 
             //Adder for each colum
-            for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixA; matrixColoumAdder++){
+            for(int matrixColoumAdder = 0; matrixColoumAdder < matrixA[0].length; matrixColoumAdder++){
                 //Adds A to B
                 BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] - matrixB[matrixRowAdder][matrixColoumAdder]));
                 BigDecimal finalMatrixNumberRounded = finalMatrixNumberBigDecimal.setScale(45, RoundingMode.HALF_UP); // Rounds to 8 decimal places
@@ -53,7 +48,7 @@ public class MatrixAdder {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        MatricesManager.printMatrix(matrixFinal);
+        printMatrix(matrixFinal);
     }
 
 
@@ -61,14 +56,14 @@ public class MatrixAdder {
     private static void additionOrSubtraction(){
 
         //Calls matrixFirstCreator and sets matrixA to answer
-        MatrixCreator matrixCreatorMatrixA = new CreateFirstMatrix();
+        Matrix matrixCreatorMatrixA = new CreateFirstMatrix();
         matrixA = matrixCreatorMatrixA.createMatrixAndIncludeSize();
 
         // Calls matrixFirstCreator and sets matrixB to answer
-        MatrixCreator matrixCreatormatrixB = new CreateAddingMatrixB();
+        Matrix matrixCreatormatrixB = new CreateAddingMatrixB();
         matrixB = matrixCreatormatrixB.createMatrixAndIncludeSize();
 
         // Create final Matrix
-        matrixFinal = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
+        matrixFinal = matrixA;
     }
 }

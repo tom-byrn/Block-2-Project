@@ -10,11 +10,6 @@ import static matrices.NumberChecker.*;
 
 public class MatricesManager implements Start {
 
-
-    //Declaring Variables
-    protected static int noOfRowsInMatrixA;
-    protected static int noOfColumnsMatrixA;
-
     public static void start() {
 
         // select function using a text block
@@ -72,13 +67,6 @@ public class MatricesManager implements Start {
         }
         if(function == 9) {
             SolveSimulationsEquations.solveEquation();
-        }
-    }
-
-    protected static void printMatrix(double[][] matrixToPrint) {
-        //Print the out the matrix
-        for (double[] row : matrixToPrint) {
-            System.out.println(Arrays.toString(row));
         }
     }
 }

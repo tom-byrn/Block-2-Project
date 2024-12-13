@@ -3,7 +3,37 @@ package matrices;
 import java.util.Scanner;
 
 
-public abstract class MatrixCreator implements CreatingMatrixInterface {
+public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterface {
+    
+    //Store matrix size
+    private static int noOfRowsInMatrixA;
+    private static int noOfColumnsMatrixA;
+
+    public static int getNoOfColumnsMatrixA() {
+        return noOfColumnsMatrixA;
+    }
+
+    public static int getNoOfRowsInMatrixA() {
+        return noOfRowsInMatrixA;
+    }
+
+    protected static void setNoOfColumnsMatrixA(int noOfColumnsMatrixA) {
+        if(noOfColumnsMatrixA > 0) {
+            Matrix.noOfColumnsMatrixA = noOfColumnsMatrixA;
+        }else{
+            System.err.println("Error please enter a number between 1-2147483647: ");
+            throw new IllegalArgumentException();
+        }
+    }
+
+    protected void setNoOfRowsInMatrixA(int noOfRowsInMatrixA) {
+        if(noOfRowsInMatrixA > 0) {
+            Matrix.noOfRowsInMatrixA = noOfRowsInMatrixA;
+        }else{
+            System.err.println("Error please enter a number between 1-2147483647: ");
+            throw new IllegalArgumentException();
+        }
+    }
 
     protected static char checker;
     private double[][] matrixOne;
@@ -35,7 +65,7 @@ public abstract class MatrixCreator implements CreatingMatrixInterface {
     @Override
     //Used to ensure Matrix entered is correct
     public char YorN(double[][]matrixToBeChecked){
-        MatricesManager.printMatrix(matrixToBeChecked);
+        printMatrix(matrixToBeChecked);
 
         System.out.print("Is matrix correct Y/N: ");
 

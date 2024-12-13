@@ -31,7 +31,7 @@ public class Determinant {
 
     protected static void getDeterminantOfAMatrix(){
         // Create a Square matrix
-        MatrixCreator squareMatrix = new CreateSquareMatrix();
+        Matrix squareMatrix = new CreateSquareMatrix();
         double[][] inputMatrix = squareMatrix.createMatrixAndIncludeSize();
 
         // Compute and print the determinant using LU decomposition

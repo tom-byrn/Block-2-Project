@@ -1,6 +1,6 @@
 package matrices;
 
-public class CreateSolutionVector extends MatrixCreator{
+public class CreateSolutionVector extends Matrix {
     private final int numberOfRows;
 
     CreateSolutionVector(double [][] matrix){

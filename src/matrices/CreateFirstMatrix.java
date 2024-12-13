@@ -1,9 +1,8 @@
 package matrices;
 
 import static matrices.NumberChecker.intSizeInt;
-import static matrices.MatricesManager.*;
 
-public class CreateFirstMatrix extends MatrixCreator{
+public class CreateFirstMatrix extends Matrix {
 
 
     @Override
@@ -13,19 +12,32 @@ public class CreateFirstMatrix extends MatrixCreator{
         System.out.print("Enter Number of Rows: ");
 
         // checks if the number of rows is valid
-        while ((noOfRowsInMatrixA = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
+        boolean check = true;
+        while(check){
+            try{
+                setNoOfRowsInMatrixA(intSizeInt());
+                check = false;
+            }catch(IllegalArgumentException ignored){
+
+            }
         }
 
         //input no of columns
         System.out.print("Enter Number of Columns: ");
+
         // checks if the number of columns is valid
-        while ((noOfColumnsMatrixA = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
+        check = true;
+        while(check){
+            try{
+                setNoOfColumnsMatrixA(intSizeInt());
+                check = false;
+            }catch(IllegalArgumentException ignored){
+
+            }
         }
 
         // Call the super method to create the matrix with the new inputted size
-        double[][] matrixFirst = super.createMatrixNoSize(noOfRowsInMatrixA,noOfColumnsMatrixA);
+        double[][] matrixFirst = super.createMatrixNoSize(getNoOfRowsInMatrixA(),getNoOfColumnsMatrixA());
 
 
         //Used for ensuring correct matrix

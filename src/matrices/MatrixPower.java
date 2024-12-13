@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import static matrices.MatrixMultiplication.multiplication;
 
-public class MatrixPower {
+public class MatrixPower extends PrintMatrix{
 
     // Function to perform matrix exponentiation using the Exponentiation by Squaring method
     private static double[][] matrixExponentiation(double[][] inputMatrix, int exponent) {
@@ -71,7 +71,7 @@ public class MatrixPower {
     protected static void powerCalculationStart(){
 
         // To get a matrix to the power the matrix must be square
-        MatrixCreator squareMatrix = new CreateSquareMatrix();
+        Matrix squareMatrix = new CreateSquareMatrix();
         double[][] matrix = squareMatrix.createMatrixAndIncludeSize();
 
         // Define the exponent to which the matrix will be raised
@@ -81,7 +81,7 @@ public class MatrixPower {
         double[][] result = matrixExponentiation(matrix, exponent);
 
         // Output the result matrix=
-        MatricesManager.printMatrix(result);
+        printMatrix(result);
     }
 
     private static int getExponent() {

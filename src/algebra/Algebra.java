@@ -225,7 +225,7 @@ public class Algebra {
     // Main method to test the functionality
     public static void main(String[] args) {
         // Example of simplifying an algebraic expression with multiple divisions and multiplications
-        String expression = "";
+        String expression = "4x - 2x";
         System.out.println("Original Expression: " + expression);
 
 

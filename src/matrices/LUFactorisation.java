@@ -1,9 +1,7 @@
 package matrices;
 
-import static matrices.MatricesManager.*;
-
 // LU = A
-public class LUFactorisation {
+public class LUFactorisation extends PrintMatrix{
 
     private static double[][] lowerTriangularMatrix;
     private static double[][] upperTriangularMatrix;
@@ -70,7 +68,7 @@ public class LUFactorisation {
 
     protected static void factoriser(){
         // Define the input matrix for LU Factorisation
-        MatrixCreator createSquareMatrix = new CreateSquareMatrix();
+        Matrix createSquareMatrix = new CreateSquareMatrix();
         double[][] inputMatrix = createSquareMatrix.createMatrixAndIncludeSize();
 
         // Find the size of it

@@ -1,33 +1,31 @@
 package matrices;
 
-import static matrices.MatricesManager.*;
-
-public class TransposeOfAMatrix {
+public class TransposeOfAMatrix extends PrintMatrix {
 
     protected static void transposeStart(){
-        MatrixCreator matrixFirstCreator = new CreateFirstMatrix();
+        Matrix matrixFirstCreator = new CreateFirstMatrix();
         double[][]matrixA = matrixFirstCreator.createMatrixAndIncludeSize();
 
         double[][] matrixFinal = transpose(matrixA);
 
-        MatricesManager.printMatrix(matrixFinal);
+        printMatrix(matrixFinal);
     }
     protected static double[][] transpose(double[][]matrixA){
 
         //Get the number of rows for matrix
-        noOfRowsInMatrixA = matrixA.length;
+        int rowsTransMatrixA = matrixA.length;
 
         // Get the number of columns
-        noOfColumnsMatrixA = matrixA[0].length;
+        int columnsTransMatrixA = matrixA[0].length;
 
         //Create a matrix of with row = coloms and colums equal to rows from MatrixA
-        double[][]matrixFinal = new double[noOfColumnsMatrixA][noOfRowsInMatrixA];
+        double[][]matrixFinal = new double[columnsTransMatrixA][rowsTransMatrixA];
 
         //Cycle through each row
-        for(int matrixRowAdder = 0; matrixRowAdder< noOfRowsInMatrixA; matrixRowAdder++){
+        for(int matrixRowAdder = 0; matrixRowAdder< rowsTransMatrixA; matrixRowAdder++){
 
             //Cycle through each colum
-            for(int matrixColoumAdder = 0; matrixColoumAdder < noOfColumnsMatrixA; matrixColoumAdder++){
+            for(int matrixColoumAdder = 0; matrixColoumAdder < columnsTransMatrixA; matrixColoumAdder++){
 
                 matrixFinal[matrixColoumAdder][matrixRowAdder] = matrixA[matrixRowAdder][matrixColoumAdder];
             }

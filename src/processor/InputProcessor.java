@@ -3,6 +3,8 @@ package processor;
 public class InputProcessor {
     // method that takes and "String input" and returns a String
     protected InputProcessor(String input){
+        // Add * between a number and a letter
+        input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         //Remove all whitespace
         input = input.replaceAll("\\s+", "");
         // Add * between a number and a parenthesis

@@ -1,14 +1,11 @@
 package matrices;
 
-
-import static matrices.MatricesManager.*;
-
-public class CreateAddingMatrixB extends MatrixCreator{
+public class CreateAddingMatrixB extends Matrix {
 
     public double[][] createMatrixAndIncludeSize() {
 
         // Call the super method to create the matrix with the new inputted size
-        double[][] matrixFirst = super.createMatrixNoSize(noOfRowsInMatrixA,noOfColumnsMatrixA);
+        double[][] matrixFirst = super.createMatrixNoSize(getNoOfRowsInMatrixA(),getNoOfColumnsMatrixA());
 
 
         //Used for ensuring correct matrix

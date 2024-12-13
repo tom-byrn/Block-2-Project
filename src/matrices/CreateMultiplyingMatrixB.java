@@ -1,10 +1,9 @@
 package matrices;
 
 import static matrices.NumberChecker.intSizeInt;
-import static matrices.MatricesManager.*;
 import static matrices.MatrixMultiplication.noOfColumnsInMatrixInB;
 
-public class CreateMultiplyingMatrixB extends MatrixCreator{
+public class CreateMultiplyingMatrixB extends Matrix {
 
 
     @Override
@@ -14,8 +13,8 @@ public class CreateMultiplyingMatrixB extends MatrixCreator{
         System.out.print("Enter Number of Rows: ");
         // checks if the number of rows is valid
         int noOfRowsInMatrixInB;
-        while (!((noOfRowsInMatrixInB = intSizeInt()) == noOfColumnsMatrixA)){
-            System.out.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + noOfColumnsMatrixA);
+        while (!((noOfRowsInMatrixInB = intSizeInt()) == getNoOfColumnsMatrixA())){
+            System.out.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + getNoOfRowsInMatrixA());
         }
 
         //input no of rows
