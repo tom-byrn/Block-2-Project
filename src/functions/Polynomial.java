@@ -9,20 +9,26 @@ import java.awt.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static menu.Colours.*;
+
 public class Polynomial {
 
     protected static void promptDegree() {
         Scanner scanner = new Scanner(System.in);
         boolean currentlySelecting = true;
         while (currentlySelecting) {
-            System.out.println("""
-                    Enter (1) to solve a first degree polynomial
-                    Enter (2) to solve a second degree polynomial
-                    Enter (3) to solve a third degree polynomial
-                    Enter (4) to solve a fourth degree polynomial
-                    
-                    """);
-            System.out.print("Enter a choice: ");
+            System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
+            System.out.println(CYAN + "║" + WHITE + "                  Polynomial Solver Menu                        " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+            System.out.println(CYAN + "║                                                                ║");
+            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to solve a first degree polynomial               " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to solve a second degree polynomial              " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to solve a third degree polynomial               " + CYAN + " ║" + RESET);
+            //System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) to solve a fourth degree polynomial              " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║                                                                ║");
+            System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+            System.out.print(CYAN + "Enter a choice: " + RESET);
+
 
 
             int selectorNum = scanner.nextInt();
@@ -171,6 +177,7 @@ public class Polynomial {
     protected static void fourthDegreePolynomial(double a, double b, double c, double d, double e) {
 
     }
+
 
 
 
