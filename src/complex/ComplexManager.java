@@ -1,6 +1,5 @@
 package complex;
 
-import functions.FunctionGraph;
 import functions.Functions;
 import menu.MenuManager;
 

@@ -1,3 +1,5 @@
+/*
+
 package functions;
 
 import org.jfree.chart.JFreeChart;
@@ -48,3 +50,5 @@ public class GraphTheme {
     }
 
 }
+
+*/

@@ -1,3 +1,5 @@
+/*
+
 package functions;
 
 import calculations.Calculations;
@@ -103,3 +105,4 @@ public class FunctionGraph extends Functions {
     }
 
 }
+*/

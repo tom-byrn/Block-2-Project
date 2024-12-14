@@ -13,15 +13,12 @@ public class PrimeFinder {
 
     public PrimeFinder(){}
 
-    //This class finds the Nth prime number through a few steps
-    //It firstly gives an upper bound estimate for the
-
     // Method to find the nth prime
     public long findNthPrime() {
 
         try {
-            if (n < 1) {
-                throw new IllegalArgumentException("n must be greater than 0");
+            if (n < 1 || n > 50000000) {
+                throw new IllegalArgumentException("Please enter a positive integer between 1 and 50,000,000");
             }
         }
         catch(IllegalArgumentException e){
@@ -62,13 +59,13 @@ public class PrimeFinder {
             nthPrime = primes.get(n - 1);
             return nthPrime;
         } else {
-            throw new RuntimeException("Estimated limit too low, increase limit");
+            throw new RuntimeException("Error with primes.size()");
         }
 
     }
 
-
     public long getNthPrime() {
         return nthPrime;
     }
+
 }

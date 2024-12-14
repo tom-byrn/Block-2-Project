@@ -66,8 +66,8 @@ public class FunctionsManager implements Start{
                         break;
                     }
                     case 6 -> {
-                        FunctionGraph fg = new FunctionGraph();
-                        fg.graphFunction();
+                        //FunctionGraph fg = new FunctionGraph();
+                        //fg.graphFunction();
                         break;
                     }
                     case 7 -> {
