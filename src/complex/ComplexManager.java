@@ -2,11 +2,17 @@ package complex;
 
 import functions.Functions;
 import menu.MenuManager;
+import menu.MenuText;
+import menu.Start;
 
 import java.util.Scanner;
 
-public class ComplexManager {
-        public static void main(String[] args) {
+import static menu.Colours.*;
+
+public class ComplexManager implements Start {
+        public static void start() {
+
+            MenuManager.clearScreen();
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Enter the real and imaginary parts of the first complex number:");
@@ -19,13 +25,23 @@ public class ComplexManager {
             double imaginary2 = scanner.nextDouble();
             Complex num2 = new Complex(real2, imaginary2);
 
-            System.out.println("Choose an operation: ");
-            System.out.println("1. Add");
-            System.out.println("2. Subtract");
-            System.out.println("3. Multiply");
-            System.out.println("4. Divide");
-            System.out.println("5. Polar Form of First Complex Number");
-            System.out.println("6. Polar Form of Second Complex Number");
+            MenuText.complexText();
+            System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
+            System.out.println(CYAN + "║" + WHITE + "             Welcome to Complex Number Operations               " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+            System.out.println(CYAN + "║                                                                ║");
+            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to Add                                            " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to Subtract                                       " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to Multiply                                       " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) to Divide                                         " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for Polar Form of First Complex Number            " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) for Polar Form of Second Complex Number           " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║                                                                ║");
+            System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║                                                                ║");
+            System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+            System.out.print(CYAN + "Enter a choice: " + RESET);
+
             int choice = scanner.nextInt();
 
             Complex result;
@@ -56,11 +72,17 @@ public class ComplexManager {
                 case 6: // Polar form of the second complex number
                     System.out.println(num2.toPolarForm());
                     break;
+                case 0: //Return to the menu
+                    MenuManager.clearScreen();
+                    MenuManager.callMenu();
+                    break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
 
             scanner.close();
+            MenuManager.clearScreen();
+            MenuManager.callMenu();
         }
     }
 

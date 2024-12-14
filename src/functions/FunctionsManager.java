@@ -1,6 +1,7 @@
 package functions;
 import calculations.Calculations;
 import menu.MenuManager;
+import menu.MenuText;
 import menu.Start;
 
 
@@ -8,6 +9,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+
+import static menu.Colours.*;
 
 public class FunctionsManager implements Start{
 
@@ -17,6 +20,9 @@ public class FunctionsManager implements Start{
     public static List<String> substitutedExpressions = new ArrayList<>();
 
     public static void start() {
+        MenuManager.clearScreen();
+
+        MenuText.functionsText();
         Scanner scanner = new Scanner(System.in);
 
         boolean currentlySelecting = true;
@@ -24,20 +30,23 @@ public class FunctionsManager implements Start{
             try {
 
                 // Prompt user to select a choice for functions
-                System.out.println("""
-                        Welcome to Functions 📈
-                        
-                        Enter (1) to evaluate a single-variate function
-                        Enter (2) to evaluate a multivariate function
-                        Enter (3) to compose a function
-                        Enter (4) for the bisection method
-                        Enter (5) for the secant method
-                        Enter (6) to graph a function
-                        Enter (7) to solve polynomials
-                        Enter (0) to return to the menu
-                        
-                        """);
-                System.out.print("Enter a choice: ");
+                // Prompt user to select a choice for functions
+                System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
+                System.out.println(CYAN + "║" + WHITE + "                     Welcome to Functions                       " + CYAN + "║" + RESET);
+                System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+                System.out.println(CYAN + "║                                                                ║");
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to evaluate a single-variate function            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to evaluate a multivariate function              " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to compose a function                            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) for the bisection method                         " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for the secant method                            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) to solve polynomials                             " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║                                                                ║");
+                System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║                                                                ║");
+                System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+                System.out.print(CYAN + "Enter a choice: " + RESET);
+
 
                 // Scanner object scans for user input
                 int selectorNum = scanner.nextInt();
@@ -65,18 +74,16 @@ public class FunctionsManager implements Start{
                         Functions.secantMethod();
                         break;
                     }
-                    case 6 -> {
+                    case 7 -> {
                         //FunctionGraph fg = new FunctionGraph();
                         //fg.graphFunction();
                         break;
                     }
-                    case 7 -> {
+                    case 6 -> {
                         Polynomial.promptDegree();
                         break;
                     }
                     case 0 -> {
-                        MenuManager.clearScreen();
-                        MenuManager.callMenu();
                         break;
                     }
                 }
@@ -85,6 +92,8 @@ public class FunctionsManager implements Start{
                 System.out.println("Please enter a valid number!\n");
                 scanner.nextLine(); // Clear invalid input from the scanner
             }
+            MenuManager.clearScreen();
+            MenuManager.callMenu();
         }
     }
 

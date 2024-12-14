@@ -118,17 +118,22 @@ public class Functions extends Algebra {
         double endRange = f.promptEndRange(startRange);
         double stepSize = f.greaterThan0("Enter step size: ");
 
-        // Header of display table
-        System.out.printf("%-10s%-10s\n", "x", "f(x)");
-        System.out.println("--------------------");
+        // Header of the table with enhanced style
+        System.out.println("╔════════════╦════════════╗");
+        System.out.printf("║ %-10s ║ %-10s ║\n", "x", "f(x)");
+        System.out.println("╠════════════╬════════════╣");
 
-        // subbing into the function and printing
+        // Subbing into the function and printing each row
         for (double i = startRange; i <= endRange; i += stepSize) {
             double result = subIn(functionInput, i);
-            System.out.printf("%-10.2f%-10.2f\n", i, result);
+            System.out.printf("║ %-10.2f ║ %-10.2f ║\n", i, result);
         }
+
+        // Closing the table
+        System.out.println("╚════════════╩════════════╝");
         System.out.println();
     }
+
 
     public static void multiVariateFunction() {
         Functions f = new Functions();

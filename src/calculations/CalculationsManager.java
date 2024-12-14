@@ -1,11 +1,17 @@
 package calculations;
 
 import java.util.Scanner;
+
+import menu.MenuManager;
+import menu.MenuText;
 import menu.Start;
+
+import static menu.Colours.*;
 
 public class CalculationsManager implements Start {
 
     public static void start()  {
+        MenuText.calculationsText(); //Prints "Calculations"
 
         String calculationInput; //Initialising calculation input string
         Scanner scanner = new Scanner(System.in); //Creating instance of the scanner class
@@ -15,7 +21,7 @@ public class CalculationsManager implements Start {
         boolean validInput = false;
         while(!validInput){
             try {
-                System.out.print("Please enter a sum: ");
+                System.out.print(CYAN + "Please enter a sum: ");
                 calculationInput = scanner.nextLine();
                 calculations = new Calculations(calculationInput); //Updating object with the functioning constructor
                 System.out.println("\n" + calculations.getOriginalInput() + " = " + calculations.getAnswer());
@@ -30,5 +36,8 @@ public class CalculationsManager implements Start {
                 System.out.println("\nInvalid sum!\n");
             }
         }
+        scanner.nextLine(); //Wait for user to hit enter before clearing screen
+        MenuManager.clearScreen();
+        MenuManager.callMenu();
     }
 }

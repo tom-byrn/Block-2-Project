@@ -2,10 +2,13 @@ package Factors;
 
 import functions.Functions;
 import menu.MenuManager;
+import menu.MenuText;
 import menu.Start;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import static menu.Colours.*;
 
 public class FactorManager implements Start {
 
@@ -13,19 +16,26 @@ public class FactorManager implements Start {
 
     public static void start() {
 
+        MenuManager.clearScreen();
+
         boolean currentlySelecting = true;
         while (currentlySelecting) {
             try {
 
+                MenuText.calculatorText(); //Show ASCII art text for calculator
                 // Prompt user to select a choice for functions
-                System.out.println("""
-                        Welcome to Functions 📈
-                        
-                        Enter (1) to find the factors of a number
-                        Enter (2) to find prime numbers
-                        
-                        """);
-                System.out.print("Enter a choice: ");
+                System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
+                System.out.println(CYAN + "║" + WHITE + "                 Welcome to Factors & Primes                    " + CYAN + "║" + RESET);
+                System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+                System.out.println(CYAN + "║                                                                ║");
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to find the factors of a number                  " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to find prime numbers                            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║                                                                ║");
+                System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║                                                                ║");
+                System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+                System.out.print(CYAN + "Enter a choice: " + RESET);
+
 
                 // Scanner object scans for user input
                 int selectorNum = scanner.nextInt();
@@ -42,6 +52,12 @@ public class FactorManager implements Start {
                     case 2 -> {
                         currentlySelecting = false;
                         FactorManager.primePrompt();
+                        break;
+                    }
+                    case 0 -> {
+                        currentlySelecting = false;
+                        MenuManager.clearScreen();
+                        MenuManager.callMenu();
                         break;
                     }
 

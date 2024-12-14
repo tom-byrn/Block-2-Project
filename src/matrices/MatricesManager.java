@@ -1,28 +1,39 @@
 package matrices;
 
 
+import menu.MenuText;
 import menu.Start;
 
 // Class imports
 import static matrices.NumberChecker.*;
+import static menu.Colours.*;
 
 public class MatricesManager implements Start {
 
     public static void start() {
 
+        MenuText.matricesText();
         // select function using a text block
-        System.out.println(
-                """
-                        Enter (1) for Addition
-                        Enter (2) for Subtraction
-                        Enter (3) for Multiplication
-                        Enter (4) for Transpose
-                        Enter (5) for Power
-                        Enter (6) for LU Factorisation
-                        Enter (7) for det(A)
-                        Enter (8) for Dominant Eigenvalues
-                        Enter (9) to  Solve Simultaneous Equations
-                        """);
+        System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + WHITE + "                     Matrix Operations Menu                     " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║                                                                ║");
+        System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) for Addition                                     " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) for Subtraction                                  " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) for Multiplication                               " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) for Transpose                                    " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for Power                                        " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) for LU Factorisation                             " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (7) for det(A)                                       " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (8) for Dominant Eigenvalues                        " + CYAN + "  ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (9) to Solve Simultaneous Equations                 " + CYAN + "  ║" + RESET);
+        System.out.println(CYAN + "║                                                                ║");
+        System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║                                                                ║");
+        System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.print(CYAN + "Enter a choice: " + RESET);
+
+
 
         // checking is a valid function selected
         byte function;

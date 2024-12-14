@@ -119,7 +119,6 @@ public class MenuManager {
 
     public static void clearScreen() {
         Scanner scanner = new Scanner(System.in);
-        scanner.nextLine();
         try {
             if (System.getProperty("os.name").contains("Windows")) {
                 // For Windows

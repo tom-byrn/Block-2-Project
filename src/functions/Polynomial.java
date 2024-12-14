@@ -35,7 +35,7 @@ public class Polynomial {
                         System.out.print("For ax + b = 0, please enter a values for a and b separated by spaces (e.g. 10 5):  ");
                         double a = scanner.nextDouble();
                         double b = scanner.nextDouble();
-                        firstDegreePolynomial(a, b);
+                        System.out.printf("%nRoot: %f", firstDegreePolynomial(a, b));
                         currentlySelecting = false;
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter valid double values!");
@@ -49,7 +49,8 @@ public class Polynomial {
                         double a = scanner.nextDouble();
                         double b = scanner.nextDouble();
                         double c = scanner.nextDouble();
-                        secondDegreePolynomial(a, b, c);
+                        if(a == 0){firstDegreePolynomial(b, c);}
+                        else{secondDegreePolynomial(a, b, c);}
                         currentlySelecting = false;
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter valid double values!");
@@ -64,7 +65,8 @@ public class Polynomial {
                         double b = scanner.nextDouble();
                         double c = scanner.nextDouble();
                         double d = scanner.nextDouble();
-                        thirdDegreePolynomial(a, b, c, d);
+                        if(a == 0){secondDegreePolynomial(b, c, d);}
+                        else{thirdDegreePolynomial(a, b, c, d);}
                         currentlySelecting = false;
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter valid double values!");
@@ -92,13 +94,14 @@ public class Polynomial {
         }
     }
 
-    protected static void firstDegreePolynomial(double a, double b){
+    //Basic formula to find a single root
+    protected static double firstDegreePolynomial(double a, double b){
         double root = - b / a;
         System.out.printf("%nRoot: %f", root);
-        MenuManager.clearScreen();
-        MenuManager.callMenu();
+        return root;
     }
 
+    //The minus b formula to find roots of a quadratic
     protected static void secondDegreePolynomial(double a, double b, double c){
         double discriminant = (b*b - 4*a*c);
         if(discriminant < 0){
@@ -116,12 +119,60 @@ public class Polynomial {
         MenuManager.callMenu();
     }
 
-    protected static void thirdDegreePolynomial(double a, double b, double c, double d){
+    //Cardano's method for finding the roots of a cubic equation https://brilliant.org/wiki/cardano-method/
+    protected static void thirdDegreePolynomial(double a, double b, double c, double d) {
+        // Normalize the polynomial
+        if (a != 1) {
+            b /= a;
+            c /= a;
+            d /= a;
+            a = 1;
+        }
+
+        // Compute p and q
+        double p = (3 * a * c - b * b) / (3 * a * a);
+        double q = (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
+
+        // Compute the discriminant
+        double discriminant = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
+
+        // Shift for depressed cubic
+        double shift = -b / (3 * a);
+
+        if (discriminant > 0) {
+            // One real root, two complex conjugate roots
+            double u = Math.cbrt(-q / 2 + Math.sqrt(discriminant));
+            double v = Math.cbrt(-q / 2 - Math.sqrt(discriminant));
+
+            double realRoot = u + v + shift;
+            System.out.printf("%nOne Real Root: %f%n", realRoot);
+        } else if (Math.abs(discriminant) < 1e-6) {
+            // All roots real, at least two are equal
+            double u = Math.cbrt(-q / 2);
+            double doubleRoot = 2 * u + shift;
+            double singleRoot = -u + shift;
+            System.out.printf("%nDouble Root: %f%nSingle Root: %f%n", doubleRoot, singleRoot);
+        } else {
+            // All roots real and distinct
+            double r = Math.sqrt(-Math.pow(p / 3, 3));
+            double phi = Math.acos(-q / (2 * r));
+            double root1 = 2 * Math.cbrt(r) * Math.cos(phi / 3) + shift;
+            double root2 = 2 * Math.cbrt(r) * Math.cos((phi + 2 * Math.PI) / 3) + shift;
+            double root3 = 2 * Math.cbrt(r) * Math.cos((phi + 4 * Math.PI) / 3) + shift;
+
+            System.out.printf("%nRoots: %f, %f, %f%n", root1, root2, root3);
+        }
+
+        MenuManager.clearScreen();
+        MenuManager.callMenu();
+    }
+
+    //Ferrari's method for solving fourth degree polynomials https://encyclopediaofmath.org/wiki/Ferrari_method
+    protected static void fourthDegreePolynomial(double a, double b, double c, double d, double e) {
 
     }
 
-    protected static void fourthDegreePolynomial(double a, double b, double c, double d, double e){
 
-    }
+
 
 }
