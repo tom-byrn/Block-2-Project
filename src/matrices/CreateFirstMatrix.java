@@ -49,12 +49,12 @@ public class CreateFirstMatrix extends Matrix {
     @Override
     public void matrixChecker(double[][] matrixFirst) {
         do {
-            checker = super.YorN(matrixFirst);
+            setChecker( super.YorN(matrixFirst));
 
-            if(checker == 'N' || checker == 'n') {
+            if(getChecker() == 'N' || getChecker() == 'n') {
                 createMatrixAndIncludeSize();
             }
-        }while (checker == 'N' || checker == 'n');
+        }while (getChecker() == 'N' || getChecker() == 'n');
     }
 
 }

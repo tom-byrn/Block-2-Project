@@ -1,6 +1,6 @@
 package matrices;
 
-public class TransposeOfAMatrix extends PrintMatrix {
+public class TransposeOfAMatrix implements PrintMatrixInterface {
 
     protected static void transposeStart(){
         Matrix matrixFirstCreator = new CreateFirstMatrix();
@@ -8,7 +8,7 @@ public class TransposeOfAMatrix extends PrintMatrix {
 
         double[][] matrixFinal = transpose(matrixA);
 
-        printMatrix(matrixFinal);
+        PrintMatrixInterface.printMatrix(matrixFinal);
     }
     protected static double[][] transpose(double[][]matrixA){
 

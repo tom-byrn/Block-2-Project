@@ -3,17 +3,17 @@ package matrices;
 import java.util.Scanner;
 
 
-public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterface {
+public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixInterface {
     
     //Store matrix size
     private static int noOfRowsInMatrixA;
     private static int noOfColumnsMatrixA;
 
-    public static int getNoOfColumnsMatrixA() {
+    protected static int getNoOfColumnsMatrixA() {
         return noOfColumnsMatrixA;
     }
 
-    public static int getNoOfRowsInMatrixA() {
+    protected static int getNoOfRowsInMatrixA() {
         return noOfRowsInMatrixA;
     }
 
@@ -21,7 +21,7 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
         if(noOfColumnsMatrixA > 0) {
             Matrix.noOfColumnsMatrixA = noOfColumnsMatrixA;
         }else{
-            System.err.println("Error please enter a number between 1-2147483647: ");
+            System.err.print("Error please enter a number between 1-2147483647: ");
             throw new IllegalArgumentException();
         }
     }
@@ -30,14 +30,38 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
         if(noOfRowsInMatrixA > 0) {
             Matrix.noOfRowsInMatrixA = noOfRowsInMatrixA;
         }else{
-            System.err.println("Error please enter a number between 1-2147483647: ");
+            System.err.print("Error please enter a number between 1-2147483647: ");
             throw new IllegalArgumentException();
         }
     }
 
-    protected static char checker;
+
+
+    private static char checker;
+
+    protected static char getChecker() {
+        return checker;
+    }
+
+    protected static void setChecker(char checker) {
+        Matrix.checker = checker;
+    }
+
+
+
     private double[][] matrixOne;
-    
+
+    // getters and setters for the matrix
+    protected double[][] getMatrixOne() {
+        return matrixOne;
+    }
+
+    protected void setMatrixOne(double[][] matrixOne) {
+        this.matrixOne = matrixOne;
+    }
+
+
+
     @Override
     // input the size of the matrix (no of rows and coloms)
     public abstract double[][] createMatrixAndIncludeSize();
@@ -48,7 +72,7 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
 
     @Override
     //Used to prevent errors e.g. someone entering 2 numbers in a row in a 3*3 matrix
-    public double getNumberRowCounterInMatrix(String rowListWithSpace, int positionCounter) {
+    public double getNumberInMatrix(String rowListWithSpace, int positionCounter) {
         double numberRowCounterInMatrix;
         // Ensures there is a number in each coloum or enters zero
         try{
@@ -65,7 +89,7 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
     @Override
     //Used to ensure Matrix entered is correct
     public char YorN(double[][]matrixToBeChecked){
-        printMatrix(matrixToBeChecked);
+        PrintMatrixInterface.printMatrix(matrixToBeChecked);
 
         System.out.print("Is matrix correct Y/N: ");
 
@@ -80,7 +104,7 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
     public double[][] createMatrixNoSize(int noOfRowsInMatrixA, int noOfColumnsMatrixA) {
 
         //Create a 2D array or Matrix
-        matrixOne = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
+        double[][]matrixCreated = new double[noOfRowsInMatrixA][noOfColumnsMatrixA];
 
         // using scanner to find the numbers
         Scanner input = new Scanner(System.in);
@@ -97,8 +121,8 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
             // iterate through the columns in each row and adding them to the matrix
             for(positionCounter = 0; positionCounter< noOfColumnsMatrixA; positionCounter++){
 
-                double numberRowCounterInMatrix = getNumberRowCounterInMatrix(rowListWithSpace, positionCounter);
-                matrixOne[rowCounter][positionCounter] = numberRowCounterInMatrix;
+                double numberRowCounterInMatrix = getNumberInMatrix(rowListWithSpace, positionCounter);
+                matrixCreated[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
 
             // for printing out next row before you enter each row
@@ -106,17 +130,7 @@ public abstract class Matrix extends PrintMatrix implements CreatingMatrixInterf
                 System.out.print("Enter next row:\t\t");
             }
         }
-        setMatrixOne(matrixOne);
+        setMatrixOne(matrixCreated);
         return getMatrixOne();
-    }
-
-
-    // getters and setters for the matrix
-    protected double[][] getMatrixOne() {
-        return matrixOne;
-    }
-
-    protected void setMatrixOne(double[][] matrixOne) {
-        this.matrixOne = matrixOne;
     }
 }

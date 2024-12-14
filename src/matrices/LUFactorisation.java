@@ -1,7 +1,7 @@
 package matrices;
 
 // LU = A
-public class LUFactorisation extends PrintMatrix{
+public class LUFactorisation implements PrintMatrixInterface {
 
     private static double[][] lowerTriangularMatrix;
     private static double[][] upperTriangularMatrix;
@@ -83,10 +83,10 @@ public class LUFactorisation extends PrintMatrix{
 
             // If LU decomposition is successful, print the L and U matrices
             System.out.println("Lower Triangular Matrix (L):");
-            printMatrix(lowerTriangularMatrix);
+            PrintMatrixInterface.printMatrix(lowerTriangularMatrix);
 
             System.out.println("\nUpper Triangular Matrix (U):");
-            printMatrix(upperTriangularMatrix);
+            PrintMatrixInterface.printMatrix(upperTriangularMatrix);
         } else {
             System.out.println("LU Decomposition failed.");
         }

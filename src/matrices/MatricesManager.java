@@ -3,8 +3,6 @@ package matrices;
 
 import menu.Start;
 
-import java.util.Arrays;
-
 // Class imports
 import static matrices.NumberChecker.*;
 

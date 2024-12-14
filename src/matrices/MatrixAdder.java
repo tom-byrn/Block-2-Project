@@ -3,13 +3,13 @@ package matrices;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class MatrixAdder extends PrintMatrix{
+public class MatrixAdder implements PrintMatrixInterface {
 
     //Initilize matrices
     //creates a 2D matrix
     private static double[][]matrixA;
     private static double[][]matrixB;
-    private static double[][] matrixFinal;
+    private static double[][]matrixFinal;
 
 
     //Used to add 2 matrixs
@@ -27,7 +27,7 @@ public class MatrixAdder extends PrintMatrix{
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = matrixA[matrixRowAdder][matrixColoumAdder] + matrixB[matrixRowAdder][matrixColoumAdder];
             }
         }
-        printMatrix(matrixFinal);
+        PrintMatrixInterface.printMatrix(matrixFinal);
     }
 
     //Used to subtract 2 matrixs
@@ -48,7 +48,7 @@ public class MatrixAdder extends PrintMatrix{
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        printMatrix(matrixFinal);
+        PrintMatrixInterface.printMatrix(matrixFinal);
     }
 
 

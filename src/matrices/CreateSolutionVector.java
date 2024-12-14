@@ -27,11 +27,11 @@ public class CreateSolutionVector extends Matrix {
     @Override
     public void matrixChecker(double[][] vectorSolution) {
         do {
-            checker = super.YorN(vectorSolution);
+            setChecker(super.YorN(vectorSolution));
 
-            if(checker == 'N' || checker == 'n') {
+            if(getChecker() == 'N' || getChecker() == 'n') {
                 createMatrixAndIncludeSize();
             }
-        }while (checker == 'N' || checker == 'n');
+        }while (getChecker() == 'N' || getChecker() == 'n');
     }
 }

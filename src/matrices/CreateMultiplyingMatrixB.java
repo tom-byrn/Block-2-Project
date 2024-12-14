@@ -1,31 +1,75 @@
 package matrices;
 
 import static matrices.NumberChecker.intSizeInt;
-import static matrices.MatrixMultiplication.noOfColumnsInMatrixInB;
-
 public class CreateMultiplyingMatrixB extends Matrix {
 
+    private static int noOfColumnsInMatrixInB;
+
+    protected static int getNoOfColumnsInMatrixInB() {
+        return noOfColumnsInMatrixInB;
+    }
+
+    protected static void setNoOfColumnsInMatrixInB(int noOfColumnsInMatrixInB) {
+        if(noOfColumnsInMatrixInB > 0) {
+            CreateMultiplyingMatrixB.noOfColumnsInMatrixInB = noOfColumnsInMatrixInB;
+        }else{
+            System.err.print("Error please enter a number between 1-2147483647: ");
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static int noOfRowsInMatrixInB;
+
+    protected static int getNoOfRowsInMatrixInB() {
+        return noOfRowsInMatrixInB;
+    }
+
+    protected static void setNoOfRowsInMatrixInB(int noOfRowsInMatrixInB) {
+        if(noOfRowsInMatrixInB > 0) {
+            CreateMultiplyingMatrixB.noOfRowsInMatrixInB = noOfRowsInMatrixInB;
+        }else{
+            System.err.print("Error please enter a number between 1-2147483647: ");
+            throw new IllegalArgumentException();
+        }
+    }
 
     @Override
     public double[][] createMatrixAndIncludeSize() {
 
         //input no of rows
         System.out.print("Enter Number of Rows: ");
+
         // checks if the number of rows is valid
-        int noOfRowsInMatrixInB;
-        while (!((noOfRowsInMatrixInB = intSizeInt()) == getNoOfColumnsMatrixA())){
-            System.out.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + getNoOfRowsInMatrixA());
+        boolean check = true;
+        while(check) {
+            try {
+                setNoOfRowsInMatrixInB(intSizeInt());
+                if(getNoOfRowsInMatrixInB() != getNoOfColumnsMatrixA()){
+                    System.err.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + getNoOfRowsInMatrixA());
+                    throw new IllegalArgumentException();
+                }
+                check = false;
+            } catch (IllegalArgumentException ignored) {
+
+            }
         }
 
         //input no of rows
         System.out.print("Enter Number of Columns: ");
-        // checks if the number of rows is valid
-        while ((noOfColumnsInMatrixInB = intSizeInt()) == 0){
-            System.out.print("Error please enter a number between 1-2147483647: ");
+
+        // checks if the number of colums is valid
+        check = true;
+        while(check) {
+            try {
+                setNoOfColumnsInMatrixInB(intSizeInt());
+                check = false;
+            } catch (IllegalArgumentException ignored) {
+
+            }
         }
 
         // Call the super method to create the matrix with the new inputted size
-        double[][] matrixFirst = super.createMatrixNoSize(noOfRowsInMatrixInB,noOfColumnsInMatrixInB);
+        double[][] matrixFirst = super.createMatrixNoSize(getNoOfRowsInMatrixInB(),getNoOfColumnsInMatrixInB());
 
 
         //Used for ensuring correct matrix
@@ -37,11 +81,11 @@ public class CreateMultiplyingMatrixB extends Matrix {
     @Override
     public void matrixChecker(double[][] matrixFirst) {
         do {
-            checker = super.YorN(matrixFirst);
+            setChecker(super.YorN(matrixFirst));
 
-            if(checker == 'N' || checker == 'n') {
+            if(getChecker() == 'N' || getChecker() == 'n') {
                 createMatrixAndIncludeSize();
             }
-        }while (checker == 'N' || checker == 'n');
+        }while (getChecker() == 'N' || getChecker() == 'n');
     }
 }

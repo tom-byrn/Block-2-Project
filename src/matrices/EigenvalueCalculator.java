@@ -2,7 +2,7 @@ package matrices;
 
 import static matrices.MatrixMultiplication.multiplication;
 
-public class EigenvalueCalculator extends PrintMatrix {
+public class EigenvalueCalculator implements PrintMatrixInterface {
 
     private static int noOfRowsInVector;
     private static void powerIteration(double[][] origialMatrix, int noOfIterations) {
@@ -39,7 +39,7 @@ public class EigenvalueCalculator extends PrintMatrix {
 
         // Print statements
         System.out.println("The Dominant Eigenvalue is: " + currentEigenvalue + "\n\nAnd it's corresponding Eigenvectors are: ");
-        printMatrix(eigenVectorMatrix);
+        PrintMatrixInterface.printMatrix(eigenVectorMatrix);
     }
 
     //this normilizes the vector

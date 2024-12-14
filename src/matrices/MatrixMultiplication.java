@@ -1,7 +1,6 @@
 package matrices;
 
-public class MatrixMultiplication extends PrintMatrix{
-    protected static int noOfColumnsInMatrixInB;
+public class MatrixMultiplication implements PrintMatrixInterface {
 
     protected static void multiplicationStart(){
         //Calls matrixFirstCreator and sets matrixA to answer
@@ -16,7 +15,7 @@ public class MatrixMultiplication extends PrintMatrix{
 
         double[][]matrixFinal = multiplication(matrixA,matrixB);
 
-        printMatrix(matrixFinal);
+        PrintMatrixInterface.printMatrix(matrixFinal);
     }
 
     //Method for multiplying matrixes
