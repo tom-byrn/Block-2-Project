@@ -41,7 +41,7 @@ public class Polynomial {
                         System.out.print("For ax + b = 0, please enter a values for a and b separated by spaces (e.g. 10 5):  ");
                         double a = scanner.nextDouble();
                         double b = scanner.nextDouble();
-                        System.out.printf("%nRoot: %f", firstDegreePolynomial(a, b));
+                        //System.out.printf("%nRoot: %f", firstDegreePolynomial(a, b));
                         currentlySelecting = false;
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter valid double values!");
@@ -55,8 +55,8 @@ public class Polynomial {
                         double a = scanner.nextDouble();
                         double b = scanner.nextDouble();
                         double c = scanner.nextDouble();
-                        if(a == 0){firstDegreePolynomial(b, c);}
-                        else{secondDegreePolynomial(a, b, c);}
+                        //if(a == 0){firstDegreePolynomial(b, c);}
+                        //else{secondDegreePolynomial(a, b, c);}
                         currentlySelecting = false;
                     } catch (InputMismatchException e) {
                         System.out.println("Please enter valid double values!");
@@ -101,28 +101,27 @@ public class Polynomial {
     }
 
     //Basic formula to find a single root
-    protected static double firstDegreePolynomial(double a, double b){
+    protected String firstDegreePolynomial(double a, double b){
         double root = - b / a;
-        System.out.printf("%nRoot: %f", root);
-        return root;
+        return String.valueOf(root);
     }
 
     //The minus b formula to find roots of a quadratic
-    protected static void secondDegreePolynomial(double a, double b, double c){
+    protected static String[] secondDegreePolynomial(double a, double b, double c){
+        String roots[] = new String[2];
         double discriminant = (b*b - 4*a*c);
         if(discriminant < 0){
             boolean complex = true;
             discriminant = -discriminant;
-            String complexRoot = String.format("%f ± %fi", -b, Math.sqrt(discriminant));
-            System.out.printf("%nRoots: %s", complexRoot);
+            roots[0] = String.format("%f + %fi", -b, Math.sqrt(discriminant));
+            roots[1] = String.format("%f - %fi", -b, Math.sqrt(discriminant));
         } else {
             boolean complex = false;
             double root1 = ((-b + Math.sqrt(discriminant)) / 2*a);
             double root2 = ((-b - Math.sqrt(discriminant)) / 2*a);
             System.out.printf("%nRoots: %f, %f", root1, root2);
         }
-        MenuManager.clearScreen();
-        MenuManager.callMenu();
+        return roots;
     }
 
     //Cardano's method for finding the roots of a cubic equation https://brilliant.org/wiki/cardano-method/

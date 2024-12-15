@@ -119,18 +119,19 @@ public class Functions  {
         double stepSize = f.greaterThan0("Enter step size: ");
 
         // Header of the table with enhanced style
-        System.out.println("╔════════════╦════════════╗");
-        System.out.printf("║ %-10s ║ %-10s ║\n", "x", "f(x)");
-        System.out.println("╠════════════╬════════════╣");
+        System.out.println("╔══════════════════════╦══════════════════════╗");
+        System.out.printf("║ %-20s ║ %-20s ║\n", "x", "f(x)");
+        System.out.println("╠══════════════════════╬══════════════════════╣");
 
         // Subbing into the function and printing each row
         for (double i = startRange; i <= endRange; i += stepSize) {
             double result = subIn(functionInput, i);
-            System.out.printf("║ %-10.2f ║ %-10.2f ║\n", i, result);
+            System.out.printf("║ %-20.10f ║ %-20.10f ║\n", i, result);
         }
 
         // Closing the table
-        System.out.println("╚════════════╩════════════╝");
+        System.out.println("╚══════════════════════╩══════════════════════╝");
+
         System.out.println();
         scanner.nextLine();
     }

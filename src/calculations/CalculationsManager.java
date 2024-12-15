@@ -11,6 +11,7 @@ import static menu.Colours.*;
 public class CalculationsManager implements Start {
 
     public static void start()  {
+        MenuManager.clearScreen();
         MenuText.calculationsText(); //Prints "Calculations"
 
         String calculationInput; //Initialising calculation input string
@@ -21,7 +22,7 @@ public class CalculationsManager implements Start {
         boolean validInput = false;
         while(!validInput){
             try {
-                System.out.print(CYAN + "Please enter a sum: ");
+                System.out.print("Please enter a sum: ");
                 calculationInput = scanner.nextLine();
                 SyntaxChecker sc = new SyntaxChecker(calculationInput); //Creating SyntaxChecker object to check for syntax errors
                 sc.validSyntax(); //Check for syntax errors
@@ -30,15 +31,23 @@ public class CalculationsManager implements Start {
                 validInput = true;
             } catch (IllegalArgumentException e) { //Custom exception messages as defined in SyntaxChecker, most specific exception gets caught first
                 System.out.println("\n " + e.getMessage() + "\n");
+                scanner.nextLine();
+                MenuManager.clearScreen();
                 CalculationsManager.start();
             } catch (ArithmeticException e) {
                 System.out.println("\nInvalid sum: Division by zero is not allowed!\n");
+                scanner.nextLine();
+                MenuManager.clearScreen();
                 CalculationsManager.start();
             } catch (IllegalStateException e) {
                 System.out.println("\nInvalid sum: Improper expression format!\n");
+                scanner.nextLine();
+                MenuManager.clearScreen();
                 CalculationsManager.start();
             } catch (Exception e) {
                 System.out.println("\nInvalid sum!\n"); //Message for default exception
+                scanner.nextLine();
+                MenuManager.clearScreen();
                 CalculationsManager.start();
             }
         }
