@@ -4,6 +4,7 @@ import Factors.FactorManager;
 import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import calculations.ConstantAdder;
+import complex.ComplexManager;
 import matrices.MatricesManager;
 import functions.*;
 import settings.SettingsManager;
@@ -16,6 +17,9 @@ import static menu.Colours.*;
 public class MenuManager {
 
     public static void callMenu()  {
+
+        MenuText.calculatorText();
+
         // Initialising objects
         Scanner scanner = new Scanner(System.in);
 
@@ -77,8 +81,7 @@ public class MenuManager {
                     }
                     case 5 -> {
                         currentlySelecting = false;
-                        //ComplexManager.
-                        MenuManager.clearScreen();
+                        ComplexManager.start();
                         break;
                     }
                     case 6 -> {

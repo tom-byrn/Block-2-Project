@@ -13,29 +13,29 @@ public class ComplexManager implements Start {
         public static void start() {
 
             MenuManager.clearScreen();
+            MenuText.complexText();
             Scanner scanner = new Scanner(System.in);
 
-            System.out.println("Enter the real and imaginary parts of the first complex number:");
+            System.out.print(CYAN + "Enter the real and imaginary parts of the first complex number:");
             double real1 = scanner.nextDouble();
             double imaginary1 = scanner.nextDouble();
             Complex num1 = new Complex(real1, imaginary1);
 
-            System.out.println("Enter the real and imaginary parts of the second complex number:");
+            System.out.print(CYAN + "Enter the real and imaginary parts of the second complex number:");
             double real2 = scanner.nextDouble();
             double imaginary2 = scanner.nextDouble();
             Complex num2 = new Complex(real2, imaginary2);
 
-            MenuText.complexText();
             System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
             System.out.println(CYAN + "║" + WHITE + "             Welcome to Complex Number Operations               " + CYAN + "║" + RESET);
             System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
             System.out.println(CYAN + "║                                                                ║");
-            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to Add                                            " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to Subtract                                       " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to Multiply                                       " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) to Divide                                         " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for Polar Form of First Complex Number            " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) for Polar Form of Second Complex Number           " + CYAN + " ║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to Add                                            " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to Subtract                                       " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to Multiply                                       " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) to Divide                                         " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for Polar Form of First Complex Number            " + CYAN + "║" + RESET);
+            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) for Polar Form of Second Complex Number           " + CYAN + "║" + RESET);
             System.out.println(CYAN + "║                                                                ║");
             System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
             System.out.println(CYAN + "║                                                                ║");

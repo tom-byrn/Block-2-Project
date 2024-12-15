@@ -17,7 +17,7 @@ public class MatricesManager implements Start {
     public static void start() {
         MenuManager.clearScreen();
         Scanner scanner = new Scanner(System.in);
-        boolean currentlySelecting = false;
+        boolean currentlySelecting = true;
         while (currentlySelecting) {
 
             try {
@@ -46,47 +46,57 @@ public class MatricesManager implements Start {
 
 
                 // checking is a valid function selected
-                byte function;
-                while ((function = byteSizeInt()) < 1 || function > 9) {
-                    System.out.print("Error please enter a number between 1-9: ");
-                }
+                int selectorNum = scanner.nextInt();
 
 
                 // Checks which function is selected
-                if (function == 1) {
-                    //Calls Addition method
-                    MatrixAdder.addition();
+                switch (selectorNum) {
+                    case 1:
+                        // Calls Addition method
+                        MatrixAdder.addition();
+                        break;
+                    case 2:
+                        // Calls Subtraction method
+                        MatrixAdder.subtraction();
+                        break;
+                    case 3:
+                        // Calls Matrix Multiplication method
+                        MatrixMultiplication.multiplicationStart();
+                        break;
+                    case 4:
+                        // Calls Transpose of a Matrix method
+                        TransposeOfAMatrix.transposeStart();
+                        break;
+                    case 5:
+                        // Calls Matrix Power calculation method
+                        MatrixPower.powerCalculationStart();
+                        break;
+                    case 6:
+                        // Calls LU Factorisation method
+                        LUFactorisation.factoriser();
+                        break;
+                    case 7:
+                        // Calls Determinant calculation method
+                        Determinant.getDeterminantOfAMatrix();
+                        break;
+                    case 8:
+                        // Calls Dominant Eigenvalue calculation method
+                        EigenvalueCalculator.getDominantEigenvalue();
+                        break;
+                    case 9:
+                        // Calls Solve Simulations Equations method
+                        SolveSimulationsEquations.solveEquation();
+                        break;
+                    case 0:
+                        // Returns to menu
+                        MenuManager.clearScreen();
+                        MenuManager.callMenu();
+                        break;
+                    default:
+                        System.out.println("Invalid function selected.");
+                        break;
                 }
 
-                if (function == 2) {
-                    MatrixAdder.subtraction();
-                }
-
-                if (function == 3) {
-                    MatrixMultiplication.multiplicationStart();
-                }
-
-                if (function == 4) {
-                    TransposeOfAMatrix.transposeStart();
-                }
-
-                if (function == 5) {
-                    MatrixPower.powerCalculationStart();
-                }
-
-                if (function == 6) {
-                    LUFactorisation.factoriser();
-                }
-
-                if (function == 7) {
-                    Determinant.getDeterminantOfAMatrix();
-                }
-                if (function == 8) {
-                    EigenvalueCalculator.getDominantEigenvalue();
-                }
-                if (function == 9) {
-                    SolveSimulationsEquations.solveEquation();
-                }
             } catch(InputMismatchException e){
                 System.out.println("Please enter a valid number!\n");
                 scanner.nextLine(); // Clear invalid input from the scanner

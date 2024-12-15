@@ -23,17 +23,23 @@ public class CalculationsManager implements Start {
             try {
                 System.out.print(CYAN + "Please enter a sum: ");
                 calculationInput = scanner.nextLine();
+                SyntaxChecker sc = new SyntaxChecker(calculationInput); //Creating SyntaxChecker object to check for syntax errors
+                sc.validSyntax(); //Check for syntax errors
                 calculations = new Calculations(calculationInput); //Updating object with the functioning constructor
                 System.out.println("\n" + calculations.getOriginalInput() + " = " + calculations.getAnswer());
                 validInput = true;
+            } catch (IllegalArgumentException e) { //Custom exception messages as defined in SyntaxChecker, most specific exception gets caught first
+                System.out.println("\n " + e.getMessage() + "\n");
+                CalculationsManager.start();
             } catch (ArithmeticException e) {
                 System.out.println("\nInvalid sum: Division by zero is not allowed!\n");
-            } catch (IllegalArgumentException e) {
-                System.out.println("\nInvalid sum: Unsupported operator or function!\n");
+                CalculationsManager.start();
             } catch (IllegalStateException e) {
                 System.out.println("\nInvalid sum: Improper expression format!\n");
+                CalculationsManager.start();
             } catch (Exception e) {
-                System.out.println("\nInvalid sum!\n");
+                System.out.println("\nInvalid sum!\n"); //Message for default exception
+                CalculationsManager.start();
             }
         }
         scanner.nextLine(); //Wait for user to hit enter before clearing screen

@@ -4,6 +4,7 @@ import functions.Functions;
 import menu.MenuManager;
 import menu.MenuText;
 import menu.Start;
+import processor.NumberFormatter;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -22,7 +23,7 @@ public class FactorManager implements Start {
         while (currentlySelecting) {
             try {
 
-                MenuText.calculatorText(); //Show ASCII art text for calculator
+                MenuText.factorsText(); //Show ASCII art text for factors
                 // Prompt user to select a choice for functions
                 System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
                 System.out.println(CYAN + "║" + WHITE + "                 Welcome to Factors & Primes                    " + CYAN + "║" + RESET);
@@ -76,22 +77,28 @@ public class FactorManager implements Start {
             System.out.print("Please enter the nth prime number you would like to find: ");
 
             try {
-                int n = scanner.nextInt(); // Read input
+                String number = scanner.nextLine(); // Read input
+                number = NumberFormatter.removeCommas(number);
+                int n = Integer.parseInt(number);
                 if (n > 0 && n <= 50000000) {
                     validInput = true; // Valid input, proceed
                     PrimeFinder primeFinder = new PrimeFinder(n);
                     primeFinder.findNthPrime();
-                    System.out.println("The nth prime number is: " + primeFinder.getNthPrime());
+                    System.out.println("The " + NumberFormatter.nthNumber(NumberFormatter.addCommas(String.valueOf(n))) + "th prime number is: " + NumberFormatter.addCommas(String.valueOf(primeFinder.getNthPrime())));
                 } else {
                     System.out.println("Please enter a positive integer between 1 and 50,000,000.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Please enter a valid integer.");
                 scanner.nextLine(); // Clear the invalid input from the buffer
+            } catch (IllegalArgumentException e) {
+                System.out.println("Please enter a valid integer.");
+                scanner.nextLine(); // Clear the invalid input from the buffer
             }
         }
 
         // Call the menu after user hits enter
+        scanner.nextLine();
         MenuManager.clearScreen();
         MenuManager.callMenu();
     }
@@ -108,7 +115,7 @@ public class FactorManager implements Start {
             try {
                 System.out.print("Please enter a number: ");
                 String num = scanner.nextLine();
-                num = num.replaceAll("\\D", ""); // Remove non-digit characters
+                num = NumberFormatter.removeCommas(num);
                 n = Long.parseLong(num);
                 f = new Factors(n);
                 validInput = true;
@@ -125,6 +132,7 @@ public class FactorManager implements Start {
         else{System.out.println(f.getFactors());}
 
         //Call the menu after user hits enter
+        scanner.nextLine();
         MenuManager.clearScreen();
         MenuManager.callMenu();
     }

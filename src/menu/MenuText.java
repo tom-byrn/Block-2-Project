@@ -1,11 +1,12 @@
 package menu;
 
 import static menu.Colours.BRIGHT_WHITE;
+import static menu.Colours.RESET;
 
 public class MenuText {
 
     public static void calculatorText(){
-        System.out.println(BRIGHT_WHITE + """
+        System.out.println(RESET + BRIGHT_WHITE + """
                    █████████            ████                      ████             █████                     \s
                   ███░░░░░███          ░░███                     ░░███            ░░███                      \s
                  ███     ░░░   ██████   ░███   ██████  █████ ████ ░███   ██████   ███████    ██████  ████████\s
@@ -18,7 +19,7 @@ public class MenuText {
     }
 
     public static void functionsText(){
-        System.out.println("""
+        System.out.println(RESET + BRIGHT_WHITE + """
                  ███████████                                 █████     ███                            \s
                 ░░███░░░░░░█                                ░░███     ░░░                             \s
                  ░███   █ ░  █████ ████ ████████    ██████  ███████   ████   ██████  ████████    █████\s
@@ -31,7 +32,7 @@ public class MenuText {
     }
 
     public static void matricesText(){
-        System.out.println("""
+        System.out.println(RESET + BRIGHT_WHITE + """
                  ██████   ██████            █████               ███                          \s
                 ░░██████ ██████            ░░███               ░░░                           \s
                  ░███░█████░███   ██████   ███████   ████████  ████   ██████   ██████   █████\s
@@ -44,7 +45,7 @@ public class MenuText {
     }
 
     public static void factorsText(){
-        System.out.println("""
+        System.out.println(RESET + BRIGHT_WHITE + """
                  ███████████                     █████                             \s
                 ░░███░░░░░░█                    ░░███                              \s
                  ░███   █ ░   ██████    ██████  ███████    ██████  ████████   █████\s
@@ -57,7 +58,7 @@ public class MenuText {
     }
 
     public static void complexText(){
-        System.out.println("""
+        System.out.println(RESET + BRIGHT_WHITE + """
                    █████████                                     ████                     \s
                   ███░░░░░███                                   ░░███                     \s
                  ███     ░░░   ██████  █████████████   ████████  ░███   ██████  █████ █████
@@ -73,7 +74,7 @@ public class MenuText {
     }
 
     public static void calculationsText(){
-        System.out.println("""
+        System.out.println(RESET + BRIGHT_WHITE + """
                    █████████            ████                      ████             █████     ███                            \s
                   ███░░░░░███          ░░███                     ░░███            ░░███     ░░░                             \s
                  ███     ░░░   ██████   ░███   ██████  █████ ████ ░███   ██████   ███████   ████   ██████  ████████    █████\s
