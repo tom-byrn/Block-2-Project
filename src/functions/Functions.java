@@ -1,6 +1,6 @@
 package functions;
 
-import algebra.Algebra;
+//import algebra.Algebra;
 import calculations.Calculations;
 import functions.FunctionsManager.*;
 import java.util.*;
@@ -9,7 +9,7 @@ import static functions.FunctionsManager.substitutedExpression;
 import static functions.FunctionsManager.substitution;
 
 
-public class Functions extends Algebra {
+public class Functions  {
     static Scanner scanner = new Scanner(System.in);
     String functionInput;
     double startRange;
