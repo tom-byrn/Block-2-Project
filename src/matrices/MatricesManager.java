@@ -102,5 +102,7 @@ public class MatricesManager implements Start {
                 scanner.nextLine(); // Clear invalid input from the scanner
             }
         }
+        MenuManager.clearScreen();
+        MatricesManager.start();
     }
 }
