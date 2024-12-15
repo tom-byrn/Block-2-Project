@@ -132,6 +132,7 @@ public class Functions  {
         // Closing the table
         System.out.println("╚════════════╩════════════╝");
         System.out.println();
+        scanner.nextLine();
     }
 
 
@@ -165,6 +166,7 @@ public class Functions  {
         }
         System.out.println(variablesInputted);
         System.out.printf("f(%s) = %.2f\n", variablesInputted, calculations.getAnswer());
+        scanner.nextLine();
     }
 
     public static void composeFunctions() {
@@ -184,6 +186,7 @@ public class Functions  {
 
         System.out.print("f(g(x)) = ");
         System.out.println(result);
+        scanner.nextLine();
     }
 
     public static void bisectionMethod() {
@@ -228,6 +231,7 @@ public class Functions  {
         }
         double root = (a+b) /2;
         System.out.printf("The root is approximately %.2f\n", root);
+        scanner.nextLine();
     }
 
     public static void secantMethod() {
@@ -253,6 +257,7 @@ public class Functions  {
             x1 = x2;
         }
         System.out.printf("The root is approximately %.2f\n", x2);
+        scanner.nextLine();
     }
 
     @Override //The toString method can be used for debugging e.g. print(f.toString)

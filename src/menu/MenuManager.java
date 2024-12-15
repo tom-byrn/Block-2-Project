@@ -104,8 +104,10 @@ public class MenuManager {
                     }
                     case 0 -> {
                         currentlySelecting = false;
-                        System.out.println("Goodbye!");
                         MenuManager.clearScreen();
+                        System.out.println("Goodbye!");
+                        scanner.nextLine();
+                        System.exit(0);
                         break;
                     }
                     default -> {

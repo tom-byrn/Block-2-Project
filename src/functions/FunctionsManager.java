@@ -93,7 +93,7 @@ public class FunctionsManager implements Start{
                 scanner.nextLine(); // Clear invalid input from the scanner
             }
             MenuManager.clearScreen();
-            MenuManager.callMenu();
+            FunctionsManager.start();
         }
     }
 
