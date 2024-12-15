@@ -113,7 +113,6 @@ public class AlgebraSimplifier {
     public static String handleMultiplicationAndDivision(String expression) {
         // Step 1: First handle division (e.g., 6x^2 / 2y => 3x^2 / y)
         expression = divideTerms(expression);
-
         // Step 2: Then handle multiplication (e.g., 3x^2 * 4x => 12x^3)
         expression = multiplyTerms(expression);
         return expression;
@@ -226,21 +225,34 @@ public class AlgebraSimplifier {
     //Divides terms in the expression and returns the updated expression.
     private static String divideTerms(String expression) {
         // Regex pattern to match division between terms, e.g., 6x^2 / 3x or 4x^3 / 2x^2
+        // Breakdown:
+        // ([+-]?\\d*\\.?\\d*)  -> matches the coefficient (optional sign and decimal part)
+        // ([a-zA-Z]*)          -> matches the variable part (like 'x', 'y', etc.)
+        // (\\^[-+]?\\d*)?      -> matches the exponent part (optional, like '^2' or '^3')
+        // /                    -> matches the division operator
+        // This pattern captures both sides of the division, including coefficient, variable, and exponent parts
         Pattern dividePattern = Pattern.compile("([+-]?\\d*\\.?\\d*)([a-zA-Z]*)(\\^[-+]?\\d*)?/([+-]?\\d*\\.?\\d*)([a-zA-Z]*)(\\^[-+]?\\d*)?");
-        Matcher matcher = dividePattern.matcher(expression);
+        Matcher matcher = dividePattern.matcher(expression); // Create a matcher object for the given expression
 
         // StringBuilder to store the result of the division
         StringBuilder result = new StringBuilder();
-        while (matcher.find()) {
-            // Extract coefficients and variables for both terms
-            double coef1 = matcher.group(1).isEmpty() ? 1 : Double.parseDouble(matcher.group(1));  // Default to 1 if no coefficient
-            double coef2 = matcher.group(4).isEmpty() ? 1 : Double.parseDouble(matcher.group(4));  // Default to 1 if no coefficient
-            String var1 = matcher.group(2);  // First variable
-            String var2 = matcher.group(5);  // Second variable
-            int exp1 = matcher.group(3) == null || matcher.group(3).isEmpty() ? 1 : Integer.parseInt(matcher.group(3).substring(1));  // Default to exponent 1
-            int exp2 = matcher.group(6) == null || matcher.group(6).isEmpty() ? 1 : Integer.parseInt(matcher.group(6).substring(1));  // Default to exponent 1
 
-            // If one of the terms has no variable, treat it as empty
+        // Loop through all matches found by the regex pattern
+        while (matcher.find()) {
+            // Extract the coefficient, variable, and exponent for both terms from the match groups
+            // If no coefficient is provided, assume it to be 1 (e.g., in 'x^2' the coefficient is implicitly 1)
+            double coef1 = matcher.group(1).isEmpty() ? 1 : Double.parseDouble(matcher.group(1)); // Coefficient of the first term
+            double coef2 = matcher.group(4).isEmpty() ? 1 : Double.parseDouble(matcher.group(4)); // Coefficient of the second term
+
+            String var1 = matcher.group(2);  // Variable part of the first term (e.g., 'x' in '6x')
+            String var2 = matcher.group(5);  // Variable part of the second term (e.g., 'x' in '3x')
+
+            // Exponent handling: If no exponent is given, assume it to be 1 (e.g., 'x' implies 'x^1')
+            // If an exponent is given, we strip the '^' and convert it to an integer.
+            int exp1 = matcher.group(3) == null || matcher.group(3).isEmpty() ? 1 : Integer.parseInt(matcher.group(3).substring(1));  // Exponent of the first term
+            int exp2 = matcher.group(6) == null || matcher.group(6).isEmpty() ? 1 : Integer.parseInt(matcher.group(6).substring(1));  // Exponent of the second term
+
+            // If a term has no variable part, treat it as an empty variable and set exponent to 0
             if (var1.isEmpty()) {
                 var1 = "";
                 exp1 = 0;
@@ -250,27 +262,32 @@ public class AlgebraSimplifier {
                 exp2 = 0;
             }
 
-            // Perform the division by dividing the coefficients and subtracting the exponents
-            double newCoef = coef1 / coef2;
-            int newExp = exp1 - exp2;
+            // Perform the division: divide coefficients and subtract exponents
+            double newCoef = coef1 / coef2;  // Coefficients division
+            int newExp = exp1 - exp2;        // Exponent subtraction
 
             // Replace the matched term with the result of the division
             if (newExp == 0) {
-                // If the exponent is 0, the term becomes a constant (e.g., x^0 -> 1), so we only append the coefficient.
+                // If the exponent becomes 0, the term simplifies to a constant (e.g., x^0 -> 1)
+                // In this case, only append the new coefficient as a constant.
                 matcher.appendReplacement(result, newCoef + "");
             } else {
-                // If the exponent is not 0, we append the coefficient, the variable, and the exponent.
-                // - If the new exponent is 1, we append the variable without the "^1" (just the variable name).
-                // - If the new exponent is -1, we append the "^-" to indicate the inverse (e.g., x^-1).
-                // - For any other exponent, we append "^" followed by the exponent value.
-                matcher.appendReplacement(result, newCoef +"x^" + newExp);
+                // If the exponent is not 0, the result will still have a variable part
+                // Special handling:
+                // - If the new exponent is 1, we just append the variable (no need to include ^1).
+                // - If the exponent is -1, append "^-" for the inverse (e.g., x^-1).
+                // - For any other exponent, append "^" followed by the exponent value.
+                matcher.appendReplacement(result, newCoef + var1 + var2 + (newExp == 1 ? "" : "^" + newExp));
             }
-
         }
+
+        // Append the remaining part of the expression after all matches have been processed
         matcher.appendTail(result);
 
+        // Return the final result as a string
         return result.toString();
     }
+
 
 
     //Ensures multiplication operators are inserted where missing in the expression.
@@ -282,10 +299,6 @@ public class AlgebraSimplifier {
 
         // Add a multiplication operator between variables and numbers, e.g., "x2" becomes "x*2"
         expression = expression.replaceAll("([a-zA-Z])(\\d)", "$1*$2");
-
-        // Treat isolated variables as "1" (e.g., "x" becomes "1x")
-        expression = expression.replaceAll("(?<!\\d)[a-zA-Z]", "1$0");
-
         return expression;
     }
 }
