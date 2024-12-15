@@ -1,7 +1,7 @@
 package algebra;
 
 import java.util.*;
-import java.util.regex.*;
+        import java.util.regex.*;
 
 public class AlgebraSimplifier {
 
@@ -120,45 +120,110 @@ public class AlgebraSimplifier {
     }
 
 
-    //Multiplies terms in the expression and returns the updated expression.
-
+    // This method processes the entire mathematical expression, identifying and handling multiplication and division
     private static String multiplyTerms(String expression) {
-        // Regex pattern to match multiplication between terms, e.g., 2x * 3x or 2x^2 * 3x^3
-        Pattern multiplyPattern = Pattern.compile("([+-]?\\d*\\.?\\d*)([a-zA-Z]+)(\\^[-+]?\\d*)?\\*([+-]?\\d*\\.?\\d*)([a-zA-Z]*)(\\^[-+]?\\d*)?");
-        Matcher matcher = multiplyPattern.matcher(expression);
+        // This regular expression splits the expression into individual terms while keeping the operators ('+' or '-')
+        String[] terms = expression.split("(?=[+/-])");
 
-        // StringBuilder to store the result of the multiplication
-        StringBuilder result = new StringBuilder();
-        while (matcher.find()) {
-            // Extract coefficients and variables for both terms
-            double coef1 = matcher.group(1).isEmpty() ? 1 : Double.parseDouble(matcher.group(1));  // Default to 1 if no coefficient
-            double coef2 = matcher.group(4).isEmpty() ? 1 : Double.parseDouble(matcher.group(4));  // Default to 1 if no coefficient
-            String var1 = matcher.group(2);  // First variable (e.g., "x")
-            String var2 = matcher.group(5);  // Second variable (e.g., "x")
-            int exp1 = matcher.group(3) == null ? 1 : Integer.parseInt(matcher.group(3).substring(1));  // Default to exponent 1
-            int exp2 = matcher.group(6) == null ? 1 : Integer.parseInt(matcher.group(6).substring(1));  // Default to exponent 1
+        // StringBuilder to accumulate the resulting expression after processing multiplication terms
+        StringBuilder resultExpression = new StringBuilder();
 
-            // If the second term has no variable, treat it as empty
-            if (var2.isEmpty()) {
-                var2 = "";
-                exp2 = 0;
+        // Iterate through each term in the expression
+        for (String term : terms) {
+            term = term.trim();  // Remove any leading or trailing whitespace for cleaner processing
+
+            // Check if the term contains multiplication ('*')
+            if (term.contains("*")) {
+                resultExpression.append(processMultiplication(term));  // Process the multiplication for this term
+            } else {
+                // If there's no multiplication, append the term as-is (with the sign if present)
+                resultExpression.append(term);
             }
-
-            // Multiply the coefficients and add the exponents
-            double newCoef = coef1 * coef2;
-            int newExp = exp1 + exp2;
-
-            // Replace the matched term with the result of the multiplication
-            matcher.appendReplacement(result, newCoef + var1 + (newExp == 1 ? "" : "^" + (newExp == -1 ? "-" : newExp)));
         }
-        matcher.appendTail(result);
 
-        return result.toString();
+        // Return the final expression after processing all terms and handling multiplication
+        return resultExpression.toString();
+    }
+
+    // This method processes multiplication of terms, combining like terms and handling coefficients and exponents
+    private static String processMultiplication(String term) {
+        // Regex pattern to match terms like '6x', '4y', '2x^2', '3x^3', etc.
+        // The pattern captures three parts:
+        // 1. The coefficient (optional) - could be a number or empty (default to 1 if not present)
+        // 2. The variable(s) - could be one or more variables (e.g., 'x', 'xy', 'xyz')
+        // 3. The exponent (optional) - could be a power (e.g., '^2', '^3') or absent (default to exponent 1)
+        Pattern multiplicationPattern = Pattern.compile("([+-]?\\d*\\.?\\d*)([a-zA-Z]+)(\\^[-+]?\\d*)?");
+        Matcher matcher = multiplicationPattern.matcher(term);  // Matcher to apply the regex to the current term
+
+        // Map to store the accumulated exponents of each variable (e.g., 'x^3', 'y^2')
+        Map<String, Integer> variableExponentMap = new HashMap<>();
+        double totalCoefficient = 1;  // Initialize the overall coefficient to 1 (to be multiplied)
+
+        // Process each match found by the regex in the term (there could be multiple parts to multiply)
+        while (matcher.find()) {
+            // Parse the coefficient (if not found, default to 1)
+            double coefficient = matcher.group(1).isEmpty() ? 1 : Double.parseDouble(matcher.group(1));
+
+            // Extract the variables (e.g., 'x', 'y', 'xy') from the term
+            String variables = matcher.group(2);
+
+            // Parse the exponent (if not found, default to 1)
+            int exponent = matcher.group(3) == null ? 1 : Integer.parseInt(matcher.group(3).substring(1));
+
+            // Multiply the coefficient of this match with the overall coefficient so far
+            totalCoefficient *= coefficient;
+
+            // Process each individual variable (such as 'x', 'y', 'z' in the term)
+            for (char variable : variables.toCharArray()) {
+                String variableStr = String.valueOf(variable);  // Convert the character to a string
+                // Update the exponent for this variable by adding the current exponent
+                // If the variable already exists in the map, its exponent is increased, otherwise it's set to the current exponent
+                variableExponentMap.put(variableStr, variableExponentMap.getOrDefault(variableStr, 0) + exponent);
+            }
+        }
+
+        // StringBuilder to build the resulting expression after multiplication
+        StringBuilder resultTerm = new StringBuilder();
+
+        // If the total coefficient is not 1, append it to the result
+        if (totalCoefficient != 1) {
+            resultTerm.append(totalCoefficient);  // Add the coefficient to the result term
+        }
+
+        // Create a list of variables and their exponents so they can be sorted and displayed
+        List<Map.Entry<String, Integer>> sortedVariables = new ArrayList<>(variableExponentMap.entrySet());
+
+        // Sort the list of variables:
+        // 1. First by exponent in descending order (higher exponents come first)
+        // 2. If exponents are equal, sort alphabetically by the variable
+        sortedVariables.sort((entry1, entry2) -> {
+            int exponentComparison = Integer.compare(entry2.getValue(), entry1.getValue());  // Compare exponents in descending order
+            if (exponentComparison == 0) {
+                return entry1.getKey().compareTo(entry2.getKey());  // If exponents are equal, sort alphabetically by variable
+            }
+            return exponentComparison;  // Return the result of exponent comparison
+        });
+
+        // Append each sorted variable and its exponent to the result term
+        for (Map.Entry<String, Integer> entry : sortedVariables) {
+            String variable = entry.getKey();  // Get the variable (e.g., 'x', 'y')
+            int exponent = entry.getValue();  // Get the exponent for this variable
+
+            resultTerm.append(variable);  // Append the variable itself
+
+            // If the exponent is not 1, append the exponent (e.g., 'x^2' instead of 'x')
+            if (exponent != 1) {
+                resultTerm.append("^").append(exponent);  // Append the exponent in the format "^n"
+            }
+        }
+
+        // Return the final processed term after handling multiplication
+        return resultTerm.toString();
     }
 
 
-    //Divides terms in the expression and returns the updated expression.
 
+    //Divides terms in the expression and returns the updated expression.
     private static String divideTerms(String expression) {
         // Regex pattern to match division between terms, e.g., 6x^2 / 3x or 4x^3 / 2x^2
         Pattern dividePattern = Pattern.compile("([+-]?\\d*\\.?\\d*)([a-zA-Z]*)(\\^[-+]?\\d*)?/([+-]?\\d*\\.?\\d*)([a-zA-Z]*)(\\^[-+]?\\d*)?");
