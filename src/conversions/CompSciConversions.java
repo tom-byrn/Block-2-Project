@@ -28,9 +28,9 @@ public class CompSciConversions {
         String inputNumber = scanner.nextLine();
 
         // Convert using polymorphism
-        Converter converter = getConverter(convertingFrom, convertingTo);
+        CompSciConverter compSciConverter = getConverter(convertingFrom, convertingTo);
         try {
-            String result = converter.convert(inputNumber);
+            String result = compSciConverter.convert(inputNumber);
             System.out.println("Converted value: " + result);
         } catch (NumberFormatException e) {
             System.out.println("Invalid number for the chosen conversion.");
@@ -62,7 +62,7 @@ public class CompSciConversions {
     }
 
     // Deciding what convertor to use used on what we're converting from and to
-    private static Converter getConverter(int from, int to) {
+    private static CompSciConverter getConverter(int from, int to) {
         if (from == 1 && to == 2) {
             return new BinaryToDecimalConverter();
         }
@@ -87,11 +87,11 @@ public class CompSciConversions {
     }
 }
 
-interface Converter {
+interface CompSciConverter {
     String convert(String input) throws NumberFormatException;
 }
 
-class BinaryToDecimalConverter implements Converter {
+class BinaryToDecimalConverter implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input, 2); // Parse binary to decimal
@@ -99,7 +99,7 @@ class BinaryToDecimalConverter implements Converter {
     }
 }
 
-class DecimalToBinaryConverter implements Converter {
+class DecimalToBinaryConverter implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input); // Parse input as decimal
@@ -107,7 +107,7 @@ class DecimalToBinaryConverter implements Converter {
     }
 }
 
-class HexToDecimalConverter implements Converter {
+class HexToDecimalConverter implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input, 16); // Parse hex to decimal
@@ -115,7 +115,7 @@ class HexToDecimalConverter implements Converter {
     }
 }
 
-class DecimalToHexConverter implements Converter {
+class DecimalToHexConverter implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input); // Parse input as decimal
@@ -123,7 +123,7 @@ class DecimalToHexConverter implements Converter {
     }
 }
 
-class BinaryToHexConvertor implements Converter {
+class BinaryToHexConvertor implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input, 2); // Parse binary to decimal
@@ -131,7 +131,7 @@ class BinaryToHexConvertor implements Converter {
     }
 }
 
-class HexToBinaryConvertor implements Converter {
+class HexToBinaryConvertor implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input, 16); // Parse hex to decimal
