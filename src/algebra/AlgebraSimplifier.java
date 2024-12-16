@@ -15,7 +15,6 @@ public class AlgebraSimplifier {
         expression = handleMultiplicationAndDivision(expression);
 
         // Step 3: Split the expression into individual terms based on '+' or '-' signs
-        // This uses a lookahead regex to ensure the '+' or '-' stays with the term it precedes
         String[] terms = expression.split("(?<!\\^)(?=[+-])");
 
         // A map to store the coefficients of terms by variable and exponent (e.g., "x^2", "y^3")
@@ -40,13 +39,18 @@ public class AlgebraSimplifier {
                 // Step 6: Handle exponent, default to 1 if not provided
                 int exponent = (exponentStr == null || exponentStr.isEmpty()) ? 1 : Integer.parseInt(exponentStr.substring(1)); // Remove the '^' symbol
 
-                // Step 7: Create a unique key using the variable and exponent (e.g., "x^2")
-                String key = variable + "^" + exponent;
+                // Step 7: Sort the variables alphabetically to normalize terms like "xy" and "yx"
+                char[] variableArray = variable.toCharArray();
+                Arrays.sort(variableArray);
+                String sortedVariables = new String(variableArray);
 
-                // Step 8: Combine terms with the same variable and exponent by adding their coefficients
+                // Step 8: Create a unique key using the sorted variables and exponent (e.g., "x^2")
+                String key = sortedVariables + "^" + exponent;
+
+                // Step 9: Combine terms with the same variable and exponent by adding their coefficients
                 termMap.put(key, termMap.getOrDefault(key, 0.0) + coefficient);
             } else {
-                // Step 9: If the term doesn't have a variable, it's a constant number (e.g., "5")
+                // Step 10: If the term doesn't have a variable, it's a constant number (e.g., "5")
                 try {
                     double constant = Double.parseDouble(term);
                     termMap.put("constant", termMap.getOrDefault("constant", 0.0) + constant);
@@ -58,16 +62,16 @@ public class AlgebraSimplifier {
             }
         }
 
-        // Step 10: Rebuild the simplified expression from the termMap
+        // Step 11: Rebuild the simplified expression from the termMap
         StringBuilder result = new StringBuilder();
 
-        // Step 11: Add the constant term if present
+        // Step 12: Add the constant term if present
         double constant = termMap.getOrDefault("constant", 0.0);
         if (constant != 0) {
             result.append(constant > 0 && !result.isEmpty() ? "+" : "").append(constant);
         }
 
-        // Step 12: Add terms with variables and exponents, sorted by variable and exponent
+        // Step 13: Add terms with variables and exponents, sorted by variable and exponent
         termMap.entrySet().stream()
                 .filter(entry -> !entry.getKey().equals("constant"))  // Exclude the constant from this part
                 .sorted(Map.Entry.comparingByKey())  // Sort terms by their variable and exponent
@@ -81,7 +85,7 @@ public class AlgebraSimplifier {
                     }
                 });
 
-        // Step 13: Return the final simplified expression or "0" if there are no terms
+        // Step 14: Return the final simplified expression or "0" if there are no terms
         return !result.isEmpty() ? result.toString() : "0";
     }
 
@@ -89,12 +93,16 @@ public class AlgebraSimplifier {
     //Handles multiplication and division in the expression by calling separate methods for each.
     public static String handleMultiplicationAndDivision(String expression) {
         // Step 1: First handle division (e.g., 6x^2 / 2y => 6x^2 * 0.5y^-2)
+        System.out.println(expression);
         expression = handleDivision(expression);
 
         // Step 2: Remove all spaces in the expression to make parsing easier
         expression = expression.replaceAll("\\s+", "");
+        expression = processingRegex(expression);
+        System.out.println(expression);
         // Step 3: Then handle multiplication (e.g., 3x^2 * 4x => 12x^3)
         expression = multiplyTerms(expression);
+        expression = processingRegex(expression);
         return expression;
     }
 
@@ -357,6 +365,16 @@ public class AlgebraSimplifier {
         return (character >= 'a' && character <= 'z') || (character >= 'A' && character <= 'Z');
     }
 
+    private static String processingRegex(String expression){
+
+        // replace x^0 with nothing
+        expression = expression.replaceAll("[a-zA-Z]\\^0", "");
+
+        // replace x^1 with x
+        expression = expression.replaceAll("([a-zA-Z])(\\^1)", "$1");
+        return expression;
+    }
+
 
     //Ensures multiplication operators are inserted where missing in the expression.
     //For example, "3x" becomes "3*x", "x2" becomes "x*2", and "x" becomes "1x".
@@ -368,7 +386,7 @@ public class AlgebraSimplifier {
         expression = expression.replaceAll("([a-zA-Z])([+-]?\\d*\\.?\\d)", "$1*$2");
 
         // adds a space either side of the division
-        expression = expression.replaceAll("/", " / ");
+        expression = expression.replaceAll("\\s+/\\s+", " / ");
         return expression;
     }
 }

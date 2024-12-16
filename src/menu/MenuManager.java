@@ -81,8 +81,8 @@ public class MenuManager {
                         break;
                     }
                     case 6 -> {
-                        currentlySelecting = false;
-                        Factors.FactorManager.start();
+                       currentlySelecting = false;
+                        factors.FactorManager.start();
                         MenuManager.clearScreen();
                         break;
                     }

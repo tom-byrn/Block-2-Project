@@ -23,7 +23,7 @@ public class PrimeFinder {
         }
         catch(IllegalArgumentException e){
             System.out.println(e.getMessage() + "\n");
-            Factors.FactorManager.primePrompt();
+            factors.FactorManager.primePrompt();
         }
 
         // Use a rough estimate for the upper bound of nth prime
