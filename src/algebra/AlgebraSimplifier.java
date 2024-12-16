@@ -89,7 +89,7 @@ public class AlgebraSimplifier {
     //Handles multiplication and division in the expression by calling separate methods for each.
     public static String handleMultiplicationAndDivision(String expression) {
         // Step 1: First handle division (e.g., 6x^2 / 2y => 6x^2 * 0.5y^-2)
-        expression = divideTerms(expression);
+        expression = handleDivision(expression);
 
         // Step 2: Remove all spaces in the expression to make parsing easier
         expression = expression.replaceAll("\\s+", "");
@@ -104,14 +104,12 @@ public class AlgebraSimplifier {
         // This regular expression splits the expression into individual terms while keeping the operators ('+' or '-')
         String[] terms = expression.split("(?=(?<!\\^)\\+|(?<!\\^)-)");
 
-
         // StringBuilder to accumulate the resulting expression after processing multiplication terms
         StringBuilder resultExpression = new StringBuilder();
 
         // Iterate through each term in the expression
         for (String term : terms) {
             term = term.trim();  // Remove any leading or trailing whitespace for cleaner processing
-            System.out.println(Arrays.toString(terms));
             // Check if the term contains multiplication ('*')
             if (term.contains("*")) {
                 resultExpression.append(processMultiplication(term));  // Process the multiplication for this term
@@ -170,13 +168,24 @@ public class AlgebraSimplifier {
             resultTerm.append(totalCoefficient);  // Add the coefficient to the result term
         }
 
-        // Create a list of variables and their exponents so they can be sorted and displayed
-        List<Map.Entry<String, Integer>> sortedVariables = new ArrayList<>(variableExponentMap.entrySet());
+        // Separate variables into two lists: one for variables without exponents, and one for variables with exponents
+        List<Map.Entry<String, Integer>> variablesWithoutExponent = new ArrayList<>();
+        List<Map.Entry<String, Integer>> variablesWithExponent = new ArrayList<>();
 
-        // Sort the list of variables:
-        // 1. First by exponent in ascending order (lower exponents come first)
-        // 2. If exponents are equal, sort alphabetically by the variable
-        sortedVariables.sort((entry1, entry2) -> {
+        // Separate variables based on whether they have an exponent
+        for (Map.Entry<String, Integer> entry : variableExponentMap.entrySet()) {
+            if (entry.getValue() == 1) {
+                variablesWithoutExponent.add(entry);  // No exponent
+            } else {
+                variablesWithExponent.add(entry);  // With exponent
+            }
+        }
+
+        // Sort variables without exponents alphabetically
+        variablesWithoutExponent.sort(Map.Entry.comparingByKey());
+
+        // Sort variables with exponents first by exponent (ascending), then alphabetically
+        variablesWithExponent.sort((entry1, entry2) -> {
             int exponentComparison = Integer.compare(entry1.getValue(), entry2.getValue());  // Compare exponents in ascending order
             if (exponentComparison == 0) {
                 return entry1.getKey().compareTo(entry2.getKey());  // If exponents are equal, sort alphabetically by variable
@@ -184,34 +193,23 @@ public class AlgebraSimplifier {
             return exponentComparison;  // Return the result of exponent comparison
         });
 
-        // Append each sorted variable and its exponent to the result term
-        for (Map.Entry<String, Integer> entry : sortedVariables) {
-            String variable = entry.getKey();  // Get the variable (e.g., 'x', 'y')
-            int exponent = entry.getValue();  // Get the exponent for this variable
+        // Append variables without exponents first
+        for (Map.Entry<String, Integer> entry : variablesWithoutExponent) {
+            resultTerm.append(entry.getKey());
+        }
 
-            resultTerm.append(variable);  // Append the variable itself
-
-            // If the exponent is not 1, append the exponent (e.g., 'x^2' instead of 'x')
-            if (exponent != 1) {
-                resultTerm.append("^").append(exponent);  // Append the exponent in the format "^n"
-            }
+        // Append variables with exponents next
+        for (Map.Entry<String, Integer> entry : variablesWithExponent) {
+            resultTerm.append(entry.getKey());  // Variable itself
+            resultTerm.append("^").append(entry.getValue());  // Exponent
         }
 
         // Return the final processed term after handling multiplication
         return resultTerm.toString();
     }
 
+
     //Divides terms in the expression and returns the updated expression.
-    public static String divideTerms(String inputExpression) {
-        // Step 1: Handle division operations (adjust numbers or variables)
-        inputExpression = handleDivision(inputExpression);
-
-        // Step 2: Handle exponentiation (reverse the sign of exponents)
-        inputExpression = handlePowers(inputExpression);
-
-        return inputExpression;
-    }
-
     // Handles division and adjusts the expression accordingly (e.g., "a / b" becomes "a * (1/b)")
     private static String handleDivision(String inputExpression) {
         // Regular expression to find division patterns, e.g., "9 / 4" or "3 / 5b"
@@ -219,7 +217,7 @@ public class AlgebraSimplifier {
         Matcher divisionMatcher = divisionPattern.matcher(inputExpression);
 
         // StringBuffer to build the result string as we modify the expression
-        StringBuilder transformedExpression = new StringBuilder();
+        StringBuilder stringBuilderDivision = new StringBuilder();
 
         // Iterate through all matches of the division pattern
         while (divisionMatcher.find()) {
@@ -234,7 +232,7 @@ public class AlgebraSimplifier {
                 }
                 double reciprocal = 1.0 / Double.parseDouble(denominator);  // Calculate the reciprocal of the denominator
 
-                divisionMatcher.appendReplacement(transformedExpression, numerator + " * " + reciprocal);
+                divisionMatcher.appendReplacement(stringBuilderDivision, numerator + " * " + reciprocal);
 
             }
             // Case 2: Denominator contains single or multiple alphabetic characters (no powers and optional constant), (e.g., "9 / mcd") -> (9 * m^1c^1d^1)
@@ -250,24 +248,29 @@ public class AlgebraSimplifier {
                     transformedDenominator.append(variable).append("^1");
                 }
 
-                divisionMatcher.appendReplacement(transformedExpression, numerator + " * " + reciprocal + transformedDenominator);
+                transformedDenominator = new StringBuilder(handlePowers(String.valueOf(transformedDenominator)));
+
+                divisionMatcher.appendReplacement(stringBuilderDivision, numerator + " * " + reciprocal + transformedDenominator);
+
+
+                // Case 3: Denominator is a number followed by a variable with a power (e.g., "5x^4")
             } else if (denominator.matches("(\\d*[a-zA-Z](\\^([+-]?\\d+))?)+")) {
                 double reciprocal = getReciprocal(denominator);
 
 
-                String variablePart = transformString(denominator);
-
-                divisionMatcher.appendReplacement(transformedExpression, numerator + " * " + reciprocal + variablePart);
+                String variablePart = addPowerOf1(denominator);
+                variablePart = handlePowers(variablePart);
+                divisionMatcher.appendReplacement(stringBuilderDivision, numerator + " * " + reciprocal + variablePart);
             }
-            // Case 3: Denominator is a number followed by a variable with a power (e.g., "5x^4")
             else {
-                divisionMatcher.appendReplacement(transformedExpression, numerator + " * " + "1/" + denominator);
+                System.err.println("Something has gone wrong");
+                throw new IllegalArgumentException();
             }
         }
         // Append the remaining part of the expression that wasn't matched
-        divisionMatcher.appendTail(transformedExpression);
+        divisionMatcher.appendTail(stringBuilderDivision);
 
-        return transformedExpression.toString();
+        return stringBuilderDivision.toString();
     }
 
     private static double getReciprocal(String denominator) {
@@ -287,6 +290,7 @@ public class AlgebraSimplifier {
 
     // Handles powers and reverses the sign of exponents (e.g., "x^4" becomes "x^-4")
     private static String handlePowers(String inputExpression) {
+
         // Regular expression to find exponentiation patterns, e.g., "x^4" or "z^-1"
         Pattern powerPattern = Pattern.compile("(\\w+)\\^(-?\\d+)");  // Matches variables with exponents (e.g., "x^4")
         Matcher powerMatcher = powerPattern.matcher(inputExpression);
@@ -312,7 +316,7 @@ public class AlgebraSimplifier {
 
     // This method transforms the input string by adding "^1" to letters that are not followed by a '^'.
     // If the letter is followed by '^' (like x^3), it remains unchanged.
-    public static String transformString(String input) {
+    public static String addPowerOf1(String input) {
 
         // Check if the first character is a digit
         input = input.matches("^\\d.*") // If the string starts with a digit
