@@ -121,7 +121,8 @@ public class AlgebraSimplifier {
     // This method processes the entire mathematical expression, identifying and handling multiplication and division
     private static String multiplyTerms(String expression) {
         // This regular expression splits the expression into individual terms while keeping the operators ('+' or '-')
-        String[] terms = expression.split("(?=[+/-])");
+        String[] terms = expression.split("(?=(?<!\\^)\\+|(?<!\\^)-)");
+
 
         // StringBuilder to accumulate the resulting expression after processing multiplication terms
         StringBuilder resultExpression = new StringBuilder();
@@ -129,7 +130,7 @@ public class AlgebraSimplifier {
         // Iterate through each term in the expression
         for (String term : terms) {
             term = term.trim();  // Remove any leading or trailing whitespace for cleaner processing
-
+            System.out.println(Arrays.toString(terms));
             // Check if the term contains multiplication ('*')
             if (term.contains("*")) {
                 resultExpression.append(processMultiplication(term));  // Process the multiplication for this term
@@ -219,9 +220,6 @@ public class AlgebraSimplifier {
         return resultTerm.toString();
     }
 
-
-
-
     //Divides terms in the expression and returns the updated expression.
     public static String divideTerms(String inputExpression) {
         // Step 1: Handle division operations (adjust numbers or variables)
@@ -275,7 +273,6 @@ public class AlgebraSimplifier {
             } else if (denominator.matches("(\\d*[a-zA-Z](\\^([+-]?\\d+))?)+")) {
                 double reciprocal = getReciprocal(denominator);
 
-                //System.out.println(reciprocal);
 
                 String variablePart = transformString(denominator);
 
@@ -299,7 +296,7 @@ public class AlgebraSimplifier {
             numberPart = Double.parseDouble(numberPartString);  // Extract numeric part (e.g., "5" from "5b")
         }
         catch(Exception ignored){}
-        System.out.println(numberPartString);
+
         if(numberPart == 0.0){
             throw new ArithmeticException("Error Divide by zero");
         }
