@@ -28,7 +28,6 @@ public class Functions  {
 
     // Helper method to validate double input
     private static double getValidDouble(String prompt) {
-        Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print(prompt);
             try {
@@ -172,7 +171,6 @@ public class Functions  {
     }
 
     public static void composeFunctions() {
-        Scanner scanner = new Scanner(System.in);
         Functions f = new Functions();
         String fX = f.promptFunctionInput("\nEnter f(x) (e.g. 2x + 5): "); // f(x)
         String gX = f.promptFunctionInput("\nEnter g(x) (e.g. 3x + 11): "); // g(x)
@@ -192,14 +190,15 @@ public class Functions  {
 
     public static void bisectionMethod() {
         Functions f = new Functions();
-        String functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4): "); // gets function
 
+        String functionInput;
         double a; // a, factorPrompt of range
         double b; // b, end of range
         double fA; // f(a)
         double fB; // f(b)
 
         while (true) {
+            functionInput = f.promptFunctionInput("Enter a function (e.g. x^2 -4): "); // gets function
             a = f.promptStartRange();
             b = f.promptEndRange(a);
 
