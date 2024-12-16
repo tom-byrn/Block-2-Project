@@ -5,6 +5,7 @@ import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import calculations.ConstantAdder;
 import complex.ComplexManager;
+import conversions.ConversionsManager;
 import matrices.MatricesManager;
 import functions.*;
 import settings.SettingsManager;
@@ -42,7 +43,7 @@ public class MenuManager {
                 System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for complex numbers                              " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) to add a constant                                " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (7) to find factors and primes                       " + CYAN + " ║" + RESET);
-                System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (9) to edit settings                                 " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (8) for conversions                                  " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to exit the application                          " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
@@ -98,7 +99,7 @@ public class MenuManager {
                     }
                     case 8 -> {
                         currentlySelecting = false;
-                        SettingsManager.start();
+                        ConversionsManager.start();
                         MenuManager.clearScreen();
                         break;
                     }

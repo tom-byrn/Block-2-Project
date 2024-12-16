@@ -25,10 +25,10 @@ public class ConversionsManager implements Start {
                 MenuText.calculatorText(); //Show ASCII art text for calculator
                 // Prompt user to select a choice for conversions
                 System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
-                System.out.println(CYAN + "║" + WHITE + "                 Welcome to Conversions                    " + CYAN + "║" + RESET);
+                System.out.println(CYAN + "║" + WHITE + "                 Welcome to Conversions                         " + CYAN + "║" + RESET);
                 System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
-                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to to convert between decimal, binary and hex                  " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to to convert between decimal, binary and hex    " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to convert currencies                            " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
