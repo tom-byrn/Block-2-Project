@@ -56,22 +56,27 @@ public class FunctionsManager implements Start{
                 switch (selectorNum) {
                     case 1 -> {
                         Functions.singleVariableFunction();
+                        currentlySelecting = false;
                         break;
                     }
                     case 2 -> {
                         Functions.multiVariateFunction();
+                        currentlySelecting = false;
                         break;
                     }
                     case 3 -> {
                         Functions.composeFunctions();
+                        currentlySelecting = false;
                         break;
                     }
                     case 4 -> {
                         Functions.bisectionMethod();
+                        currentlySelecting = false;
                         break;
                     }
                     case 5 -> {
                         Functions.secantMethod();
+                        currentlySelecting = false;
                         break;
                     }
                     case 7 -> {
@@ -81,9 +86,13 @@ public class FunctionsManager implements Start{
                     }
                     case 6 -> {
                         Polynomial.promptDegree();
+                        currentlySelecting = false;
                         break;
                     }
                     case 0 -> {
+                        MenuManager.clearScreen();
+                        MenuManager.callMenu();
+                        currentlySelecting = false;
                         break;
                     }
                 }

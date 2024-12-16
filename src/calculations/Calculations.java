@@ -18,7 +18,6 @@ public class Calculations{
         CalculationsProcessor processor = new CalculationsProcessor(calculationInput);
 
         this.calculationInput = processor.toString();
-
     }
 
 
@@ -29,7 +28,6 @@ public class Calculations{
     }
 
     public double evaluate(String calculationInput){
-        //this.calculationInput = calculationInput;
 
         // Shunting Yard Algorithm implementation (https://brilliant.org/wiki/shunting-yard-algorithm/)
 
@@ -61,38 +59,41 @@ public class Calculations{
             else if(Character.isDigit(ch) || ch == '.'){
                 currentToken.append(ch); //if digit or decimal, add to the current token
             }
-            else if(Character.isLetter(ch)){
-                currentToken.append(ch); //add letters to the current token
-            }
-            else {
-                if(!currentToken.isEmpty()){ //if an operator or parenthesis
-                    tokens.add(currentToken.toString()); // Corrected to add the current token
-                    currentToken.setLength(0); //reset the current token list
+            else if (Character.isLetter(ch)) {
+                currentToken.append(ch); // Add letters to the current token
+            } else if (Character.isDigit(ch) && currentToken.length() > 0 && Character.isLetter(currentToken.charAt(0))) {
+                // Handle cases like "root3" or "log5" by appending the digit to the function token
+                currentToken.append(ch);
+            } else {
+                if (!currentToken.isEmpty()) {
+                    tokens.add(currentToken.toString());
+                    currentToken.setLength(0);
                 }
-                tokens.add(Character.toString(ch)); //add operator / parentheses
+                tokens.add(Character.toString(ch)); // Add operator/parentheses
             }
+
         }
 
         //Add the last token (if there is any)
         if(!currentToken.isEmpty()){
             tokens.add(currentToken.toString());
         }
-
         return tokens;
     }
 
     //Convert tokens to Reverse Polish Notation (This is the notation needed for the shunting yard algorithm to work)
     //https://brilliant.org/wiki/shunting-yard-algorithm/#reverse-polish
 
-    private List<String> toRPN(List<String> tokens){
+    private List<String> toRPN(List<String> tokens) {
         List<String> output = new ArrayList<>();
         Stack<String> operators = new Stack<>();
 
-        Map<String, Integer> precedence = Map.of( //Setting levels of precedence to operators
+        Map<String, Integer> precedence = Map.of(
                 "+", 1, "-", 1,
                 "*", 2, "/", 2,
-                "^", 3, "%",3,
-                "!",4);
+                "^", 3, "%", 3,
+                "!", 4
+        );
 
         for (String token : tokens) {
             if (isNumber(token)) {
@@ -122,25 +123,36 @@ public class Calculations{
         return output;
     }
 
+
     //Evaluate the RPN expression
-    private double evaluateRPN(List<String> rpn){
+    private double evaluateRPN(List<String> rpn) {
         Stack<Double> stack = new Stack<>();
-        for(String token: rpn){
-            if(isNumber(token)) {
-                stack.push(Double.parseDouble(token));//Converts the token string into a double if it's detected that it is a number
-            } else if(isFunction(token)) { //Apply function to if a function token is detected
-                if (stack.isEmpty()) {
-                    throw new IllegalStateException("Invalid expression. Not enough values for function: " + token);
+        for (String token : rpn) {
+            if (isNumber(token)) {
+                stack.push(Double.parseDouble(token));
+            } else if (isFunction(token)) {
+                if (token.startsWith("root") || token.startsWith("log")) {
+                    if (stack.size() < 1) { // Check if there's at least one argument
+                        throw new IllegalStateException("Invalid expression. Not enough values for double-argument function: " + token);
+                    }
+                    double value = stack.pop();
+                    double base = Double.parseDouble(token.replaceAll("[^0-9]", "")); // Extract the base
+                    String functionName = token.replaceAll("[0-9]", ""); // Extract function name
+                    stack.push(applyDoubleFunction(functionName, base, value));
+                } else {
+                    if (stack.isEmpty()) {
+                        throw new IllegalStateException("Invalid expression. Not enough values for function: " + token);
+                    }
+                    double a = stack.pop();
+                    stack.push(applyFunction(token, a));
                 }
-                double a = stack.pop();
-                stack.push(applyFunction(token, a));
             } else {
                 if (stack.size() < 2) {
                     throw new IllegalStateException("Invalid expression. Not enough values for operator: " + token);
                 }
-                double b = stack.pop(); //if it's not a number or a function, it is going to be an operator
+                double b = stack.pop();
                 double a = stack.pop();
-                stack.push(applyOperator(a, b, token)); //Apply one of the operators to a & b
+                stack.push(applyOperator(a, b, token));
             }
         }
         if (stack.size() != 1) {
@@ -148,6 +160,8 @@ public class Calculations{
         }
         return stack.pop();
     }
+
+
 
     private boolean isNumber(String token){
         try {
@@ -161,7 +175,8 @@ public class Calculations{
     private boolean isFunction(String token){
         return token.equals("sin") || token.equals("cos") || token.equals("log")
                 || token.equals("ln") || token.equals("sqrt") || token.equals("tan")
-                || token.equals("sinh") || token.equals("cosh") || token.equals("tanh"); //As many functions can be added to this as needed
+                || token.equals("sinh") || token.equals("cosh") || token.equals("tanh") //As many functions can be added to this as needed
+                || token.startsWith("root") || token.startsWith("log"); //Using startsWith() method to handle functions that take 2 numbers
         //I intend to edit the log function later so that any type of log can be used
     }
 
@@ -219,6 +234,15 @@ public class Calculations{
             default -> throw new IllegalArgumentException("Unknown function: " + function);
         };
     }
+
+    private double applyDoubleFunction(String function, double base, double value) {
+        return switch (function) {
+            case "root" -> Math.pow(value, 1.0 / base); // Compute nth root
+            case "log" -> Math.log(value) / Math.log(base); // Compute log with base
+            default -> throw new IllegalArgumentException("Unknown double-argument function: " + function);
+        };
+    }
+
 
     public String getInput(){
         return calculationInput;

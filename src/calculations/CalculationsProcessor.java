@@ -7,6 +7,7 @@ public class CalculationsProcessor extends processor.InputProcessor {
 
     public CalculationsProcessor(String input) {
         super(input);
+
         input = getProcessedString();
 
         setProcessedString(input);

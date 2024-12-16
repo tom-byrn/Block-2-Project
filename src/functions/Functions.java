@@ -168,16 +168,16 @@ public class Functions  {
         System.out.println(variablesInputted);
         System.out.printf("f(%s) = %.2f\n", variablesInputted, calculations.getAnswer());
         scanner.nextLine();
+        scanner.nextLine();
     }
 
     public static void composeFunctions() {
         Scanner scanner = new Scanner(System.in);
         Functions f = new Functions();
-        String fX = f.promptFunctionInput("Enter f(x) (e.g. 2x + 5): "); // f(x)
-        scanner.nextLine();
-        String gX = f.promptFunctionInput("Enter g(x) (e.g. 3x + 11): "); // g(x)
+        String fX = f.promptFunctionInput("\nEnter f(x) (e.g. 2x + 5): "); // f(x)
+        String gX = f.promptFunctionInput("\nEnter g(x) (e.g. 3x + 11): "); // g(x)
 
-        double x = getValidDouble("Enter a value for x: ");
+        double x = getValidDouble("\nEnter a value for x: ");
 
         // finding g(variable)
         double gVariable = subIn(gX, x);
@@ -185,7 +185,7 @@ public class Functions  {
         // finding f(g(x))
         double result = subIn(fX, gVariable);
 
-        System.out.print("f(g(x)) = ");
+        System.out.print("\nf(g(x)) = ");
         System.out.println(result);
         scanner.nextLine();
     }

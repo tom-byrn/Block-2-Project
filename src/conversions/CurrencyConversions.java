@@ -1,5 +1,7 @@
 package conversions;
 
+import menu.MenuManager;
+
 import java.util.Scanner;
 
 public class CurrencyConversions {
@@ -12,29 +14,33 @@ public class CurrencyConversions {
         Scanner scanner = new Scanner(System.in);
 
         // Ask what the user is converting from
-        int convertingFrom = getConversionChoice(scanner, "What are you converting from?");
+        int convertingFrom = getConversionChoice(scanner, "\nWhat are you converting from?");
 
         // Ask what the user is converting to
-        int convertingTo = getConversionChoice(scanner, "What are you converting to?");
+        int convertingTo = getConversionChoice(scanner, "\nWhat are you converting to?");
 
         // Make sure that convertingFrom and convertingTo are not the same
         while (convertingFrom == convertingTo) {
             System.out.println("Conversion from and to cannot be the same. Please select a different conversion type.");
-            convertingTo = getConversionChoice(scanner, "What are you converting to?");
+            convertingTo = getConversionChoice(scanner, "\nWhat are you converting to?");
         }
 
         // Ask for the amount to convert
-        System.out.println("Enter the amount to convert:");
+        System.out.print("\nEnter the amount to convert:");
         String inputAmount = scanner.nextLine();
 
         // Convert using polymorphism
         CurrencyConverter converter = getConverter(convertingFrom, convertingTo);
         try {
             String result = converter.convert(inputAmount);
-            System.out.println("Converted value: " + result);
+            System.out.println("\nConverted value: " + result);
         } catch (NumberFormatException e) {
-            System.out.println("Invalid amount entered.");
+            System.out.println("\nInvalid amount entered.");
         }
+
+        scanner.nextLine(); //Wait for user to hit enter then clear screen and re prompt menu
+        MenuManager.clearScreen();
+        ConversionsManager.start();
     }
 
     private static int getConversionChoice(Scanner scanner, String prompt) {
@@ -47,6 +53,8 @@ public class CurrencyConversions {
             System.out.println("Enter (3) for British Pound");
             System.out.println("Enter (4) for Japanese Yen");
             System.out.println("Enter (5) for Australian Dollar");
+
+            System.out.print("Enter a choice: ");
 
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();

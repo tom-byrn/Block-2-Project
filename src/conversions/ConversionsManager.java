@@ -22,7 +22,7 @@ public class ConversionsManager implements Start {
         while (currentlySelecting) {
             try {
 
-                MenuText.calculatorText(); //Show ASCII art text for calculator
+                MenuText.conversionsText(); //Show ASCII art text for calculator
                 // Prompt user to select a choice for conversions
                 System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
                 System.out.println(CYAN + "║" + WHITE + "                 Welcome to Conversions                         " + CYAN + "║" + RESET);

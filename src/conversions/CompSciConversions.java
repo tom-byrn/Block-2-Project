@@ -1,40 +1,42 @@
 package conversions;
 
+import menu.MenuManager;
+
 import java.util.Scanner;
 
 public class CompSciConversions {
-
-    public static void main(String[] args) {
-        compSciConversions();
-    }
 
     public static void compSciConversions() {
         Scanner scanner = new Scanner(System.in);
 
         // Ask what the user is converting from
-        int convertingFrom = getConversionChoice(scanner, "What are you converting from?");
+        int convertingFrom = getConversionChoice(scanner, "\nWhat are you converting from?");
 
         // Ask what the user is converting to
-        int convertingTo = getConversionChoice(scanner, "What are you converting to?");
+        int convertingTo = getConversionChoice(scanner, "\nWhat are you converting to?");
 
         // Make sure that convertingFrom and convertingTo are not the same
         while (convertingFrom == convertingTo) {
-            System.out.println("Conversion from and to cannot be the same. Please select a different conversion type.");
-            convertingTo = getConversionChoice(scanner, "What are you converting to?");
+            System.out.println("\nConversion from and to cannot be the same. Please select a different conversion type.");
+            convertingTo = getConversionChoice(scanner, "\nWhat are you converting to?");
         }
 
         // Ask for the number to convert
-        System.out.println("Enter the number to convert:");
+        System.out.print("Enter the number to convert:");
         String inputNumber = scanner.nextLine();
 
         // Convert using polymorphism
         CompSciConverter compSciConverter = getConverter(convertingFrom, convertingTo);
         try {
             String result = compSciConverter.convert(inputNumber);
-            System.out.println("Converted value: " + result);
+            System.out.println("\nConverted value: " + result);
         } catch (NumberFormatException e) {
-            System.out.println("Invalid number for the chosen conversion.");
+            System.out.println("\nInvalid number for the chosen conversion.");
         }
+
+        scanner.nextLine(); //Wait for user to hit enter then clear screen and re prompt menu
+        MenuManager.clearScreen();
+        ConversionsManager.start();
     }
 
     private static int getConversionChoice(Scanner scanner, String prompt) {
@@ -45,11 +47,13 @@ public class CompSciConversions {
             System.out.println("Enter (1) for binary");
             System.out.println("Enter (2) for decimal");
             System.out.println("Enter (3) for hex");
+            System.out.print("\nEnter a choice: ");
 
             if (scanner.hasNextInt()) {
                 choice = scanner.nextInt();
                 scanner.nextLine(); // Clear buffer
                 if (choice >= 1 && choice <= 3) {
+                    System.out.println("\n");
                     return choice; // Valid choice
                 } else {
                     System.out.println("Invalid choice. Please enter 1, 2, or 3.");

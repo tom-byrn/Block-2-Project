@@ -4,25 +4,6 @@ import java.util.*;
         import java.util.regex.*;
 
 public class AlgebraSimplifier {
-
-    public static void main(String[] args) {
-        // Create a scanner to take user input
-        Scanner scanner = new Scanner(System.in);
-
-        // Prompt the user for an algebraic expression
-        System.out.println("Enter an algebraic expression to simplify:");
-
-        // Read the algebraic expression entered by the user
-        String expression = scanner.nextLine();
-
-        // Simplify the input expression using the simplifyExpression method
-        String simplifiedExpression = simplifyExpression(expression);
-
-        // Output the simplified expression
-        System.out.println("Simplified expression: " + simplifiedExpression);
-    }
-
-
     //Simplifies the algebraic expression by combining like terms and handling basic arithmetic operations.
 
     public static String simplifyExpression(String expression) {

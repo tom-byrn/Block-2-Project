@@ -1,11 +1,7 @@
 package functions;
 
-import algebra.AlgebraManager;
-import calculations.CalculationsManager;
-import matrices.MatricesManager;
 import menu.MenuManager;
 
-import java.awt.*;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,36 +10,44 @@ import static menu.Colours.*;
 public class Polynomial {
 
     protected static void promptDegree() {
+        MenuManager.clearScreen();
         Scanner scanner = new Scanner(System.in);
+
+        System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
+        System.out.println(CYAN + "║" + WHITE + "                  Polynomial Solver Menu                        " + CYAN + "║" + RESET);
+        System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
+        System.out.println(CYAN + "║                                                                ║");
+        System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to find linear function roots                  " + CYAN + "   ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to find quadratic function roots               " + CYAN + "   ║" + RESET);
+        System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to solve cubic function roots                    " + CYAN + " ║" + RESET);
+        System.out.println(CYAN + "║                                                                ║");
+        System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to functions menu                     " + CYAN + "  ║" + RESET);
+        System.out.println(CYAN + "║                                                                ║");
+        System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
+        System.out.print(CYAN + "Enter a choice: " + RESET);
+
+
+
+
+        int selectorNum = scanner.nextInt();
+        System.out.println();
+
+        String roots[];
+        // Switch case for choosing a calculator function to use
         boolean currentlySelecting = true;
         while (currentlySelecting) {
-            System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
-            System.out.println(CYAN + "║" + WHITE + "                  Polynomial Solver Menu                        " + CYAN + "║" + RESET);
-            System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
-            System.out.println(CYAN + "║                                                                ║");
-            System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to solve a first degree polynomial               " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to solve a second degree polynomial              " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to solve a third degree polynomial               " + CYAN + " ║" + RESET);
-            //System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) to solve a fourth degree polynomial              " + CYAN + " ║" + RESET);
-            System.out.println(CYAN + "║                                                                ║");
-            System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
-            System.out.print(CYAN + "Enter a choice: " + RESET);
-
-
-
-            int selectorNum = scanner.nextInt();
-            System.out.println();
-
-            // Switch case for choosing a calculator function to use
             switch (selectorNum) {
                 case 1 -> {
                     try {
                         System.out.print("For ax + b = 0, please enter a values for a and b separated by spaces (e.g. 10 5):  ");
                         double a = scanner.nextDouble();
                         double b = scanner.nextDouble();
-                        //System.out.printf("%nRoot: %f", firstDegreePolynomial(a, b));
+                        PolynomialSolver ps = new PolynomialSolver(a, b);
+                        roots = ps.linearPolynomial();
+                        System.out.println("\n" + ps.toString(a, b) + "\n");
+                        scanner.nextLine();
                         currentlySelecting = false;
-                    } catch (InputMismatchException e) {
+                    } catch (InputMismatchException | IllegalArgumentException e) {
                         System.out.println("Please enter valid double values!");
                         scanner.nextLine();
                     }
@@ -55,10 +59,12 @@ public class Polynomial {
                         double a = scanner.nextDouble();
                         double b = scanner.nextDouble();
                         double c = scanner.nextDouble();
-                        //if(a == 0){firstDegreePolynomial(b, c);}
-                        //else{secondDegreePolynomial(a, b, c);}
+                        PolynomialSolver ps = new PolynomialSolver(a, b, c);
+                        roots = ps.quadraticPolynomial();
+                        System.out.println("\n" + ps.toString(a, b, c) + "\n");
+                        scanner.nextLine();
                         currentlySelecting = false;
-                    } catch (InputMismatchException e) {
+                    } catch (InputMismatchException | IllegalArgumentException e) {
                         System.out.println("Please enter valid double values!");
                         scanner.nextLine();
                     }
@@ -71,10 +77,12 @@ public class Polynomial {
                         double b = scanner.nextDouble();
                         double c = scanner.nextDouble();
                         double d = scanner.nextDouble();
-                        if(a == 0){secondDegreePolynomial(b, c, d);}
-                        else{thirdDegreePolynomial(a, b, c, d);}
+                        PolynomialSolver ps = new PolynomialSolver(a, b, c, d);
+                        roots = ps.cubicPolynomial();
+                        System.out.println("\n" + ps.toString(a, b, c, d) + "\n");
+                        scanner.nextLine();
                         currentlySelecting = false;
-                    } catch (InputMismatchException e) {
+                    } catch (InputMismatchException | IllegalArgumentException e) {
                         System.out.println("Please enter valid double values!");
                         scanner.nextLine();
                     }
@@ -88,97 +96,23 @@ public class Polynomial {
                         double c = scanner.nextDouble();
                         double d = scanner.nextDouble();
                         double e = scanner.nextDouble();
-                        thirdDegreePolynomial(a, b, c, d);
+                        PolynomialSolver ps = new PolynomialSolver(a, b, c, d, e);
+                        roots = ps.quarticPolynomial();
+                        System.out.println("\n" + ps.toString(a, b, c, d, e) + "\n");
+                        scanner.nextLine();
                         currentlySelecting = false;
-                    } catch (InputMismatchException e) {
+                    } catch (InputMismatchException | IllegalArgumentException e) {
                         System.out.println("Please enter valid double values!");
                         scanner.nextLine();
                     }
-                    break;
+                }
+                case 0 -> {
+                    MenuManager.clearScreen();
+                    FunctionsManager.start();
                 }
             }
         }
+        scanner.nextLine();
+        Polynomial.promptDegree();
     }
-
-    //Basic formula to find a single root
-    protected String firstDegreePolynomial(double a, double b){
-        double root = - b / a;
-        return String.valueOf(root);
-    }
-
-    //The minus b formula to find roots of a quadratic
-    protected static String[] secondDegreePolynomial(double a, double b, double c){
-        String roots[] = new String[2];
-        double discriminant = (b*b - 4*a*c);
-        if(discriminant < 0){
-            boolean complex = true;
-            discriminant = -discriminant;
-            roots[0] = String.format("%f + %fi", -b, Math.sqrt(discriminant));
-            roots[1] = String.format("%f - %fi", -b, Math.sqrt(discriminant));
-        } else {
-            boolean complex = false;
-            double root1 = ((-b + Math.sqrt(discriminant)) / 2*a);
-            double root2 = ((-b - Math.sqrt(discriminant)) / 2*a);
-            System.out.printf("%nRoots: %f, %f", root1, root2);
-        }
-        return roots;
-    }
-
-    //Cardano's method for finding the roots of a cubic equation https://brilliant.org/wiki/cardano-method/
-    protected static void thirdDegreePolynomial(double a, double b, double c, double d) {
-        // Normalize the polynomial
-        if (a != 1) {
-            b /= a;
-            c /= a;
-            d /= a;
-            a = 1;
-        }
-
-        // Compute p and q
-        double p = (3 * a * c - b * b) / (3 * a * a);
-        double q = (2 * b * b * b - 9 * a * b * c + 27 * a * a * d) / (27 * a * a * a);
-
-        // Compute the discriminant
-        double discriminant = Math.pow(q / 2, 2) + Math.pow(p / 3, 3);
-
-        // Shift for depressed cubic
-        double shift = -b / (3 * a);
-
-        if (discriminant > 0) {
-            // One real root, two complex conjugate roots
-            double u = Math.cbrt(-q / 2 + Math.sqrt(discriminant));
-            double v = Math.cbrt(-q / 2 - Math.sqrt(discriminant));
-
-            double realRoot = u + v + shift;
-            System.out.printf("%nOne Real Root: %f%n", realRoot);
-        } else if (Math.abs(discriminant) < 1e-6) {
-            // All roots real, at least two are equal
-            double u = Math.cbrt(-q / 2);
-            double doubleRoot = 2 * u + shift;
-            double singleRoot = -u + shift;
-            System.out.printf("%nDouble Root: %f%nSingle Root: %f%n", doubleRoot, singleRoot);
-        } else {
-            // All roots real and distinct
-            double r = Math.sqrt(-Math.pow(p / 3, 3));
-            double phi = Math.acos(-q / (2 * r));
-            double root1 = 2 * Math.cbrt(r) * Math.cos(phi / 3) + shift;
-            double root2 = 2 * Math.cbrt(r) * Math.cos((phi + 2 * Math.PI) / 3) + shift;
-            double root3 = 2 * Math.cbrt(r) * Math.cos((phi + 4 * Math.PI) / 3) + shift;
-
-            System.out.printf("%nRoots: %f, %f, %f%n", root1, root2, root3);
-        }
-
-        MenuManager.clearScreen();
-        MenuManager.callMenu();
-    }
-
-    //Ferrari's method for solving fourth degree polynomials https://encyclopediaofmath.org/wiki/Ferrari_method
-    protected static void fourthDegreePolynomial(double a, double b, double c, double d, double e) {
-
-    }
-
-
-
-
-
 }

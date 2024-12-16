@@ -7,8 +7,8 @@ public class InputProcessor {
         input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         //Remove all whitespace
         input = input.replaceAll("\\s+", "");
-        // Add * between a number and a parenthesis
-        input = input.replaceAll("(\\d)(\\()", "$1*$2");
+        // Add * between a number and a parenthesis unless the number is preceded by 't' or 'g'
+        input = input.replaceAll("(?<![tg\\d])(\\d)(\\()", "$1*$2");
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
 

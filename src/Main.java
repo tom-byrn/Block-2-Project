@@ -7,5 +7,4 @@ public class Main {
         MenuManager.callMenu();
     }
 
-
 }
