@@ -1,7 +1,7 @@
 package algebra;
 
 import java.util.*;
-        import java.util.regex.*;
+import java.util.regex.*;
 
 public class AlgebraSimplifier {
     //Simplifies the algebraic expression by combining like terms and handling basic arithmetic operations.
@@ -366,6 +366,9 @@ public class AlgebraSimplifier {
 
         // Add a multiplication operator between variables and numbers, e.g., "x2" becomes "x*2"
         expression = expression.replaceAll("([a-zA-Z])([+-]?\\d*\\.?\\d)", "$1*$2");
+
+        // adds a space either side of the division
+        expression = expression.replaceAll("/", " / ");
         return expression;
     }
 }
