@@ -1,12 +1,11 @@
 package menu;
 
-import factors.FactorManager;
 import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import complex.ComplexManager;
 import conversions.ConversionsManager;
+import functions.FunctionsManager;
 import matrices.MatricesManager;
-import functions.*;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -84,7 +83,7 @@ public class MenuManager {
                     }
                     case 6 -> {
                         currentlySelecting = false;
-                        FactorManager.start();
+                        Factors.FactorManager.start();
                         MenuManager.clearScreen();
                         break;
                     }
