@@ -4,7 +4,7 @@ import menu.MenuManager;
 
 import static matrices.LUFactorisation.*;
 
-public class SolveSimulationsEquations implements PrintMatrixInterface {
+public class SolveSimulationsEquations implements PrintMatrixFinal {
 
     protected static void solveEquation(){
         // Create Matrix A
@@ -19,7 +19,7 @@ public class SolveSimulationsEquations implements PrintMatrixInterface {
         double[][] solution = solveUsingLU(coefficientMatrix, rightHandSide);
 
         // Print the solution vector x (values for the variables)
-        PrintMatrixInterface.printMatrix(solution);
+        PrintMatrixFinal.printFinal(solution);
     }
 
     // Function to solve Ax = b using LU factorization

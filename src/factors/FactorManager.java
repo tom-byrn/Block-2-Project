@@ -1,5 +1,6 @@
-package Factors;
+package factors;
 
+import factors.PrimeFinder;
 import functions.Functions;
 import menu.MenuManager;
 import menu.MenuText;
@@ -108,7 +109,7 @@ public class FactorManager implements Start {
 
     public static void factorPrompt() {
 
-        Factors f = new Factors();
+        Factors.Factors f = new Factors.Factors();
         long n = 0;
 
         boolean validInput = false;
@@ -118,7 +119,7 @@ public class FactorManager implements Start {
                 String num = scanner.nextLine();
                 num = NumberFormatter.removeCommas(num);
                 n = Long.parseLong(num);
-                f = new Factors(n);
+                f = new Factors.Factors(n);
                 validInput = true;
 
             } catch (Exception e) {

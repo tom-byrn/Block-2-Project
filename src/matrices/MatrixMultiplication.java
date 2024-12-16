@@ -1,6 +1,6 @@
 package matrices;
 
-public class MatrixMultiplication implements PrintMatrixInterface {
+public class MatrixMultiplication implements PrintMatrixFinal {
 
     protected static void multiplicationStart(){
         //Calls matrixFirstCreator and sets matrixA to answer
@@ -15,7 +15,7 @@ public class MatrixMultiplication implements PrintMatrixInterface {
 
         double[][]matrixFinal = multiplication(matrixA,matrixB);
 
-        PrintMatrixInterface.printMatrix(matrixFinal);
+        PrintMatrixFinal.printFinal(matrixFinal);
     }
 
     //Method for multiplying matrixes

@@ -3,7 +3,7 @@ package matrices;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class MatrixAdder implements PrintMatrixInterface {
+public class MatrixAdder implements PrintMatrixFinal{
 
     //Initilize matrices
     //creates a 2D matrix
@@ -27,7 +27,7 @@ public class MatrixAdder implements PrintMatrixInterface {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = matrixA[matrixRowAdder][matrixColoumAdder] + matrixB[matrixRowAdder][matrixColoumAdder];
             }
         }
-        PrintMatrixInterface.printMatrix(matrixFinal);
+        PrintMatrixFinal.printFinal(matrixFinal);
     }
 
     //Used to subtract 2 matrixs
@@ -48,7 +48,7 @@ public class MatrixAdder implements PrintMatrixInterface {
                 matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
             }
         }
-        PrintMatrixInterface.printMatrix(matrixFinal);
+        PrintMatrixFinal.printFinal(matrixFinal);
     }
 
 

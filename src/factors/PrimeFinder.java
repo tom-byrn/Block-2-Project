@@ -1,4 +1,4 @@
-package Factors;
+package factors;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class PrimeFinder {
         }
         catch(IllegalArgumentException e){
             System.out.println(e.getMessage() + "\n");
-            FactorManager.primePrompt();
+            Factors.FactorManager.primePrompt();
         }
 
         // Use a rough estimate for the upper bound of nth prime

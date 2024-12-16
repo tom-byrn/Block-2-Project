@@ -3,7 +3,7 @@ package matrices;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MatrixPower extends MatrixMultiplication implements PrintMatrixInterface {
+public class MatrixPower extends MatrixMultiplication implements PrintMatrixFinal {
 
     // Function to perform matrix exponentiation using the Exponentiation by Squaring method
     private static double[][] matrixExponentiation(double[][] inputMatrix, int exponent) {
@@ -79,7 +79,7 @@ public class MatrixPower extends MatrixMultiplication implements PrintMatrixInte
         double[][] result = matrixExponentiation(matrix, exponent);
 
         // Output the result matrix=
-        PrintMatrixInterface.printMatrix(result);
+        PrintMatrixFinal.printFinal(result);
     }
 
     private static int getExponent() {

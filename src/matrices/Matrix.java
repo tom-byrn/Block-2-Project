@@ -3,7 +3,7 @@ package matrices;
 import java.util.Scanner;
 
 
-public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixInterface {
+public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixSuper {
     
     //Store matrix size
     private static int noOfRowsInMatrixA;
@@ -89,7 +89,7 @@ public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixInte
     @Override
     //Used to ensure Matrix entered is correct
     public char YorN(double[][]matrixToBeChecked){
-        PrintMatrixInterface.printMatrix(matrixToBeChecked);
+        PrintMatrixSuper.printMatrix(matrixToBeChecked);
 
         System.out.print("Is matrix correct Y/N: ");
 

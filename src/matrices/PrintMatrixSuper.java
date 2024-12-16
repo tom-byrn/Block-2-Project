@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 
-public interface PrintMatrixInterface {
+public interface PrintMatrixSuper {
 
     public static void printMatrix(double[][] matrixToPrint) {
 
