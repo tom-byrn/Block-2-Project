@@ -16,12 +16,12 @@ public class ComplexManager implements Start {
             MenuText.complexText();
             Scanner scanner = new Scanner(System.in);
 
-            System.out.print(CYAN + "Enter the real and imaginary parts of the first complex number:");
+            System.out.print(RESET + "Enter the real and imaginary parts of the first complex number:");
             double real1 = scanner.nextDouble();
             double imaginary1 = scanner.nextDouble();
             Complex num1 = new Complex(real1, imaginary1);
 
-            System.out.print(CYAN + "Enter the real and imaginary parts of the second complex number:");
+            System.out.print(RESET + "Enter the real and imaginary parts of the second complex number:");
             double real2 = scanner.nextDouble();
             double imaginary2 = scanner.nextDouble();
             Complex num2 = new Complex(real2, imaginary2);
@@ -40,7 +40,7 @@ public class ComplexManager implements Start {
             System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
             System.out.println(CYAN + "║                                                                ║");
             System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
-            System.out.print(CYAN + "Enter a choice: " + RESET);
+            System.out.print(RESET + "Enter a choice: " + RESET);
 
             int choice = scanner.nextInt();
 
@@ -79,10 +79,10 @@ public class ComplexManager implements Start {
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
-
+            scanner.nextLine();
             scanner.nextLine();
             MenuManager.clearScreen();
-            ComplexManager.start();
+            MenuManager.callMenu();
         }
     }
 

@@ -28,7 +28,6 @@ public class MenuManager {
             try {
 
                 // Prompt user to select a calculator function
-                // Prompt user to select a calculator function
                 System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
                 System.out.println(CYAN + "║" + WHITE + "                   Welcome to the Calculator Menu!              " + CYAN + "║" + RESET);
                 System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
