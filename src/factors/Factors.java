@@ -1,4 +1,4 @@
-package Factors;
+package factors;
 
 import java.util.ArrayList;
 import java.util.List;

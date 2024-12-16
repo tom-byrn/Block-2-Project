@@ -75,14 +75,14 @@ public class ComplexManager implements Start {
                 case 0: //Return to the menu
                     MenuManager.clearScreen();
                     MenuManager.callMenu();
-                    break;
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
             }
 
-            scanner.close();
+            scanner.nextLine();
             MenuManager.clearScreen();
-            MenuManager.callMenu();
+            ComplexManager.start();
         }
     }
 

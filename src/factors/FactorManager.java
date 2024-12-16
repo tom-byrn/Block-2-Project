@@ -1,4 +1,4 @@
-package Factors;
+package factors;
 
 import functions.Functions;
 import menu.MenuManager;

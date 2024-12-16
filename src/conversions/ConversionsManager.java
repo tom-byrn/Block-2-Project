@@ -58,7 +58,7 @@ public class ConversionsManager implements Start {
                         currentlySelecting = false;
                         MenuManager.clearScreen();
                         MenuManager.callMenu();
-                        break;
+                        return;
                     }
 
                 }
