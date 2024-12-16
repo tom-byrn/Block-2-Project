@@ -93,13 +93,12 @@ public class AlgebraSimplifier {
     //Handles multiplication and division in the expression by calling separate methods for each.
     public static String handleMultiplicationAndDivision(String expression) {
         // Step 1: First handle division (e.g., 6x^2 / 2y => 6x^2 * 0.5y^-2)
-        System.out.println(expression);
         expression = handleDivision(expression);
 
         // Step 2: Remove all spaces in the expression to make parsing easier
         expression = expression.replaceAll("\\s+", "");
         expression = processingRegex(expression);
-        System.out.println(expression);
+
         // Step 3: Then handle multiplication (e.g., 3x^2 * 4x => 12x^3)
         expression = multiplyTerms(expression);
         expression = processingRegex(expression);
