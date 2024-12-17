@@ -1,11 +1,20 @@
 package matrices;
 
+import java.util.Scanner;
+
 import static matrices.MatrixMultiplication.multiplication;
 
 public class EigenvalueCalculator implements PrintMatrixFinal {
 
     private static int noOfRowsInVector;
-    private static void powerIteration(double[][] origialMatrix, int noOfIterations) {
+
+    private static double eigenvalue;
+
+    protected static double getEigenvalue() {
+        return eigenvalue;
+    }
+
+    protected static double[][] powerIteration(double[][] origialMatrix, int noOfIterations) {
 
         noOfRowsInVector = origialMatrix.length; // Size of the matrix (assuming a square matrix)
 
@@ -35,11 +44,16 @@ public class EigenvalueCalculator implements PrintMatrixFinal {
         // 2. v^T * A
         // 3. multiply by v ( * v)
         double[][] currentEigenvalueArray = multiplication(multiplication(TransposeOfAMatrix.transpose(eigenVectorMatrix), origialMatrix), eigenVectorMatrix);
-        double currentEigenvalue = currentEigenvalueArray[0][0];
+        eigenvalue = currentEigenvalueArray[0][0];
 
-        // Print statements
-        System.out.println("The Dominant Eigenvalue is: " + currentEigenvalue + "\n\nAnd it's corresponding Eigenvectors are: ");
-        PrintMatrixFinal.printFinal(eigenVectorMatrix);
+        if(Double.isNaN(eigenvalue)){
+            System.err.println("The Matrix (A-ʎI) is Singular.\nUnable to find eigenvalues.");
+            Scanner input = new Scanner(System.in);
+            input.nextLine();
+            MatricesManager.start();
+        }
+
+        return eigenVectorMatrix;
     }
 
     //this normilizes the vector
@@ -71,6 +85,10 @@ public class EigenvalueCalculator implements PrintMatrixFinal {
         int maxIterations = 25;
 
         // Call the power iteration method to find the largest eigenvalue and eigenvector
-        EigenvalueCalculator.powerIteration(matrix, maxIterations);
+        double[][]eigenVectorMatrix = EigenvalueCalculator.powerIteration(matrix, maxIterations);
+
+        // Print statements
+        System.out.println("\nThe Dominant Eigenvalue is: " + getEigenvalue() + "\nAnd it's corresponding Eigenvectors are: ");
+        PrintMatrixFinal.printFinal(eigenVectorMatrix);
     }
 }

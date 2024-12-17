@@ -38,8 +38,9 @@ public class MatricesManager implements Start {
                 System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (7) for det(A)                                       " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (8) for Dominant Eigenvalues                        " + CYAN + "  ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (9) to Solve Simultaneous Equations                 " + CYAN + "  ║" + RESET);
-                System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (10) for Dimensionality Reduction                   " + CYAN + "  ║" + "\n║"
-                        + BRIGHT_PURPLE +  "               Using Principal Component Analysis             " + CYAN + "  ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (10) to Multiply by a Number                         " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (11) for Dimensionality Reduction                   " + CYAN + "  ║" + "\n║"
+                        + BRIGHT_BLUE +  "               Using Principal Component Analysis             " + CYAN + "  ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
@@ -88,6 +89,14 @@ public class MatricesManager implements Start {
                     case 9:
                         // Calls Solve Simulations Equations method
                         SolveSimulationsEquations.solveEquation();
+                        break;
+                    case 10:
+                        // Calls MultiplyByANumber method
+                        MultiplyByANumber.MultiplyStart();
+                        break;
+                    case 11:
+                        // Calls MultiplyByANumber method
+                        PCA.pcaStart();
                         break;
                     case 0:
                         // Returns to menu
