@@ -6,7 +6,7 @@ import menu.Start;
 
 import java.util.Scanner;
 
-public class AlgebraManager extends Remove0And1 implements Start {
+public class AlgebraManager implements Start, ProcessorAlgebra {
 
     public void start(){
 
@@ -35,6 +35,15 @@ public class AlgebraManager extends Remove0And1 implements Start {
         scanner.nextLine();
         MenuManager.clearScreen();
         MenuManager.callMenu();
+    }
+
+    private static String processingRegex(String expression){
+        ProcessorAlgebra.processingRegex(expression);
+
+        //add spaces
+        expression = expression.replaceAll("\\+", " + ");
+        expression = expression.replaceAll("-", " - ");
+        return expression;
     }
 
 }

@@ -3,7 +3,7 @@ package algebra;
 import java.util.*;
 import java.util.regex.*;
 
-public class AlgebraSimplifier extends AlgebraMultiplicationAndDivision{
+public class AlgebraSimplifier extends AlgebraMultiplicationAndDivision implements ProcessorAlgebra{
     //Simplifies the algebraic expression by combining like terms and handling basic arithmetic operations.
 
     public static String simplifyExpression(String expression) {
@@ -98,11 +98,11 @@ public class AlgebraSimplifier extends AlgebraMultiplicationAndDivision{
 
         // Step 2: Remove all spaces in the expression to make parsing easier
         expression = expression.replaceAll("\\s+", "");
-        expression = Remove0And1.processingRegex(expression);
+        expression = ProcessorAlgebra.processingRegex(expression);
 
         // Step 3: Then handle multiplication (e.g., 3x^2 * 4x => 12x^3)
         expression = AlgebraMultiplicationAndDivision.multiplyTerms(expression);
-        expression = Remove0And1.processingRegex(expression);
+        expression = ProcessorAlgebra.processingRegex(expression);
         return expression;
     }
 

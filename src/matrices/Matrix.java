@@ -84,7 +84,7 @@ public abstract class Matrix extends Calculations implements CreatingMatrixInter
             numberInMatrix = super.evaluate(String.valueOf(numberRowCounterInMatrix));
             //NumberFormatException is an exception that occours when trying to convert a string to a number when string doesn't have an appropriate format
             //Prevents ArrayIndexOutOfBoundsException when trying to add something out of bounds to an array
-        }catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
+        }catch(Exception e){
             //If no number detected it inputs 0
             numberInMatrix = 0;
         }
@@ -125,7 +125,7 @@ public abstract class Matrix extends Calculations implements CreatingMatrixInter
 
         // using scanner to find the numbers
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter first row:\t");
+        System.out.print("Enter first row ( Numbers / Sums should be separated by a \",\" ):\t");
 
         // iterate through the rows
         for(int rowCounter = 0; rowCounter< noOfRowsInMatrixA; rowCounter++){
@@ -145,7 +145,7 @@ public abstract class Matrix extends Calculations implements CreatingMatrixInter
 
             // for printing out next row before you enter each row
             if(noOfRowsInMatrixA != (rowCounter+1)){
-                System.out.print("Enter next row:\t\t");
+                System.out.print("Enter next row ( Numbers / Sums should be separated by a \",\" ):\t\t");
             }
         }
         setMatrixOne(matrixCreated);
