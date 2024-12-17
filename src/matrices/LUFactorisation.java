@@ -49,7 +49,7 @@ public class LUFactorisation implements PrintMatrixFinal {
 
                 // Check if the pivot element (upperTriangularMatrix[pivotRow][pivotRow]) is zero
                 // If it's zero, LU decomposition cannot proceed without pivoting
-                if (upperTriangularMatrix[currentRow][currentRow] == 0) {
+                if (upperTriangularMatrix[pivotRow][pivotRow] == 0) {
                     System.out.println("Pivot element is zero, LU Factorisation cannot be performed.");
                     return false;  // Return false indicating failure
                 }
@@ -57,14 +57,29 @@ public class LUFactorisation implements PrintMatrixFinal {
                 // Calculate the multiplier to eliminate the element upperTriangularMatrix[currentRow][pivotRow]
                 double multiplier = upperTriangularMatrix[currentRow][pivotRow] / upperTriangularMatrix[pivotRow][pivotRow];
 
+
                 lowerTriangularMatrix[currentRow][pivotRow] = multiplier;  // Store the multiplier in the corresponding L matrix element
 
                 // Update the upperTriangularMatrix by subtracting the appropriate multiple of row pivotRow
                 for (int currentCol = pivotRow; currentCol < matrixSize; currentCol++) {
                     upperTriangularMatrix[currentRow][currentCol] -= multiplier * upperTriangularMatrix[pivotRow][currentCol];  // Perform the row operation to eliminate upperTriangularMatrix[currentRow][pivotRow]
                 }
+
             }
         }
+
+        // Sets all elements below the diagonal of a square 2D array to zero. Prevent some minor inacuracies
+        // Elements below the diagonal have row index > column index.
+        // Iterate through each row of the matrix, starting from the second row (index 1)
+        for (int currentRow = 1; currentRow < matrixSize; currentRow++) {
+            // Iterate through the columns for the current row, up to the diagonal
+
+            for (int currentCol = 0; currentCol < currentRow; currentCol++) {
+                // Set all elements below the diagonal to zero (i.e., where row > col)
+                upperTriangularMatrix[currentRow][currentCol] = 0;
+            }
+        }
+
         return true;  // Return true indicating successful LU decomposition
     }
 
