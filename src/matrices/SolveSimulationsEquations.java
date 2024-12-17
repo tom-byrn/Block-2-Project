@@ -2,9 +2,8 @@ package matrices;
 
 import menu.MenuManager;
 
-import static matrices.LUFactorisation.*;
 
-public class SolveSimulationsEquations implements PrintMatrixFinal {
+public class SolveSimulationsEquations extends Determinant implements PrintMatrixFinal {
 
     protected static void solveEquation(){
         // Create Matrix A
@@ -26,7 +25,7 @@ public class SolveSimulationsEquations implements PrintMatrixFinal {
     private static double[][] solveUsingLU(double[][] coefficientMatrix, double[][] rightHandSide) {
         int numberOfVariables = coefficientMatrix.length;  // Number of variables (size of the system)
 
-        double[][]lowerTriangularMatrix = new double[numberOfVariables][numberOfVariables]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
+        double[][] lowerTriangularMatrix = new double[numberOfVariables][numberOfVariables]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
         double [][] upperTriangularMatrix = new double[numberOfVariables][numberOfVariables]; // Declare upperTriangularMatrix as a n x n matrix for upper triangular matrix (U)
 
         setLowerTriangularMatrix(lowerTriangularMatrix);
@@ -34,8 +33,9 @@ public class SolveSimulationsEquations implements PrintMatrixFinal {
 
         // Step 1: Perform LU factorization of the coefficient matrix
         // perform LU Factorisation
-        if(!LUFactorisation.luFactorisation(coefficientMatrix, getLowerTriangularMatrix(), getUpperTriangularMatrix())){
-            MenuManager.callMenu();
+        if(Determinant.computeDeterminant(coefficientMatrix) == 0){
+            System.out.println("The Determinant is 0, hence there is no solution for these Simulations Equations");
+            PrintMatrixFinal.printFinal(coefficientMatrix);
         }
 
         // Step 2: Solve Lc = b using forward substitution

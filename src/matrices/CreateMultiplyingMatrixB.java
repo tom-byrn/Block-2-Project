@@ -1,6 +1,5 @@
 package matrices;
 
-import static matrices.NumberChecker.intSizeInt;
 public class CreateMultiplyingMatrixB extends Matrix {
 
     private static int noOfColumnsInMatrixInB;
@@ -45,7 +44,7 @@ public class CreateMultiplyingMatrixB extends Matrix {
             try {
                 setNoOfRowsInMatrixInB(intSizeInt());
                 if(getNoOfRowsInMatrixInB() != getNoOfColumnsMatrixA()){
-                    System.err.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + getNoOfRowsInMatrixA());
+                    System.err.println("Sorry your matrix must have the same number of rows as matrix A has columns: " + getNoOfColumnsMatrixA());
                     throw new IllegalArgumentException();
                 }
                 check = false;

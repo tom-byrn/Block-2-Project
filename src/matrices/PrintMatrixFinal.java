@@ -10,6 +10,6 @@ public interface PrintMatrixFinal extends PrintMatrixSuper {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         MenuManager.clearScreen();
-        MenuManager.callMenu();
+        MatricesManager.start();
     }
 }

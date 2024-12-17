@@ -89,6 +89,7 @@ public class LUFactorisation implements PrintMatrixFinal {
             PrintMatrixFinal.printFinal(upperTriangularMatrix);
         } else {
             System.out.println("LU Decomposition failed.");
+            PrintMatrixFinal.printFinal(inputMatrix);
         }
     }
 }

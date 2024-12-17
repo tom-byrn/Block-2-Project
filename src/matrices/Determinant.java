@@ -1,17 +1,20 @@
 package matrices;
 
-public class Determinant {
+public class Determinant extends LUFactorisation{
 
     // Function to compute the determinant using LU decomposition
-    private static double computeDeterminant(double[][] inputMatrix) {
+    protected static double computeDeterminant(double[][] inputMatrix) {
         int matrixSize = inputMatrix.length;  // Get the size of the matrix (n x n)
 
         // Create the lower and upper triangular matrices to store the LU decomposition result
         double[][] lowerMatrix = new double[matrixSize][matrixSize];
         double[][] upperMatrix = new double[matrixSize][matrixSize];
 
+        setLowerTriangularMatrix(lowerMatrix);
+        setUpperTriangularMatrix(upperMatrix);
+
         // Perform LU factorisation
-        if (LUFactorisation.luFactorisation(inputMatrix, lowerMatrix, upperMatrix)) {
+        if (LUFactorisation.luFactorisation(inputMatrix, getLowerTriangularMatrix(), getUpperTriangularMatrix())) {
 
             // The total determinant is the product of the diagonal elements of the upper matrix
             double determinant = 1.0;

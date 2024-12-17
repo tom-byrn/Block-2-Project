@@ -1,7 +1,5 @@
 package matrices;
 
-import static matrices.NumberChecker.intSizeInt;
-
 public class CreateFirstMatrix extends Matrix {
 
 

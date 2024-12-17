@@ -1,6 +1,5 @@
 package matrices;
 
-import static matrices.NumberChecker.intSizeInt;
 
 public class CreateSquareMatrix extends Matrix {
 
