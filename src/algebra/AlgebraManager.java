@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class AlgebraManager implements Start, ProcessorAlgebra {
 
-    public void start(){
+    public static void start(){
 
         MenuManager.clearScreen();
         MenuText.algebraText();
