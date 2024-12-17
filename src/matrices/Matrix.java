@@ -1,10 +1,11 @@
 package matrices;
 
+import calculations.Calculations;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixSuper {
+public abstract class Matrix extends Calculations implements CreatingMatrixInterface, PrintMatrixSuper {
     
     //Store matrix size
     private static int noOfRowsInMatrixA;
@@ -74,17 +75,20 @@ public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixSupe
     @Override
     //Used to prevent errors e.g. someone entering 2 numbers in a row in a 3*3 matrix
     public double getNumberInMatrix(String rowListWithSpace, int positionCounter) {
-        double numberRowCounterInMatrix;
+        String numberRowCounterInMatrix;
+        double numberInMatrix;
         // Ensures there is a number in each coloum or enters zero
         try{
-            numberRowCounterInMatrix = Double.parseDouble(rowListWithSpace.split(" ")[positionCounter]);
+            numberRowCounterInMatrix = rowListWithSpace.split(",")[positionCounter];
+
+            numberInMatrix = super.evaluate(String.valueOf(numberRowCounterInMatrix));
             //NumberFormatException is an exception that occours when trying to convert a string to a number when string doesn't have an appropriate format
             //Prevents ArrayIndexOutOfBoundsException when trying to add something out of bounds to an array
         }catch(NumberFormatException | ArrayIndexOutOfBoundsException e){
             //If no number detected it inputs 0
-            numberRowCounterInMatrix = 0;
+            numberInMatrix = 0;
         }
-        return numberRowCounterInMatrix;
+        return numberInMatrix;
     }
 
     @Override
@@ -134,6 +138,7 @@ public abstract class Matrix implements CreatingMatrixInterface, PrintMatrixSupe
             // iterate through the columns in each row and adding them to the matrix
             for(positionCounter = 0; positionCounter< noOfColumnsMatrixA; positionCounter++){
 
+                //Gets the actual number
                 double numberRowCounterInMatrix = getNumberInMatrix(rowListWithSpace, positionCounter);
                 matrixCreated[rowCounter][positionCounter] = numberRowCounterInMatrix;
             }
