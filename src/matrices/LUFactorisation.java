@@ -1,5 +1,7 @@
 package matrices;
 
+import java.util.Scanner;
+
 // LU = A
 public class LUFactorisation implements PrintMatrixFinal {
 
@@ -47,7 +49,7 @@ public class LUFactorisation implements PrintMatrixFinal {
 
                 // Check if the pivot element (upperTriangularMatrix[pivotRow][pivotRow]) is zero
                 // If it's zero, LU decomposition cannot proceed without pivoting
-                if (upperTriangularMatrix[pivotRow][pivotRow] == 0) {
+                if (upperTriangularMatrix[currentRow][currentRow] == 0) {
                     System.out.println("Pivot element is zero, LU Factorisation cannot be performed.");
                     return false;  // Return false indicating failure
                 }
@@ -82,11 +84,15 @@ public class LUFactorisation implements PrintMatrixFinal {
         if (luFactorisation(inputMatrix, lowerTriangularMatrix, upperTriangularMatrix)) {
 
             // If LU decomposition is successful, print the L and U matrices
-            System.out.println("Lower Triangular Matrix (L):");
+            System.out.println("\nLower Triangular Matrix (L):");
             PrintMatrixSuper.printMatrix(lowerTriangularMatrix);
 
             System.out.println("\nUpper Triangular Matrix (U):");
-            PrintMatrixFinal.printFinal(upperTriangularMatrix);
+            PrintMatrixSuper.printMatrix(upperTriangularMatrix);
+
+            //Just to wait to hit enter
+            Scanner input = new Scanner(System.in);
+            input.nextLine();
         } else {
             System.out.println("LU Decomposition failed.");
             PrintMatrixFinal.printFinal(inputMatrix);
