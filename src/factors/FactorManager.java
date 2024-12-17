@@ -109,7 +109,7 @@ public class FactorManager implements Start {
 
     public static void factorPrompt() {
 
-        Factors.Factors f = new Factors.Factors();
+        factors.Factors f = new factors.Factors();
         long n = 0;
 
         boolean validInput = false;
@@ -119,7 +119,7 @@ public class FactorManager implements Start {
                 String num = scanner.nextLine();
                 num = NumberFormatter.removeCommas(num);
                 n = Long.parseLong(num);
-                f = new Factors.Factors(n);
+                f = new factors.Factors(n);
                 validInput = true;
 
             } catch (Exception e) {

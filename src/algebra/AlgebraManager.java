@@ -26,7 +26,7 @@ public class AlgebraManager implements Start {
         String simplifiedExpression = AlgebraSimplifier.simplifyExpression(expression);
 
         // Output the simplified expression
-        System.out.println("\nSimplified expression: " + simplifiedExpression);
+        System.out.print("\nSimplified expression: " + simplifiedExpression);
 
         //Wait for user to hit enter before clearing the screen
         scanner.nextLine();
