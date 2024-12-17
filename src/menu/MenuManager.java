@@ -1,11 +1,13 @@
 package menu;
 
+import factors.FactorManager;
 import algebra.AlgebraManager;
 import calculations.CalculationsManager;
 import complex.ComplexManager;
 import conversions.ConversionsManager;
-import functions.FunctionsManager;
 import matrices.MatricesManager;
+import functions.*;
+import probability.ProbabilityManager;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -28,6 +30,7 @@ public class MenuManager {
             try {
 
                 // Prompt user to select a calculator function
+                // Prompt user to select a calculator function
                 System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
                 System.out.println(CYAN + "║" + WHITE + "                   Welcome to the Calculator Menu!              " + CYAN + "║" + RESET);
                 System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
@@ -39,6 +42,7 @@ public class MenuManager {
                 System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for complex numbers                              " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) to find factors and primes                       " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (7) for conversions                                  " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (8) for probability                                  " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to exit the application                          " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
@@ -81,8 +85,8 @@ public class MenuManager {
                         break;
                     }
                     case 6 -> {
-                       currentlySelecting = false;
-                        factors.FactorManager.start();
+                        currentlySelecting = false;
+                        FactorManager.start();
                         MenuManager.clearScreen();
                         break;
                     }
@@ -92,12 +96,12 @@ public class MenuManager {
                         MenuManager.clearScreen();
                         break;
                     }
-                    /* case 9 -> {
+                    case 8 -> {
                         currentlySelecting = false;
-                        ConstantAdder.start();
+                        ProbabilityManager.start();
                         MenuManager.clearScreen();
                         break;
-                    } */
+                    }
                     case 0 -> {
                         currentlySelecting = false;
                         MenuManager.clearScreen();
