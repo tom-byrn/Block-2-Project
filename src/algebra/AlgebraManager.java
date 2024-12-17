@@ -6,9 +6,9 @@ import menu.Start;
 
 import java.util.Scanner;
 
-public class AlgebraManager implements Start {
+public class AlgebraManager extends Remove0And1 implements Start {
 
-    public static void start(){
+    public void start(){
 
         MenuManager.clearScreen();
         MenuText.algebraText();
@@ -24,6 +24,9 @@ public class AlgebraManager implements Start {
 
         // Simplify the input expression using the simplifyExpression method
         String simplifiedExpression = AlgebraSimplifier.simplifyExpression(expression);
+
+        // Process output
+        simplifiedExpression = processingRegex(simplifiedExpression);
 
         // Output the simplified expression
         System.out.print("\nSimplified expression: " + simplifiedExpression);

@@ -1,6 +1,6 @@
 package matrices;
 
-public class PCA implements PrintMatrixSuper{
+public class PCA implements PrintMatrixFinal{
     protected static void pcaStart() {
 
         //Create Dataset
