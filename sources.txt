@@ -1,6 +1,5 @@
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\Main.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\algebra\AlgebraManager.java
-C:\Users\tomby\IdeaProjects\Block-2-Project\src\algebra\AlgebraProcessor.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\algebra\AlgebraSimplifier.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\calculations\Calculations.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\calculations\CalculationsManager.java
@@ -16,6 +15,7 @@ C:\Users\tomby\IdeaProjects\Block-2-Project\src\conversions\CurrencyConversions.
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\factors\FactorManager.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\factors\Factors.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\factors\PrimeFinder.java
+C:\Users\tomby\IdeaProjects\Block-2-Project\src\functions\Differentiation.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\functions\FunctionGraph.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\functions\Functions.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\functions\FunctionsManager.java
@@ -39,7 +39,8 @@ C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\MatrixInverse.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\MatrixMultiplication.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\MatrixPower.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\NumberChecker.java
-C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\PrintMatrixInterface.java
+C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\PrintMatrixFinal.java
+C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\PrintMatrixSuper.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\SolveSimulationsEquations.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\matrices\TransposeOfAMatrix.java
 C:\Users\tomby\IdeaProjects\Block-2-Project\src\menu\Colours.java

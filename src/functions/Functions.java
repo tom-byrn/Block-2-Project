@@ -3,6 +3,8 @@ package functions;
 //import algebra.Algebra;
 import calculations.Calculations;
 import functions.FunctionsManager.*;
+import processor.InputProcessor;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import static functions.FunctionsManager.substitutedExpression;
@@ -27,7 +29,7 @@ public class Functions  {
     }
 
     // Helper method to validate double input
-    private static double getValidDouble(String prompt) {
+    protected static double getValidDouble(String prompt) {
         while (true) {
             System.out.print(prompt);
             try {
@@ -74,7 +76,7 @@ public class Functions  {
     }
 
     // method to sub a variable into a function
-    private static double subIn(String function, double variable) {
+    protected static double subIn(String function, double variable) {
         String substitution = "(" + variable + ")";
         String substitutedExpression = function.replaceAll("x", substitution);
         Calculations calculations = new Calculations(substitutedExpression);
@@ -245,6 +247,8 @@ public class Functions  {
         double fX0;
         double fX1;
 
+        System.out.println("");
+        int counter = 1;
         while (true) {
             fX0 = subIn(functionInput, x0);
             fX1 = subIn(functionInput, x1);
@@ -255,8 +259,11 @@ public class Functions  {
             }
             x0 = x1;
             x1 = x2;
+
+            counter += 1;
+            System.out.printf("Iteration %d: x = %.6f\t\t f(x) = %.6f\n", counter, x2, subIn(functionInput, x2));
         }
-        System.out.printf("The root is approximately %.2f\n", x2);
+        System.out.printf("\nThe root is approximately %.2f\n", x2);
         scanner.nextLine();
     }
 

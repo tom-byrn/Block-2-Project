@@ -173,7 +173,7 @@ public class Calculations{
     }
 
     private boolean isFunction(String token){
-        return token.equals("sin") || token.equals("cos") || token.equals("log")
+        return token.equals("sin") || token.equals("cos") || token.equals("log") //default log10
                 || token.equals("ln") || token.equals("sqrt") || token.equals("tan")
                 || token.equals("sinh") || token.equals("cosh") || token.equals("tanh") //As many functions can be added to this as needed
                 || token.startsWith("root") || token.startsWith("log"); //Using startsWith() method to handle functions that take 2 numbers

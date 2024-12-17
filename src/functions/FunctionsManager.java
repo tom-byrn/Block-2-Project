@@ -41,11 +41,16 @@ public class FunctionsManager implements Start{
                 System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (4) for the bisection method                         " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (5) for the secant method                            " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (6) to solve polynomials                             " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (7) for differentiation                              " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (8) for the gradient descent method                  " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (9) for Newton's method                              " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
                 System.out.print(CYAN + "Enter a choice: " + RESET);
+
+
 
 
                 // Scanner object scans for user input
@@ -79,13 +84,23 @@ public class FunctionsManager implements Start{
                         currentlySelecting = false;
                         break;
                     }
-                    case 7 -> {
-                        //FunctionGraph fg = new FunctionGraph();
-                        //fg.graphFunction();
-                        break;
-                    }
                     case 6 -> {
                         Polynomial.promptDegree();
+                        currentlySelecting = false;
+                        break;
+                    }
+                    case 7 -> {
+                        Differentiation.numericDifferentiation();
+                        currentlySelecting = false;
+                        break;
+                    }
+                    case 8 -> {
+                        Differentiation.gradientDescent();
+                        currentlySelecting = false;
+                        break;
+                    }
+                    case 9 -> {
+                        Differentiation.newtonMethod();
                         currentlySelecting = false;
                         break;
                     }

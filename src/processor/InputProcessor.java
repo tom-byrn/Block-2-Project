@@ -7,7 +7,7 @@ public class InputProcessor {
         input = input.replaceAll("(\\d)([a-zA-Z])", "$1*$2");
         //Remove all whitespace
         input = input.replaceAll("\\s+", "");
-        // Add * between a number and a parenthesis unless the number is preceded by 't' or 'g'
+        // Add * between a number and a parenthesis unless the number is preceded by 't' or 'g' for log and root
         input = input.replaceAll("(?<![tg\\d])(\\d)(\\()", "$1*$2");
         // Replace ")(" with ")*("
         input = input.replaceAll("\\)\\(", ")*(");
@@ -17,15 +17,12 @@ public class InputProcessor {
         input = input.replaceAll("--", "+");
         input = input.replaceAll("-\\(", "-1(");
         input = input.replaceAll("-([a-zA-Z])", "-1*$1");
-        input = input.replaceFirst("^-", "(0-");
+        input = input.replaceFirst("^-", "0-");
         input = input.replaceAll("\\(-", "(0-");
 
         // Replacing factorial with factorial number needed for the 2 argument constructor
         input = input.replaceAll("!", "!0");
 
-
-        // Constants
-        // Replace e with Euler constant
         // Replace e with a string conversion of Math.E
         input = input.replaceAll("\\be\\b", String.valueOf(Math.E));
 
@@ -62,6 +59,8 @@ public class InputProcessor {
         // Replace u with Unified Atomic Mass Unit
         input = input.replaceAll("\\bu\\b", "1.6605402*10^(0-27)");
 
+        // Ensure * between all numbers and (
+        input = input.replaceAll("(?<![tg\\d])(\\d)(\\()", "$1*$2");
 
         calculations.CalculationsProcessor.setProcessedString(input);
     }
