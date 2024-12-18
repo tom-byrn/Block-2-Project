@@ -3,10 +3,9 @@ package matrices;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class MultiplyByANumber {
+public class MultiplyByANumber implements PrintMatrixFinal{
     protected static void multiplyStart() {
         System.out.print("Enter Number: ");
-        Scanner input = new Scanner(System.in);
 
         double number = 0;
 
@@ -14,6 +13,7 @@ public class MultiplyByANumber {
         boolean noNumberEntered = true;
         while (noNumberEntered) {
             try {
+                Scanner input = new Scanner(System.in);
                 number = input.nextDouble();
                 noNumberEntered = false;
             } catch (InputMismatchException e) {
