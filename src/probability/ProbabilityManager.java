@@ -1,5 +1,6 @@
 package probability;
 
+import functions.FunctionsManager;
 import menu.MenuManager;
 import menu.MenuText;
 import menu.Start;
@@ -73,6 +74,8 @@ public class ProbabilityManager implements Start {
                 System.out.println("Please enter a valid number!\n");
                 scanner.nextLine(); // Clear invalid input from the scanner
             }
+            MenuManager.clearScreen();
+            ProbabilityManager.start();
         }
     }
 
