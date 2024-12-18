@@ -7,13 +7,13 @@ Welcome to the Calculator Project! This application is a versatile calculator th
 The calculator supports the following operations:
 
 1. **Basic Calculations**: Perform addition, subtraction, multiplication, and division. ➕➖✖️➗
-2. **Functions**: Evaluate trigonometric, logarithmic, and other mathematical functions. 📐📊
+2. **Functions**: Evaluate trigonometric, logarithmic, and other mathematical functions. 📐
 3. **Matrices**: Perform operations like addition, multiplication, and finding determinants. 🧮
 4. **Algebra**: Solve equations and simplify expressions. 🧑‍🏫
 5. **Complex Numbers**: Perform calculations with complex numbers. 🔢
-6. **Factors and Primes**: Find factors of numbers and check for primality. 🏗️🔎
-7. **Conversions**: Convert units (e.g., length, temperature, and weight). 🌡️📏
-8. **Probability**: Calculate probabilities and combinatorics. 🎲📈
+6. **Factors and Primes**: Find factors of numbers and check for primality. 🏗🔎
+7. **Conversions**: Convert units (e.g., length, temperature, and weight). 💶
+8. **Probability**: Calculate probabilities and combinatorics. 🎲
 
 ## Getting Started
 To use this application, ensure the following:
