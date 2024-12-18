@@ -29,5 +29,5 @@ To use this application, ensure the following:
 Feel free to share feedback or contribute to the project by creating pull requests or submitting issues. 💬🤝
 
 ### Contact
-For any queries or suggestions, please reach out to the project maintainer. 📧
+For any queries or suggestions, please reach out. 📧
 
