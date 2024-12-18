@@ -30,9 +30,9 @@ public class ProbabilityManager implements Start {
                 System.out.println(CYAN + "║" + WHITE + "                 Welcome to Probability                         " + CYAN + "║" + RESET);
                 System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
-                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to use Baye’s theorem                            " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (1) to use Bayes theorem                            " + CYAN + "  ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_GREEN + "    Enter (2) to check if events and independent               " + CYAN + " ║" + RESET);
-                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (3) to find P(A|B)                                   " + CYAN + " ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (3) to find P(A|B)                                   " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");

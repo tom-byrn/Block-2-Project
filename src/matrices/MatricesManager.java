@@ -39,13 +39,13 @@ public class MatricesManager implements Start {
                 System.out.println(CYAN + "║" + BRIGHT_YELLOW + "    Enter (8) for Dominant Eigenvalues                        " + CYAN + "  ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_CYAN + "    Enter (9) to Solve Simultaneous Equations                 " + CYAN + "  ║" + RESET);
                 System.out.println(CYAN + "║" + BRIGHT_PURPLE + "    Enter (10) to Multiply by a Number                         " + CYAN + " ║" + RESET);
-                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (11) for Dimensionality Reduction                   " + CYAN + "  ║" + "\n║"
-                        + BRIGHT_BLUE +  "               Using Principal Component Analysis             " + CYAN + "  ║" + RESET);
+                System.out.println(CYAN + "║" + BRIGHT_BLUE + "    Enter (11) for Dimensionality Reduction with PCA          " + CYAN + "  ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "║" + BRIGHT_RED + "    Enter (0) to return to the menu                            " + CYAN + " ║" + RESET);
                 System.out.println(CYAN + "║                                                                ║");
                 System.out.println(CYAN + "╚════════════════════════════════════════════════════════════════╝" + RESET);
                 System.out.print(CYAN + "Enter a choice: " + RESET);
+
 
 
                 // checking is a valid function selected

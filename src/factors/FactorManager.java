@@ -85,16 +85,13 @@ public class FactorManager implements Start {
                     validInput = true; // Valid input, proceed
                     PrimeFinder primeFinder = new PrimeFinder(n);
                     primeFinder.findNthPrime();
-                    System.out.println("\nThe " + NumberFormatter.nthNumber(NumberFormatter.addCommas(String.valueOf(n))) + "th prime number is: " + NumberFormatter.addCommas(String.valueOf(primeFinder.getNthPrime())) + "\n");
+                    System.out.println("\nThe " + NumberFormatter.nthNumber(NumberFormatter.addCommas(String.valueOf(n))) + " prime number is: " + NumberFormatter.addCommas(String.valueOf(primeFinder.getNthPrime())) + "\n");
                     scanner.nextLine();
                 } else {
                     System.out.println("Please enter a positive integer between 1 and 50,000,000\n");
                     scanner.nextLine();
                 }
-            } catch (InputMismatchException e) {
-                System.out.println("Please enter a valid integer.");
-                scanner.nextLine(); // Clear the invalid input from the buffer
-            } catch (IllegalArgumentException e) {
+            } catch (InputMismatchException | IllegalArgumentException e) {
                 System.out.println("Please enter a valid integer.");
                 scanner.nextLine(); // Clear the invalid input from the buffer
             }

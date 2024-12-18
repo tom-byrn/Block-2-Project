@@ -5,6 +5,8 @@ import menu.MenuManager;
 import menu.MenuText;
 import menu.Start;
 
+import java.util.IllegalFormatException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import static menu.Colours.*;
@@ -15,16 +17,29 @@ public class ComplexManager implements Start {
             MenuManager.clearScreen();
             MenuText.complexText();
             Scanner scanner = new Scanner(System.in);
+            double real1 = 0;
+            double imaginary1 = 0;
+            double real2 = 0;
+            double imaginary2 = 0;
+            Complex num1 = new Complex();
+            Complex num2 = new Complex();
 
-            System.out.print(RESET + "Enter the real and imaginary parts of the first complex number:");
-            double real1 = scanner.nextDouble();
-            double imaginary1 = scanner.nextDouble();
-            Complex num1 = new Complex(real1, imaginary1);
 
-            System.out.print(RESET + "Enter the real and imaginary parts of the second complex number:");
-            double real2 = scanner.nextDouble();
-            double imaginary2 = scanner.nextDouble();
-            Complex num2 = new Complex(real2, imaginary2);
+            try {
+                System.out.print(RESET + "Enter the real and imaginary parts of the first complex number:");
+                real1 = scanner.nextDouble();
+                imaginary1 = scanner.nextDouble();
+                num1 = new Complex(real1, imaginary1);
+
+                System.out.print(RESET + "Enter the real and imaginary parts of the second complex number:");
+                real2 = scanner.nextDouble();
+                imaginary2 = scanner.nextDouble();
+                num2 = new Complex(real2, imaginary2);
+                System.out.println("");
+            } catch (IllegalStateException | IllegalArgumentException | InputMismatchException e){
+                System.out.println("Please enter valid double values\n");
+
+            }
 
             System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
             System.out.println(CYAN + "║" + WHITE + "             Welcome to Complex Number Operations               " + CYAN + "║" + RESET);
@@ -43,6 +58,7 @@ public class ComplexManager implements Start {
             System.out.print(RESET + "Enter a choice: " + RESET);
 
             int choice = scanner.nextInt();
+            System.out.println("");
 
             Complex result;
             switch (choice) {

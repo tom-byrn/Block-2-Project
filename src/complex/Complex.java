@@ -12,6 +12,9 @@ public class Complex extends Calculations {
             this.imaginary = imaginary;
         }
 
+        //Default no argument constructor
+        public Complex() {}
+
         // Getter for real part
         public double getReal() {
             return real;

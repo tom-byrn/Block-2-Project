@@ -30,7 +30,6 @@ public class FunctionsManager implements Start{
             try {
 
                 // Prompt user to select a choice for functions
-                // Prompt user to select a choice for functions
                 System.out.println(CYAN + "╔════════════════════════════════════════════════════════════════╗" + RESET);
                 System.out.println(CYAN + "║" + WHITE + "                     Welcome to Functions                       " + CYAN + "║" + RESET);
                 System.out.println(CYAN + "╠════════════════════════════════════════════════════════════════╣" + RESET);

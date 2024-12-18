@@ -69,7 +69,7 @@ public class Calculations{
                     tokens.add(currentToken.toString());
                     currentToken.setLength(0);
                 }
-                tokens.add(Character.toString(ch)); // Add operator/parentheses
+                tokens.add(Character.toString(ch)); // Add operator/parentheses as a seperate token
             }
 
         }
