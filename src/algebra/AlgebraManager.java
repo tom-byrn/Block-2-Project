@@ -22,14 +22,21 @@ public class AlgebraManager implements Start, ProcessorAlgebra {
         // Read the algebraic expression entered by the user
         String expression = scanner.nextLine();
 
-        // Simplify the input expression using the simplifyExpression method
-        String simplifiedExpression = AlgebraSimplifier.simplifyExpression(expression);
+        String simplifiedExpression = "";
+        try {
+            // Simplify the input expression using the simplifyExpression method
+            simplifiedExpression = AlgebraSimplifier.simplifyExpression(expression);
+        }catch(IllegalArgumentException e){
+            System.err.print("Something has gone wrong");
+        }
 
         // Process output
         simplifiedExpression = processingRegex(simplifiedExpression);
 
-        // Output the simplified expression
-        System.out.print("\nSimplified expression: " + simplifiedExpression);
+        if(!simplifiedExpression.isEmpty()) {
+            // Output the simplified expression
+            System.out.print("\nSimplified expression: " + simplifiedExpression);
+        }
 
         //Wait for user to hit enter before clearing the screen
         scanner.nextLine();

@@ -58,7 +58,6 @@ public abstract class Division {
                 divisionMatcher.appendReplacement(stringBuilderDivision, numerator + " * " + reciprocal + variablePart);
             }
             else {
-                System.err.println("Something has gone wrong");
                 throw new IllegalArgumentException();
             }
         }
