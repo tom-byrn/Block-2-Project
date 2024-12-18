@@ -13,16 +13,8 @@ public class LUFactorisation implements PrintMatrixFinal {
         return lowerTriangularMatrix;
     }
 
-    public static void setLowerTriangularMatrix(double[][] lowerTriangularMatrix) {
-        LUFactorisation.lowerTriangularMatrix = lowerTriangularMatrix;
-    }
-
     public static double[][] getUpperTriangularMatrix() {
         return upperTriangularMatrix;
-    }
-
-    public static void setUpperTriangularMatrix(double[][] upperTriangularMatrix) {
-        LUFactorisation.upperTriangularMatrix = upperTriangularMatrix;
     }
 
     // Method to perform LU Decomposition
@@ -79,7 +71,8 @@ public class LUFactorisation implements PrintMatrixFinal {
                 upperTriangularMatrix[currentRow][currentCol] = 0;
             }
         }
-
+        LUFactorisation.lowerTriangularMatrix = lowerTriangularMatrix;
+        LUFactorisation.upperTriangularMatrix = upperTriangularMatrix;
         return true;  // Return true indicating successful LU decomposition
     }
 

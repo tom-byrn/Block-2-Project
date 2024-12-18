@@ -1,8 +1,5 @@
 package matrices;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 public class MatrixAdder implements PrintMatrixFinal{
 
     //Initilize matrices
@@ -41,11 +38,8 @@ public class MatrixAdder implements PrintMatrixFinal{
 
             //Adder for each colum
             for(int matrixColoumAdder = 0; matrixColoumAdder < matrixA[0].length; matrixColoumAdder++){
-                //Adds A to B
-                BigDecimal finalMatrixNumberBigDecimal = BigDecimal.valueOf((matrixA[matrixRowAdder][matrixColoumAdder] - matrixB[matrixRowAdder][matrixColoumAdder]));
-                BigDecimal finalMatrixNumberRounded = finalMatrixNumberBigDecimal.setScale(45, RoundingMode.HALF_UP); // Rounds to 8 decimal places
 
-                matrixFinal[matrixRowAdder][matrixColoumAdder] = finalMatrixNumberRounded.doubleValue();
+                matrixFinal[matrixRowAdder][matrixColoumAdder] = matrixA[matrixRowAdder][matrixColoumAdder] - matrixB[matrixRowAdder][matrixColoumAdder];
             }
         }
         PrintMatrixFinal.printFinal(matrixFinal);

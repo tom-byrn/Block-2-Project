@@ -1,8 +1,5 @@
 package matrices;
 
-import menu.MenuManager;
-
-
 public class SolveSimulationsEquations extends Determinant implements PrintMatrixFinal {
 
     protected static void solveEquation(){
@@ -23,13 +20,6 @@ public class SolveSimulationsEquations extends Determinant implements PrintMatri
 
     // Function to solve Ax = b using LU factorization
     private static double[][] solveUsingLU(double[][] coefficientMatrix, double[][] rightHandSide) {
-        int numberOfVariables = coefficientMatrix.length;  // Number of variables (size of the system)
-
-        double[][] lowerTriangularMatrix = new double[numberOfVariables][numberOfVariables]; // Declare lowerTriangularMatrix as a n x n matrix for lower triangular matrix (L)
-        double [][] upperTriangularMatrix = new double[numberOfVariables][numberOfVariables]; // Declare upperTriangularMatrix as a n x n matrix for upper triangular matrix (U)
-
-        setLowerTriangularMatrix(lowerTriangularMatrix);
-        setUpperTriangularMatrix(upperTriangularMatrix);
 
         // Step 1: Perform LU factorization of the coefficient matrix
         // perform LU Factorisation

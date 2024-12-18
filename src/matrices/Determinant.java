@@ -1,5 +1,7 @@
 package matrices;
 
+import java.util.Scanner;
+
 public class Determinant extends LUFactorisation{
 
     // Function to compute the determinant using LU decomposition
@@ -10,11 +12,9 @@ public class Determinant extends LUFactorisation{
         double[][] lowerMatrix = new double[matrixSize][matrixSize];
         double[][] upperMatrix = new double[matrixSize][matrixSize];
 
-        setLowerTriangularMatrix(lowerMatrix);
-        setUpperTriangularMatrix(upperMatrix);
 
         // Perform LU factorisation
-        if (LUFactorisation.luFactorisation(inputMatrix, getLowerTriangularMatrix(), getUpperTriangularMatrix())) {
+        if (LUFactorisation.luFactorisation(inputMatrix, lowerMatrix, upperMatrix)) {
 
             // The total determinant is the product of the diagonal elements of the upper matrix
             double determinant = 1.0;
@@ -40,5 +40,9 @@ public class Determinant extends LUFactorisation{
         // Compute and print the determinant using LU decomposition
         double determinant = computeDeterminant(inputMatrix);
         System.out.println("Determinant of the matrix: " + determinant);
+
+        //Wait for input
+        Scanner input = new Scanner(System.in);
+        input.nextLine();
     }
 }
