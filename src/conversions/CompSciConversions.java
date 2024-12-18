@@ -139,6 +139,6 @@ class HexToBinaryConvertor implements CompSciConverter {
     @Override
     public String convert(String input) {
         int decimal = Integer.parseInt(input, 16); // Parse hex to decimal
-        return Integer.toHexString(decimal).toUpperCase(); // Convert to hex
+        return Integer.toBinaryString(decimal); // Convert to hex
     }
 }
