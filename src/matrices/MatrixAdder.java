@@ -58,6 +58,6 @@ public class MatrixAdder implements PrintMatrixFinal{
         matrixB = matrixCreatormatrixB.createMatrixAndIncludeSize();
 
         // Create final Matrix
-        matrixFinal = matrixA;
+        matrixFinal = new double[matrixA.length][matrixA[0].length];
     }
 }
