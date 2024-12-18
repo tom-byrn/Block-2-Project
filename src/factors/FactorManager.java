@@ -1,7 +1,5 @@
 package factors;
 
-import factors.PrimeFinder;
-import functions.Functions;
 import menu.MenuManager;
 import menu.MenuText;
 import menu.Start;
