@@ -94,7 +94,7 @@ public class AlgebraSimplifier extends AlgebraMultiplicationAndDivision implemen
     //Handles multiplication and division in the expression by calling separate methods for each.
     public static String handleMultiplicationAndDivision(String expression) {
         // Step 1: First handle division (e.g., 6x^2 / 2y => 6x^2 * 0.5y^-2)
-        expression = AlgebraMultiplicationAndDivision.handleDivision(expression);
+        expression = Division.handleDivision(expression);
 
         // Step 2: Remove all spaces in the expression to make parsing easier
         expression = expression.replaceAll("\\s+", "");
@@ -116,8 +116,11 @@ public class AlgebraSimplifier extends AlgebraMultiplicationAndDivision implemen
         // Add a multiplication operator between variables and numbers, e.g., "x2" becomes "x*2"
         expression = expression.replaceAll("([a-zA-Z])([+-]?\\d*\\.?\\d)", "$1*$2");
 
+        // Removes Spaces
+        expression = expression.replaceAll("\\s", "");
+
         // adds a space either side of the division
-        expression = expression.replaceAll("\\s+/\\s+", " / ");
+        expression = expression.replaceAll("/", " / ");
         return expression;
     }
 }

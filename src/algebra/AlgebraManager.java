@@ -42,7 +42,7 @@ public class AlgebraManager implements Start, ProcessorAlgebra {
 
         //add spaces
         expression = expression.replaceAll("\\+", " + ");
-        expression = expression.replaceAll("-", " - ");
+        expression = expression.replaceAll("(?<!\\^)\\s*-\\s*", " - ");
         return expression;
     }
 
