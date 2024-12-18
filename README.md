@@ -5,11 +5,11 @@ Welcome to our Calculator Project! This application is a versatile CLI calculato
 The calculator supports the following operations:
 
 1. **Basic Calculations**: Performs complex calculations with complex functions such as factorials and trigonometry. ➕➖✖️➗
-2. **Functions**: Evaluate functions, differentials, and use algorithms such as gradrient descent.
+2. **Functions**: Evaluate functions, differentials, and use algorithms such as gradrient descent.📈
 3. **Matrices**: Perform operations like addition, multiplication, finding determinants, LU factorisation, and dimensionality reduction. 🧮
-4. **Algebra**: Solve equations and simplify expressions. 🧑‍🏫
-5. **Complex Numbers**: Perform calculations with complex numbers. 🔢
-6. **Factors and Primes**: Find factors of numbers and check for primality. 🏗🔎
+4. **Algebra**: Solve equations and simplify expressions. 🔠
+5. **Complex Numbers**: Perform calculations with complex numbers. ℹ️
+6. **Factors and Primes**: Find factors of numbers and check for primality. 🔎
 7. **Conversions**: Convert from binary, decimal, and hexadecimal or convert currency values. 💾💵
 8. **Probability**: Calculate probabilities and check event dependency. 🎲
 
