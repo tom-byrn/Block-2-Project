@@ -1,7 +1,7 @@
 # Calculator Project README
 
 ## Project Overview
-Welcome to our Calculator Project! This application is a versatile calculator that supports a wide range of functionalities, from basic arithmetic operations to advanced mathematical computations. ✨
+Welcome to our Calculator Project! This application is a versatile CLI calculator that supports a wide range of functionalities. ✨
 
 ### Features
 The calculator supports the following operations:
