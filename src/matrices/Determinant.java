@@ -46,6 +46,6 @@ public class Determinant extends LUFactorisation{
         //Wait for input
         Scanner input = new Scanner(System.in);
         input.nextLine();
-        MenuManager.callMenu();
+        MenuManager.clearScreen();
     }
 }
