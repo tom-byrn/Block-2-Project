@@ -1,7 +1,7 @@
 # Calculator Project README
 
 ## Project Overview
-Welcome to the Calculator Project! This application is a versatile calculator that supports a wide range of functionalities, from basic arithmetic operations to advanced mathematical computations. ✨
+Welcome to our Calculator Project! This application is a versatile calculator that supports a wide range of functionalities, from basic arithmetic operations to advanced mathematical computations. ✨
 
 ### Features
 The calculator supports the following operations:
@@ -31,3 +31,8 @@ Feel free to share feedback or contribute to the project by creating pull reques
 ### Contact
 For any queries or suggestions, please reach out. 📧
 
+### Made by
+Tom Byrne
+Emer O'Connor
+Mark Drohan
+Somi Vinnikota
