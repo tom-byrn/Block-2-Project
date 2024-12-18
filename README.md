@@ -32,7 +32,4 @@ Feel free to share feedback or contribute to the project by creating pull reques
 For any queries or suggestions, please reach out. 📧
 
 ### Made by
-Tom Byrne
-Emer O'Connor
-Mark Drohan
-Somi Vinnikota
+Tom Byrne, Emer O'Connor, Mark Drohan, Somi Vinnikota
