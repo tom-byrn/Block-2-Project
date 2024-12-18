@@ -1,5 +1,7 @@
 package matrices;
 
+import menu.MenuManager;
+
 import java.util.Scanner;
 
 public class Determinant extends LUFactorisation{
@@ -44,5 +46,6 @@ public class Determinant extends LUFactorisation{
         //Wait for input
         Scanner input = new Scanner(System.in);
         input.nextLine();
+        MenuManager.callMenu();
     }
 }

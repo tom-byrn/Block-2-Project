@@ -1,5 +1,7 @@
 package matrices;
 
+import menu.MenuManager;
+
 import java.util.Scanner;
 
 // LU = A
@@ -101,6 +103,7 @@ public class LUFactorisation implements PrintMatrixFinal {
             //Just to wait to hit enter
             Scanner input = new Scanner(System.in);
             input.nextLine();
+            MenuManager.callMenu();
         } else {
             System.out.println("LU Decomposition failed.");
             PrintMatrixFinal.printFinal(inputMatrix);
