@@ -38,7 +38,7 @@ public class AlgebraManager implements Start, ProcessorAlgebra {
     }
 
     private static String processingRegex(String expression){
-        ProcessorAlgebra.processingRegex(expression);
+        expression = ProcessorAlgebra.processingRegex(expression);
 
         //add spaces
         expression = expression.replaceAll("\\+", " + ");

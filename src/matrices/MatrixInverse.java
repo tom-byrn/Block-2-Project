@@ -2,6 +2,7 @@ package matrices;
 
 public class MatrixInverse {
 
+
     // Function to calculate the inverse of a matrix using Gaussian elimination
     protected static boolean calculateInverse(double[][] inputMatrix, double[][] inverseMatrix) {
         // Get the size of the matrix (n x n)

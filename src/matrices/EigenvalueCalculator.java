@@ -47,7 +47,7 @@ public class EigenvalueCalculator implements PrintMatrixFinal {
         eigenvalue = currentEigenvalueArray[0][0];
 
         if(Double.isNaN(eigenvalue)){
-            System.err.println("The Matrix (A-ʎI) is Singular.\nUnable to find eigenvalues.");
+            System.err.println("The Matrix's eigenvalue is NaN.\nUnable to continue.");
             Scanner input = new Scanner(System.in);
             input.nextLine();
             MatricesManager.start();

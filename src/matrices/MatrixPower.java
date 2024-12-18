@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class MatrixPower extends MatrixMultiplication implements PrintMatrixFinal {
 
     // Function to perform matrix exponentiation using the Exponentiation by Squaring method
-    private static double[][] matrixExponentiation(double[][] inputMatrix, int exponent) {
+    protected static double[][] matrixExponentiation(double[][] inputMatrix, int exponent) {
 
         int matrixSize = inputMatrix.length;  // Size of the square matrix (assuming matrix is square)
 
@@ -33,7 +33,7 @@ public class MatrixPower extends MatrixMultiplication implements PrintMatrixFina
             if (MatrixInverse.calculateInverse(inputMatrix, resultMatrix)) {
 
                 // If the inverse was successfully calculated, print the inverse matrix
-                System.out.println("The inverse of the matrix is:");
+                exponent = Math.abs(exponent);
 
             } else {
                 // If the matrix is not invertible (singular), print a message indicating this
@@ -45,10 +45,10 @@ public class MatrixPower extends MatrixMultiplication implements PrintMatrixFina
         // Step 3a: Reduce the exponent by 1
         exponent--;
 
-        // Step 5: Set the base matrix for exponentiation
+        // Step 4: Set the base matrix for exponentiation
         double[][] currentBase = inputMatrix; // Start with the given matrix as the base for exponentiation
 
-        // Step 6: Exponentiation by Squaring
+        // Step 5: Exponentiation by Squaring
         while (exponent > 0) {
             if (exponent % 2 == 1) {  // If the exponent is odd
                 resultMatrix = multiplication(resultMatrix, currentBase);  // Multiply result by current base
