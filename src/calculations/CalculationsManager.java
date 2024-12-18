@@ -6,7 +6,6 @@ import menu.MenuManager;
 import menu.MenuText;
 import menu.Start;
 
-import static menu.Colours.*;
 
 public class CalculationsManager implements Start {
 
