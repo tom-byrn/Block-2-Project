@@ -6,14 +6,14 @@ Welcome to our Calculator Project! This application is a versatile calculator th
 ### Features
 The calculator supports the following operations:
 
-1. **Basic Calculations**: Perform addition, subtraction, multiplication, and division. ➕➖✖️➗
-2. **Functions**: Evaluate trigonometric, logarithmic, and other mathematical functions. 📐
-3. **Matrices**: Perform operations like addition, multiplication, and finding determinants. 🧮
+1. **Basic Calculations**: Performs complex calculations with complex functions such as factorials and trigonometry. ➕➖✖️➗
+2. **Functions**: Evaluate functions, differentials, and use algorithms such as gradrient descent.
+3. **Matrices**: Perform operations like addition, multiplication, finding determinants, LU factorisation, and dimensionality reduction. 🧮
 4. **Algebra**: Solve equations and simplify expressions. 🧑‍🏫
 5. **Complex Numbers**: Perform calculations with complex numbers. 🔢
 6. **Factors and Primes**: Find factors of numbers and check for primality. 🏗🔎
-7. **Conversions**: Convert units (e.g., length, temperature, and weight). 💶
-8. **Probability**: Calculate probabilities and combinatorics. 🎲
+7. **Conversions**: Convert from binary, decimal, and hexadecimal or convert currency values. 💾💵
+8. **Probability**: Calculate probabilities and check event dependency. 🎲
 
 ## Getting Started
 To use this application, ensure the following:
@@ -22,14 +22,9 @@ To use this application, ensure the following:
 - You have Java installed on your system. ☕
 
 ## How to Use
-- Once the application starts, follow the prompts to choose the desired operation.
+- Run the main class. Once the application starts, follow the prompts to choose the desired operation.
 - Input values as requested by the program. ✅
 
-## Feedback and Contributions
-Feel free to share feedback or contribute to the project by creating pull requests or submitting issues. 💬🤝
-
-### Contact
-For any queries or suggestions, please reach out. 📧
 
 ### Made by
 Tom Byrne, Emer O'Connor, Mark Drohan, Somi Vinnikota
