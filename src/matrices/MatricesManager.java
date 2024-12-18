@@ -92,7 +92,7 @@ public class MatricesManager implements Start {
                         break;
                     case 10:
                         // Calls MultiplyByANumber method
-                        MultiplyByANumber.MultiplyStart();
+                        MultiplyByANumber.multiplyStart();
                         break;
                     case 11:
                         // Calls MultiplyByANumber method

@@ -4,18 +4,18 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MultiplyByANumber {
-    protected static void MultiplyStart() {
+    protected static void multiplyStart() {
         System.out.print("Enter Number: ");
         Scanner input = new Scanner(System.in);
 
         double number = 0;
 
         //Repeat until a valid number is entered
-        boolean x = true;
-        while (x) {
+        boolean noNumberEntered = true;
+        while (noNumberEntered) {
             try {
                 number = input.nextDouble();
-                x = false;
+                noNumberEntered = false;
             } catch (InputMismatchException e) {
                 // This block catches InputMismatchException
                 // if patterns don't match e.g. a letter
