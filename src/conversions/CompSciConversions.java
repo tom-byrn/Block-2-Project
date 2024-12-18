@@ -83,7 +83,7 @@ public class CompSciConversions {
             return new BinaryToHexConvertor();
         }
         else if (from == 3 && to == 1) {
-            return new BinaryToHexConvertor();
+            return new HexToBinaryConvertor();
         }
         else {
             throw new IllegalArgumentException("Unsupported conversion choice.");
