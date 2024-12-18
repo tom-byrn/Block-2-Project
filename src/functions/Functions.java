@@ -185,6 +185,8 @@ public class Functions extends FunctionTemplate {
             System.out.println("\nArithmetic error, you cannot divide by zero\n");
             scanner.nextLine();
         }
+        System.out.println();
+        scanner.nextLine();
         scanner.nextLine();
     }
 
