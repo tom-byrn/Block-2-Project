@@ -1,5 +1,3 @@
-# Calculator Project README
-
 ## Project Overview
 Welcome to our Calculator Project! This application is a versatile CLI calculator that supports a wide range of functionalities. ✨
 
